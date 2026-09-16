@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel and Transport Unit 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-primary: #4F46E5;
+  --color-secondary: #06B6D4;
+  --color-accent: #F59E0B;
+  --color-bg: #F8FAFC;
+  --color-card: #FFFFFF;
+  --color-correct: #22C55E;
+  --color-wrong: #EF4444;
+  --color-selecting: #2563EB;
+  --color-pending: #FEF3C7;
+  --color-pending-text: #92400E;
+}
+body {
+  font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+  background-color: var(--color-bg);
+  background-image: radial-gradient(#CBD5E1 1px, transparent 1px);
+  background-size: 20px 20px;
+  margin: 0;
+  padding: 20px 10px;
+  color: #334155;
+}
+h1 {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 5px;
+}
+.progress-container {
+  max-width: 800px;
+  margin: 0 auto 20px;
+  background: #E2E8F0;
+  border-radius: 10px;
+  height: 10px;
+  overflow: hidden;
+}
+.progress-bar {
+  height: 100%;
+  background: var(--color-primary);
+  width: 0%;
+  transition: width 0.3s;
+}
+.progress-text {
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.quiz-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.card {
+  background: var(--color-card);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.question {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.option-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 14px 20px;
+  min-height: 52px;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.6;
+  background: #F8FAFC;
+  border: 2px solid #E2E8F0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  overflow-wrap: break-word;
+  color: inherit;
+}
+.option-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  border-color: var(--color-selecting);
+}
+.option-btn.pending {
+  background: var(--color-pending);
+  color: var(--color-pending-text);
+  border-color: var(--color-accent);
+  transform: scale(1.02);
+}
+.option-btn.correct {
+  background: var(--color-correct);
+  border-color: var(--color-correct);
+  color: white;
+}
+.option-btn.wrong {
+  background: var(--color-wrong);
+  border-color: var(--color-wrong);
+  color: white;
+  animation: shake 0.1s ease-in-out 2;
+}
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(0); }
+  75% { transform: translateX(4px); }
+  100% { transform: translateX(0); }
+}
+.check-btn, .submit-btn {
+  width: 100%;
+  max-width: 400px;
+  margin: 30px auto;
+  display: block;
+  padding: 15px 40px;
+  font-size: 20px;
+  font-weight: 700;
+  background: var(--color-correct);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(34,197,94,0.3);
+  font-family: inherit;
+}
+
+.check-btn:disabled, 
+.submit-btn {
+  width: 100%;
+  max-width: 400px;
+  margin: 30px auto;
+  display: block;
+  padding: 15px 40px;
+  font-size: 20px;
+  font-weight: 700;
+  background: var(--color-correct);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(34,197,94,0.3);
+  font-family: inherit;
+}
+
+.explanation {
+  display: none;
+  margin-top: 20px;
+  padding: 16px;
+  background: #F1F5F9;
+  border-radius: 12px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #1E293B;
+  border-left: 4px solid var(--color-primary);
+}
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 14px;
+}
+.results-table th, .results-table td {
+  border: 1px solid #E2E8F0;
+  text-align: center;
+  padding: 8px;
+}
+.results-table td.correct { background: var(--color-correct); color: white; }
+.results-table td.wrong { background: var(--color-wrong); color: white; }
+.results-table td.empty { background: var(--color-wrong); color: white; }
+.student-info {
+  background: var(--color-card);
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.student-info input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+@media (max-width: 600px) {
+  h1 { font-size: 20px; }
+  .question { font-size: 20px; }
+  .option-btn { font-size: 17px; }
+  .explanation { font-size: 16px; }
+  .check-btn, .submit-btn {
+  width: 100%;
+  max-width: 400px;
+  margin: 30px auto;
+  display: block;
+  padding: 15px 40px;
+  font-size: 20px;
+  font-weight: 700;
+  background: var(--color-correct);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(34,197,94,0.3);
+  font-family: inherit;
+}
+
+}
+</style>
+</head>
+<body>
+
+<h1>Travel and Transport Unit 2</h1>
+<div class="progress-text"><span id="progress-text">0</span> / <span id="total-text">0</span> answered</div>
+<div class="progress-container"><div class="progress-bar" id="progress-bar"></div></div>
+
+<div class="quiz-container">
+  <div class="student-info">
+    <label for="student-name"><strong>Họ và tên học sinh:</strong></label>
+    <input type="text" id="student-name" placeholder="Nhập họ và tên của bạn...">
+  </div>
+  
+  <div id="quiz-content"></div>
+  
+  <button id="submit-btn" class="submit-btn">Nộp bài</button>
+  <div id="results-container" style="display:none; padding-bottom: 50px;"></div>
+</div>
+
+<script>
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playTone(frequency, duration, type) {
+  try {
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    oscillator.type = type;
+    oscillator.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + duration);
+  } catch(e) {}
+}
+function playSelectSound() { playTone(600, 0.08, 'sine'); }
+function playCorrectSound() { 
+  playTone(800, 0.1, 'sine'); 
+  setTimeout(() => playTone(1200, 0.15, 'sine'), 100); 
+}
+function playWrongSound() { playTone(150, 0.2, 'sawtooth'); }
+
+const rawData = [
+  // Section A
+  { q: "You need a passport to cross the ............ between Mexico and the United States.", o: ["edge", "line", "border", "rim"], a: 2 },
+  { q: "The hotel where we are ............ is quite luxurious.", o: ["living", "remaining", "existing", "staying"], a: 3 },
+  { q: "When you ............ your destination, your tour guide will meet you at the airport.", o: ["arrive", "get", "reach", "achieve"], a: 2 },
+  { q: "It can be quite busy here during the tourist ............ .", o: ["season", "period", "phase", "stage"], a: 0 },
+  { q: "David ............ me to the train station every morning.", o: ["goes", "takes", "has", "makes"], a: 1 },
+  { q: "I always enjoy our school ............ to France.", o: ["excursion", "journey", "trip", "travel"], a: 2 },
+  { q: "Hurry up, or we'll ............ the bus!", o: ["avoid", "miss", "drop", "lose"], a: 1 },
+  { q: "The brochure says that the hotel has a great ............ of the sea.", o: ["appearance", "look", "sight", "view"], a: 3 },
+  { q: "I must remember to ............ a souvenir back from Spain for my grandmother.", o: ["go", "take", "bring", "keep"], a: 2 },
+  { q: "The ............ from London to Berlin is about 919 kilometres.", o: ["measure", "length", "gap", "distance"], a: 3 },
+  { q: "Make sure you ............ a hotel before you come to our island, especially in the summer.", o: ["book", "keep", "put", "take"], a: 0 },
+  { q: "I live in Barcelona, but my ............ town is Madrid.", o: ["birth", "home", "native", "origin"], a: 1 },
+  
+  // Section B
+  { q: "I hope to go on a trip round the ............ one day.", o: ["world", "earth", "globe", "planet"], a: 0 },
+  { q: "You learn a lot about the local ............ by speaking to local people.", o: ["territory", "area", "land", "region"], a: 1 },
+  { q: "It's good to have someone to ............ you when you are on holiday.", o: ["lead", "guide", "direct", "show"], a: 1 },
+  { q: "I get the train to work every day and the ............ is quite expensive.", o: ["fare", "fee", "cost", "price"], a: 0 },
+  { q: "Captain Cook discovered Australia on a ............ to the Pacific.", o: ["voyage", "travel", "journey", "trip"], a: 0 },
+  { q: "Most tourist attractions in London charge an admission ............ .", o: ["fee", "ticket", "cost", "price"], a: 0 },
+  { q: "The sunset over Niagara Falls really is a magnificent ............ .", o: ["look", "sight", "view", "vision"], a: 1 },
+
+  // Section C
+  { q: "Let's go to the airport to ............ Grandpa off when he flies back home.", o: ["catch", "make", "see", "get"], a: 2 },
+  { q: "If it starts to rain, ............ for a nearby cave to wait for it to pass.", o: ["make", "pull", "go", "check"], a: 0 },
+  { q: "We would like to remind all guests that they must ............ out before midday.", o: ["check", "get", "pick", "see"], a: 0 },
+  { q: "Please ............ in and stop so that I can buy something to drink.", o: ["pull", "go", "catch", "pick"], a: 0 },
+  { q: "Every Saturday night my dad ............ us up outside the cinema.", o: ["picks", "gets", "makes", "pulls"], a: 0 },
+  { q: "I think the neighbours have ............ away for the weekend.", o: ["gone", "checked", "seen", "made"], a: 0 },
+  { q: "John's up ahead so Greg is pedalling fast to ............ up with him.", o: ["catch", "get", "pull", "see"], a: 0 },
+  { q: "We're going on holiday tomorrow, but we'll call you when we ............ back.", o: ["get", "go", "make", "pick"], a: 0 },
+
+  // Section D
+  { q: "We can *start our journey* ............ towards the mountains at dawn.", o: ["set off", "take off", "go away", "pull in"], a: 0 },
+  { q: "Dad fetched the luggage while Mum *registered* ............ at the hotel.", o: ["checked in", "signed in", "made in", "got in"], a: 0 },
+  { q: "I asked the taxi driver to *let me get out* ............ outside the train station.", o: ["drop me off", "let me off", "pick me up", "pull me over"], a: 0 },
+  { q: "Oh, no! I've forgotten my passport! We'll have to *go back* ............ and get it!", o: ["turn back", "get back", "make back", "see back"], a: 0 },
+  { q: "The most exciting moment is when the plane *leaves the ground* ............ .", o: ["takes off", "sets off", "goes off", "pulls off"], a: 0 },
+  { q: "Stop the car! I think we've *hit* ............ a dog.", o: ["run over", "knocked down", "driven over", "pulled over"], a: 0 },
+  { q: "I don't think a horse can ever *stay at the same speed as* ............ a car.", o: ["keep up with", "catch up with", "make up with", "go up with"], a: 0 },
+
+  // Section E
+  { q: "The speed ............ in towns is 50 km/h and you shouldn't go faster than that.", o: ["limit", "rate", "level", "mark"], a: 0 },
+  { q: "Why don't we ............ the scenic route along the coast?", o: ["take", "make", "go", "have"], a: 0 },
+  { q: "If you buy your plane ticket ............ advance, it's often cheaper than if you wait.", o: ["in", "on", "at", "by"], a: 0 },
+  { q: "I can't remember the name of the hotel we stayed at off the ............ of my head.", o: ["top", "back", "front", "side"], a: 0 },
+  { q: "I'm sorry I'm late! I ............ my way and had to ask for directions.", o: ["lost", "missed", "dropped", "forgot"], a: 0 },
+  { q: "My mum's away in Germany on a business ............ at the moment.", o: ["trip", "travel", "journey", "tour"], a: 0 },
+  { q: "The bank? Well, turn left here, then go ............ ahead for a kilometre and it's on the left.", o: ["straight", "right", "direct", "fast"], a: 0 },
+  { q: "If you look on your left-hand ............ as we turn this corner, you'll see Big Ben.", o: ["side", "way", "direction", "part"], a: 0 },
+  { q: "I'll look round the shops in the morning and then ............ sightseeing in the afternoon.", o: ["go", "make", "do", "have"], a: 0 },
+  { q: "My grandma hasn't driven since she ............ an accident last year.", o: ["had", "made", "did", "got"], a: 0 },
+  { q: "I love visiting foreign places, ............ the sights and learning about other cultures.", o: ["seeing", "looking", "watching", "viewing"], a: 0 },
+  { q: "During the 70s, many British people started to go ............ holiday to Spain.", o: ["on", "in", "at", "for"], a: 0 },
+  { q: "While you're in London, you should take a tour ............ the Houses of Parliament.", o: ["of", "around", "in", "to"], a: 0 },
+
+  // Section F
+  { q: "I've always dreamt ............ China.", o: ["to visit", "of visiting", "I visit", "visit"], a: 1 },
+  { q: "The travel agency is arranging for us ............ at a really nice hotel.", o: ["stay", "of staying", "to stay", "staying"], a: 2 },
+  { q: "My dad says he always regrets ............ more.", o: ["to not travel", "not travelling", "he not travel", "of not travelling"], a: 1 },
+  { q: "John seems keen ............ how to drive as soon as he can.", o: ["of learning", "he learn", "for learn", "to learn"], a: 3 },
+  { q: "Now, class, I'd like you all to write ............ a description of your last holiday.", o: ["me", "to me", "it me", "about me"], a: 0 },
+  { q: "When you arrive ............, have your passport ready.", o: ["to the airport", "in the airport", "on the airport", "at the airport"], a: 3 },
+  { q: "The Joneses have invited us ............ to Australia with them this summer.", o: ["going", "for going", "about going", "to go"], a: 3 },
+  { q: "The in-flight entertainment may differ ............ that advertised.", o: ["to", "from", "in", "at"], a: 1 },
+
+  // Section G
+  { q: "Oh, let me tell you about our trip. Did you know that Sara is afraid of be flying?", o: ["of", "be", "is", "that"], a: 1 },
+  { q: "We had arranged it with her family to go to France for a few days.", o: ["had", "it", "to", "for"], a: 1 },
+  { q: "I have always wanted to see Paris and would love to live in there one day.", o: ["have", "to", "in", "there"], a: 2 },
+  { q: "Well, we got to the airport and Sara appeared being nervous. I asked her if", o: ["to", "being", "her", "if"], a: 1 },
+  { q: "she was okay and she said she was fine, so we continued on to our way.", o: ["was", "so", "to", "our"], a: 2 },
+  { q: "We went through passport control and I could see so that Sara wasn't", o: ["went", "could", "so", "that"], a: 2 },
+  { q: "keen on going any further. Just then, a voice announced: 'We regret it to", o: ["on", "any", "it", "to"], a: 2 },
+  { q: "inform passengers that Flight 114 to France is been cancelled.' That was", o: ["that", "is", "been", "was"], a: 1 },
+  { q: "our flight! Sarah said she was glad because of she was too frightened to", o: ["was", "of", "too", "to"], a: 1 },
+  { q: "fly anyway! So, we all went to home. That was the end of that trip!", o: ["all", "to", "the", "that"], a: 1 },
+
+  // Section H
+  { q: "It's not always easy being a (1) ............ . (TOUR)", o: ["tourist", "tourism", "touring", "tours"], a: 0 },
+  { q: "You spend half your time making (2) ............ for your holiday (ARRANGE)", o: ["arrangements", "arrangers", "arranging", "arranged"], a: 0 },
+  { q: "and the other half worrying about sticking to the (3) ............ . (TIME)", o: ["timetable", "timing", "timer", "times"], a: 0 },
+  { q: "There are no (4) ............ problems, (CULTURE)", o: ["cultural", "cultured", "culturally", "cultures"], a: 0 },
+  { q: "you don't need someone to be the (5) ............ (PHOTOGRAPH)", o: ["photographer", "photography", "photographic", "photographs"], a: 0 },
+  { q: "and you know that the local (6) ............ are always friendly! (INHABIT)", o: ["inhabitants", "inhabitations", "inhabiting", "inhabited"], a: 0 },
+
+  // Section I
+  { q: "Beijing has changed so much in the last few years that it's almost ............ . (RECOGNISE)", o: ["unrecognisable", "recognised", "recognising", "recognisable"], a: 0 },
+  { q: "The number of cars ............ (WORLD) is about a billion and is increasing all the time.", o: ["worldwide", "world", "worldly", "worlding"], a: 0 },
+  { q: "The new maglev trains run on a completely ............ (DIFFER) system from ordinary trains.", o: ["different", "difference", "differently", "differing"], a: 0 },
+  { q: "Living in a foreign country really does ............ (BROAD) your horizons.", o: ["broaden", "broad", "broadly", "broadness"], a: 0 },
+  { q: "I can't find a ............ (DIRECT) flight from London to Delhi so I've booked one that changes in Frankfurt.", o: ["direct", "direction", "directly", "director"], a: 0 },
+  { q: "All passengers must complete a visa form upon ............ (ARRIVE) at Singapore airport.", o: ["arrival", "arriving", "arrived", "arrives"], a: 0 },
+  { q: "You can still see old milestones by the side of the road in England, showing the ............ (DISTANT) to the nearest town.", o: ["distance", "distant", "distantly", "distancing"], a: 0 },
+  { q: "The Museum of Transport has a full-sized jet plane next to the ............ (ENTER).", o: ["entrance", "entry", "entering", "entered"], a: 0 }
+];
+
+const quizData = rawData.map((item, index) => {
+  return {
+    id: index + 1,
+    type: "vocab",
+    questionHTML: item.q,
+    options: item.o.map((optText, optIndex) => ({
+      label: String.fromCharCode(65 + optIndex), // A, B, C, D
+      html: optText,
+      isCorrect: optIndex === item.a
+    })),
+    explanationHTML: `<p><strong>A. ${item.o[0]}</strong></p>
+                      <p><strong>B. ${item.o[1]}</strong></p>
+                      <p><strong>C. ${item.o[2]}</strong></p>
+                      <p><strong>D. ${item.o[3]}</strong></p>
+                      <p>Dịch: ${item.q}</p>
+                      <p>Đáp án đúng là <strong>${String.fromCharCode(65 + item.a)}</strong>.</p>
+                      <p>Các đáp án khác sai ngữ pháp / ngữ cảnh.</p>`
+  };
+});
+
+let userState = {};
+quizData.forEach(q => {
+  userState[q.id] = { selected: null, checked: false, isCorrect: null };
+});
+
+const quizContainer = document.getElementById('quiz-content');
+const totalText = document.getElementById('total-text');
+const progressText = document.getElementById('progress-text');
+const progressBar = document.getElementById('progress-bar');
+totalText.textContent = quizData.length;
+
+function shuffleArray(array) {
+  let shuffled = array.slice();
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = 0;
+    
+  }
+  return shuffled;
+}
+
+function updateProgress() {
+  const answered = Object.values(userState).filter(s => s.selected !== null).length;
+  progressText.textContent = answered;
+  progressBar.style.width = (answered / quizData.length * 100) + '%';
+}
+
+function renderQuiz() {
+  quizData.forEach(q => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `<div class="question">Câu ${q.id}: ${q.questionHTML}</div>`;
+    
+    const optionsContainer = document.createElement('div');
+    optionsContainer.className = 'options';
+    optionsContainer.id = `options-${q.id}`;
+    
+    let shuffledContents = shuffleArray(q.options);
+    let labels = ["A", "B", "C", "D"];
+    let shuffledLabels = shuffleArray(labels);
+    
+    let displayOptions = shuffledContents.map((opt, i) => {
+      return {
+        displayLabel: shuffledLabels[i],
+        html: opt.html,
+        originalLabel: opt.label,
+        isCorrect: opt.isCorrect
+      };
+    });
+    
+    displayOptions.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.innerHTML = `<strong>${opt.displayLabel}.</strong> ${opt.html}`;
+      btn.onclick = () => selectOption(q.id, opt.originalLabel, btn);
+      btn.dataset.original = opt.originalLabel;
+      optionsContainer.appendChild(btn);
+    });
+    
+    card.appendChild(optionsContainer);
+    
+    const checkBtn = document.createElement('button');
+    checkBtn.className = 'check-btn';
+    checkBtn.id = `check-btn-${q.id}`;
+    checkBtn.textContent = 'Kiểm tra';
+    checkBtn.disabled = true;
+    checkBtn.onclick = () => checkAnswer(q.id);
+    card.appendChild(checkBtn);
+    
+    const expDiv = document.createElement('div');
+    expDiv.className = 'explanation';
+    expDiv.id = `exp-${q.id}`;
+    expDiv.innerHTML = q.explanationHTML;
+    card.appendChild(expDiv);
+    
+    quizContainer.appendChild(card);
+  });
+}
+
+function selectOption(qId, originalLabel, btnElement) {
+  if (userState[qId].checked) return;
+  userState[qId].selected = originalLabel;
+  
+  const optionsContainer = document.getElementById(`options-${qId}`);
+  Array.from(optionsContainer.children).forEach(btn => btn.classList.remove('pending'));
+  btnElement.classList.add('pending');
+  
+  playSelectSound();
+  document.getElementById(`check-btn-${qId}`).disabled = false;
+  updateProgress();
+}
+
+function checkAnswer(qId, auto = false) {
+  if (userState[qId].checked) return;
+  const state = userState[qId];
+  if (!state.selected && !auto) return;
+  
+  const qInfo = quizData.find(q => q.id === qId);
+  const correctOpt = qInfo.options.find(o => o.isCorrect);
+  
+  state.checked = true;
+  state.isCorrect = (state.selected === correctOpt.label);
+  
+  const optionsContainer = document.getElementById(`options-${qId}`);
+  Array.from(optionsContainer.children).forEach(btn => {
+    btn.classList.remove('pending');
+    btn.style.pointerEvents = 'none';
+    if (btn.dataset.original === correctOpt.label) {
+      btn.classList.add('correct');
+    } else if (btn.dataset.original === state.selected && !state.isCorrect) {
+      btn.classList.add('wrong');
+    }
+  });
+  
+  document.getElementById(`check-btn-${qId}`).style.display = 'none';
+  document.getElementById(`exp-${qId}`).style.display = 'block';
+  
+  if (!auto) {
+    if (state.isCorrect) playCorrectSound();
+    else playWrongSound();
+  }
+}
+
+document.getElementById('submit-btn').addEventListener('click', function() {
+  const studentName = document.getElementById('student-name').value.trim() || 'Khách';
+  let correctCount = 0;
+  
+  quizData.forEach(q => {
+    if (!userState[q.id].checked) {
+      if (userState[q.id].selected !== null) {
+        checkAnswer(q.id, true);
+      } else {
+        userState[q.id].checked = true;
+        userState[q.id].isCorrect = false;
+        const optionsContainer = document.getElementById(`options-${q.id}`);
+        Array.from(optionsContainer.children).forEach(btn => btn.style.pointerEvents = 'none');
+        const correctOpt = q.options.find(o => o.isCorrect);
+        Array.from(optionsContainer.children).forEach(btn => {
+          if (btn.dataset.original === correctOpt.label) btn.classList.add('correct');
+        });
+        document.getElementById(`check-btn-${q.id}`).style.display = 'none';
+        document.getElementById(`exp-${q.id}`).style.display = 'block';
+      }
+    }
+    if (userState[q.id].isCorrect) correctCount++;
+  });
+  
+  this.disabled = true;
+  
+  let loisai = "";
+  quizData.forEach(q => {
+    if (!userState[q.id].isCorrect) {
+      loisai += `Câu ${q.id} (chọn ${userState[q.id].selected || 'bỏ trống'}), `;
+    }
+  });
+  
+  const score = (correctCount / quizData.length * 10).toFixed(1);
+  const tile = `${correctCount}/${quizData.length}`;
+  const formUrl = `https://docs.google.com/forms/d/e/1FAIpQLSelQyzh_lWyb2vZUnQ1jc1p9FLRknDZiUt9NiUiiX1epHTFLw/formResponse?entry.351633352=link3&entry.1895948982=${encodeURIComponent(studentName)}&entry.1232319784=${encodeURIComponent(score)}&entry.1125920425=${encodeURIComponent(tile)}&entry.1907417670=${encodeURIComponent(loisai)}`;
+  
+  fetch(formUrl, { mode: 'no-cors' }).catch(e => console.log(e));
+  alert(`Điểm của bạn: ${score}\\nBạn làm đúng ${tile} câu.`);
+  
+  renderTable();
+});
+
+function renderTable() {
+  const resContainer = document.getElementById('results-container');
+  resContainer.style.display = 'block';
+  
+  let html = '<h2>Bảng tổng kết</h2>';
+  let totalRows = Math.ceil(quizData.length / 20);
+  
+  for (let r = 0; r < totalRows; r++) {
+    html += '<table class="results-table"><tr><th>Câu</th>';
+    let end = Math.min((r+1)*20, quizData.length);
+    for (let i = r*20; i < end; i++) html += `<th>${quizData[i].id}</th>`;
+    html += '</tr>';
+    
+    ['A','B','C','D'].forEach(label => {
+      html += `<tr><th>${label}</th>`;
+      for (let i = r*20; i < end; i++) {
+        let q = quizData[i];
+        let st = userState[q.id];
+        let correctOpt = q.options.find(o => o.isCorrect).label;
+        
+        let cls = '';
+        if (st.selected === null) cls = 'empty';
+        else if (label === correctOpt) cls = 'correct';
+        else if (label === st.selected) cls = 'wrong';
+        
+        html += `<td class="${cls}">${label}</td>`;
+      }
+      html += '</tr>';
+    });
+    html += '</table>';
+  }
+  resContainer.innerHTML = html;
+  resContainer.scrollIntoView({behavior: 'smooth'});
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
