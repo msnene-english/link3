@@ -486,10 +486,10 @@ quizData.forEach(q => {
 });
 
 const quizContainer = document.getElementById('quiz-content');
-const totalText = document.getElementById('total-text');
-const progressText = document.getElementById('progress-text');
-const progressBar = document.getElementById('progress-bar');
-totalText.textContent = quizData.length;
+const totalText = document.getElementById('top-total-text');
+const progressText = document.getElementById('top-progress-text');
+const progressBar = document.getElementById('top-progress-bar');
+if (totalText) totalText.textContent = quizData.length;
 
 function shuffleArray(array) {
   let shuffled = array.slice();
@@ -502,8 +502,8 @@ function shuffleArray(array) {
 
 function updateProgress() {
   const answered = Object.values(userState).filter(s => s.selected !== null).length;
-  progressText.textContent = answered;
-  progressBar.style.width = (answered / quizData.length * 100) + '%';
+  if (progressText) progressText.textContent = answered;
+  if (progressBar) progressBar.style.width = (answered / quizData.length * 100) + '%';
 }
 
 function renderQuiz() {
