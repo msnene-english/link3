@@ -289,13 +289,42 @@ h1 {
 }
 </style>
 
+<style>
+
+/* PROGRESS BAR CSS */
+.progress-container {
+  max-width: 800px;
+  margin: 0 auto 20px;
+  background: #E2E8F0;
+  border-radius: 10px;
+  height: 10px;
+  overflow: hidden;
+}
+.progress-bar-inner {
+  height: 100%;
+  background: #4F46E5;
+  width: 0%;
+  transition: width 0.3s;
+}
+.progress-text-container {
+  text-align: center;
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #475569;
+}
+
+</style>
 </head>
 <body>
 <div style="text-align: left; margin-bottom: 20px; font-weight: 600; color: #64748B; font-size: 15px;">GV biên soạn: Ms Chí Nên - 0852639652</div>
 
 <h1>Travel and Transport Unit 2</h1>
-<div class="progress-text"><span id="progress-text">0</span> / <span id="total-text">0</span> answered</div>
-<div class="progress-container"><div class="progress-bar" id="progress-bar"></div></div>
+</div>
+
+
+<div class="progress-text-container"><span id="top-progress-text">0</span> / <span id="top-total-text">0</span> answered</div>
+<div class="progress-container"><div class="progress-bar-inner" id="top-progress-bar"></div></div>
 
 <div class="quiz-container">
   <div class="student-info">
@@ -652,6 +681,25 @@ function renderTable() {
 }
 
 renderQuiz();
+
+function updateTopProgress() {
+    let answered = 0;
+    if (typeof userState !== 'undefined') {
+        answered = Object.values(userState).filter(s => s.selected !== null || s.checked).length;
+    }
+    const pt = document.getElementById('top-progress-text');
+    const pb = document.getElementById('top-progress-bar');
+    const tt = document.getElementById('top-total-text');
+    
+    if (pt) pt.textContent = answered;
+    if (tt && typeof quizData !== 'undefined') tt.textContent = quizData.length;
+    if (pb && typeof quizData !== 'undefined' && quizData.length > 0) {
+        pb.style.width = (answered / quizData.length * 100) + '%';
+    }
+}
+// Init progress on load
+document.addEventListener('DOMContentLoaded', updateTopProgress);
+
 </script>
 <div class="footer-text">GV biên soạn: Ms Chí Nên - 0852639652</div>
 </body>
