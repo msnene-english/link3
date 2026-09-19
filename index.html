@@ -637,9 +637,20 @@ document.getElementById('submit-btn').addEventListener('click', function() {
   
   const score = (correctCount / quizData.length * 10).toFixed(1);
   const tile = `${correctCount}/${quizData.length}`;
-  const formUrl = `https://docs.google.com/forms/d/e/1FAIpQLSelQyzh_lWyb2vZUnQ1jc1p9FLRknDZiUt9NiUiiX1epHTFLw/formResponse?entry.351633352=link3&entry.1895948982=${encodeURIComponent(studentName)}&entry.1232319784=${encodeURIComponent(score)}&entry.1125920425=${encodeURIComponent(tile)}&entry.1907417670=${encodeURIComponent(loisai)}`;
-  
-  fetch(formUrl, { mode: 'no-cors' }).catch(e => console.log(e));
+  const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSelQyzh_lWyb2vZUnQ1jc1p9FLRknDZiUt9NiUiiX1epHTFLw/formResponse";
+  const formBody = new URLSearchParams({
+    "entry.351633352": "Travel and Transport Unit 2",
+    "entry.1895948982": studentName,
+    "entry.1232319784": score,
+    "entry.1125920425": tile,
+    "entry.1907417670": loisai
+  });
+  fetch(formUrl, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: formBody.toString()
+  }).catch(e => console.log(e));
   alert(`Điểm của bạn: ${score}\\nBạn làm đúng ${tile} câu.`);
   
   renderTable();
