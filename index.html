@@ -1,282 +1,473 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Travel and Transport Unit 2</title>
-<style>
-:root{--color-primary:#4F46E5;--color-secondary:#06B6D4;--color-accent:#F59E0B;--color-bg:#F8FAFC;--color-card:#FFFFFF;--color-correct:#22C55E;--color-wrong:#EF4444;--color-selecting:#2563EB;--color-pending:#FEF3C7;--color-pending-text:#92400E;}
-body { font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif; background-color: var(--color-bg); margin: 0; padding: 0; color: #333; }
-.watermark { position: fixed; top: 10px; left: 10px; font-size: 14px; color: rgba(0,0,0,0.5); z-index: 1000; pointer-events: none; }
-.footer-watermark { text-align: center; padding: 20px; font-size: 14px; color: rgba(0,0,0,0.5); }
-.progress-bar-container { position: sticky; top: 0; width: 100%; height: 6px; background: #e2e8f0; z-index: 999; }
-.progress-bar { height: 100%; background: var(--color-primary); width: 0%; transition: width 0.3s; }
-.container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
-.card { background: var(--color-card); border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.08); padding: 24px; margin-bottom: 24px; transition: transform 0.2s, box-shadow 0.2s; }
-h1 { font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 30px; }
-.question-text { font-size: 21px; font-weight: 600; line-height: 1.6; margin-bottom: 20px; }
-.options { display: flex; flex-direction: column; gap: 12px; }
-.option { display: flex; align-items: center; padding: 14px 20px; border: 1px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 18px; transition: all 0.2s; }
-.option:hover:not(.disabled) { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,.05); }
-.option.selected { background: var(--color-pending); color: var(--color-pending-text); border-color: var(--color-pending); transform: scale(1.02); }
-.option.correct { background: var(--color-correct); color: white; border-color: var(--color-correct); }
-.option.wrong { background: var(--color-wrong); color: white; border-color: var(--color-wrong); animation: shake 0.2s; }
-.disabled { pointer-events: none; cursor: not-allowed; opacity: 0.8; }
-.check-btn { display: block; width: 100%; padding: 14px 20px; min-height: 52px; background: var(--color-primary); color: white; border: none; border-radius: 8px; font-size: 17px; font-weight: 600; cursor: pointer; margin-top: 20px; transition: opacity 0.2s; }
-.check-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-.explanation { margin-top: 20px; padding: 16px; background: #f1f5f9; border-radius: 8px; font-size: 17px; line-height: 1.8; display: none; }
-.gap-input { font-size: 18px; padding: 6px 12px; border: 1px solid #cbd5e1; border-radius: 6px; width: 150px; margin: 0 8px; text-align: center; }
-.gap-input.correct { background: var(--color-correct); color: white; border-color: var(--color-correct); }
-.gap-input.wrong { background: var(--color-wrong); color: white; border-color: var(--color-wrong); }
-.submit-btn { display: block; width: 200px; margin: 40px auto; padding: 16px; background: var(--color-secondary); color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: 700; cursor: pointer; }
-#login-screen { position: fixed; top:0; left:0; width:100%; height:100%; background: var(--color-bg); z-index: 2000; display: flex; align-items: center; justify-content: center; }
-.login-box { background: white; padding: 40px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; width: 90%; max-width: 400px; }
-.login-box input { width: 100%; padding: 12px; margin: 20px 0; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
-.login-box button { width: 100%; padding: 14px; background: var(--color-primary); color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; }
-#results-screen { display: none; }
-@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
-@media (max-width: 600px) { h1 { font-size: 20px; } .question-text { font-size: 20px; } .option { font-size: 17px; } .check-btn { font-size: 16px; } }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel and Transport Unit 2</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f0f2f5; position: relative; z-index: 1; }
+        .watermark { position: absolute; top: 30px; left: 0; right: 0; text-align: center; font-size: 50px; color: rgba(0, 0, 0, 0.04); font-weight: bold; pointer-events: none; z-index: -1; user-select: none; }
+        .watermark div { transform: rotate(-30deg); margin: 200px 0; }
+        h1, h2 { color: #2c3e50; text-align: center; }
+        .screen { display: none; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .screen.active { display: block; }
+        
+        input[type="text"] { width: 100%; padding: 12px; margin: 10px 0 20px; border: 2px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; transition: border-color 0.3s; }
+        input[type="text"]:focus { border-color: #3498db; outline: none; }
+        
+        button { background: #3498db; color: #fff; border: none; padding: 12px 24px; font-size: 16px; border-radius: 6px; cursor: pointer; transition: background 0.3s, transform 0.1s; }
+        button:hover { background: #2980b9; }
+        button:active { transform: scale(0.98); }
+        button:disabled { background: #95a5a6; cursor: not-allowed; }
+        
+        .question-block { margin-bottom: 25px; padding: 15px; background: #f9f9f9; border-left: 4px solid #3498db; border-radius: 0 8px 8px 0; }
+        .instruction-box { margin-bottom: 15px; padding: 10px 15px; background: #e8f4fd; border: 1px solid #b6d4fe; border-radius: 6px; font-weight: bold; color: #004085; }
+        .question-text { font-weight: 500; margin-bottom: 15px; font-size: 16px; line-height: 1.8; }
+        
+        .options { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+        .option { padding: 12px 15px; background: #fff; border: 2px solid #eee; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 10px; }
+        .option:hover { border-color: #3498db; background: #f8faff; }
+        .option.selected { border-color: #3498db; background: #ebf5ff; }
+        .option.correct-opt { border-color: #2ecc71; background: #eafaf1; }
+        .option.wrong-opt { border-color: #e74c3c; background: #fdedec; }
+        
+        .radio-circle { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 50%; position: relative; }
+        .option.selected .radio-circle::after { content: ''; position: absolute; top: 4px; left: 4px; width: 12px; height: 12px; background: #3498db; border-radius: 50%; }
+        
+        .gap-fill-input { width: 120px !important; padding: 4px 8px !important; margin: 0 5px !important; display: inline-block !important; border: 1px solid #ccc !important; border-radius: 4px !important; font-size: 16px !important; }
+        
+        .reordering-container { display: flex; flex-direction: column; gap: 15px; }
+        .word-bank, .drop-zone { display: flex; flex-wrap: wrap; gap: 8px; min-height: 45px; padding: 10px; background: #fff; border: 2px dashed #ddd; border-radius: 8px; }
+        .word-chip { padding: 8px 16px; background: #3498db; color: #fff; border-radius: 20px; cursor: pointer; user-select: none; font-weight: 500; transition: transform 0.1s; }
+        .word-chip:active { transform: scale(0.95); }
+        .word-chip.correct { background: #2ecc71; }
+        .word-chip.wrong { background: #e74c3c; }
+        
+        .rewrite-input { width: 100%; height: 80px; padding: 12px; border: 2px solid #ddd; border-radius: 6px; resize: vertical; font-size: 16px; font-family: inherit; }
+        
+        .check-btn { margin-top: 15px; background: #3498db; font-size: 14px; padding: 8px 16px; }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background: #eef2f5; border-radius: 6px; font-size: 14.5px; line-height: 1.5; color: #2c3e50; border-left: 4px solid #2ecc71; }
+        
+        .progress-bar { width: 100%; height: 10px; background: #ddd; border-radius: 5px; margin-bottom: 20px; overflow: hidden; }
+        .progress-fill { height: 100%; background: #2ecc71; width: 0%; transition: width 0.3s; }
+        
+        .result-details { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 6px; text-align: left; max-height: 300px; overflow-y: auto; font-size: 14px; }
+        .error-item { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee; color: #e74c3c; }
+    </style>
 </head>
 <body>
-<div id="login-screen">
-    <div class="login-box">
-        <h2>Nhập tên của bạn</h2>
-        <input type="text" id="student-name" placeholder="Họ và tên..." required>
-        <button onclick="startQuiz()">Bắt đầu làm bài</button>
+    <div class="watermark">
+        <div>U1-U2 Đề 1</div>
+        <div>U1-U2 Đề 1</div>
+        <div>U1-U2 Đề 1</div>
+        <div>U1-U2 Đề 1</div>
     </div>
-</div>
-<div class="watermark">GV biên soạn: Ms Chí Nên - 0852639652</div>
-<div class="progress-bar-container"><div class="progress-bar" id="progress-bar"></div></div>
-<div class="container" id="quiz-container" style="display:none;">
-    <h1>Travel and Transport Unit 2</h1>
-    <div id="questions-area"></div>
-    <button class="submit-btn" id="submit-btn" onclick="submitQuiz()">Nộp bài</button>
-    <div id="results-screen">
-        <h2 style="text-align:center; margin-top:40px; color:var(--color-wrong)">DANH SÁCH CÁC CÂU LÀM SAI</h2>
-        <div id="wrong-questions-area"></div>
+
+    <div id="startScreen" class="screen active">
+        <h1>Travel and Transport Unit 2</h1>
+        <p style="text-align: center; color: #7f8c8d;">Nhập họ và tên của bạn để bắt đầu làm bài</p>
+        <input type="text" id="studentName" placeholder="Ví dụ: Nguyễn Văn A" autocomplete="off">
+        <div style="text-align: center;">
+            <button onclick="startTest()">Bắt đầu làm bài</button>
+        </div>
     </div>
-</div>
-<div class="footer-watermark">GV biên soạn: Ms Chí Nên - 0852639652</div>
 
-<script>
-const quizData = [{"id": "A1", "type": "multiple_choice", "questionHTML": "You need a passport to cross the ............ between Mexico and the United States.", "options": [{"label": "A", "html": "edge", "isCorrect": false}, {"label": "B", "html": "line", "isCorrect": false}, {"label": "C", "html": "border", "isCorrect": true}, {"label": "D", "html": "rim", "isCorrect": false}], "explanationHTML": "<b>D\u1ecbch c\u00e2u h\u1ecfi:</b> B\u1ea1n c\u1ea7n h\u1ed9 chi\u1ebfu \u0111\u1ec3 v\u01b0\u1ee3t qua bi\u00ean gi\u1edbi gi\u1eefa Mexico v\u00e0 Hoa K\u1ef3.<br><b>Gi\u1ea3i th\u00edch:</b> 'border' (bi\u00ean gi\u1edbi) l\u00e0 ranh gi\u1edbi gi\u1eefa hai qu\u1ed1c gia. 'edge' (r\u00eca), 'line' (\u0111\u01b0\u1eddng k\u1ebb), 'rim' (v\u00e0nh) kh\u00f4ng d\u00f9ng cho ranh gi\u1edbi qu\u1ed1c gia."}, {"id": "A2", "type": "multiple_choice", "questionHTML": "The hotel where we are ............ is quite luxurious.", "options": [{"label": "A", "html": "living", "isCorrect": false}, {"label": "B", "html": "remaining", "isCorrect": false}, {"label": "C", "html": "existing", "isCorrect": false}, {"label": "D", "html": "staying", "isCorrect": true}], "explanationHTML": "<b>D\u1ecbch c\u00e2u h\u1ecfi:</b> Kh\u00e1ch s\u1ea1n n\u01a1i ch\u00fang t\u00f4i \u0111ang \u1edf kh\u00e1 sang tr\u1ecdng.<br><b>Gi\u1ea3i th\u00edch:</b> 'stay' (\u1edf l\u1ea1i) d\u00f9ng cho vi\u1ec7c \u1edf t\u1ea1m th\u1eddi t\u1ea1i kh\u00e1ch s\u1ea1n. 'live' (s\u1ed1ng) d\u00f9ng cho n\u01a1i \u1edf th\u01b0\u1eddng xuy\u00ean. 'remain' (c\u00f2n l\u1ea1i), 'exist' (t\u1ed3n t\u1ea1i) kh\u00f4ng ph\u00f9 h\u1ee3p ng\u1eef c\u1ea3nh."}, {"id": "A3", "type": "multiple_choice", "questionHTML": "When you ............ your destination, your tour guide will meet you at the airport.", "options": [{"label": "A", "html": "arrive", "isCorrect": false}, {"label": "B", "html": "get", "isCorrect": false}, {"label": "C", "html": "reach", "isCorrect": true}, {"label": "D", "html": "achieve", "isCorrect": false}], "explanationHTML": "<b>D\u1ecbch c\u00e2u h\u1ecfi:</b> Khi b\u1ea1n \u0111\u1ebfn \u0111i\u1ec3m \u0111\u1ebfn, h\u01b0\u1edbng d\u1eabn vi\u00ean s\u1ebd \u0111\u00f3n b\u1ea1n t\u1ea1i s\u00e2n bay.<br><b>Gi\u1ea3i th\u00edch:</b> 'reach' (\u0111\u1ebfn) \u0111i tr\u1ef1c ti\u1ebfp v\u1edbi t\u00e2n ng\u1eef (reach your destination). 'arrive' \u0111i v\u1edbi 'at/in', 'get' \u0111i v\u1edbi 'to'. 'achieve' (\u0111\u1ea1t \u0111\u01b0\u1ee3c) d\u00f9ng cho m\u1ee5c ti\u00eau."}, {"id": "A4", "type": "multiple_choice", "questionHTML": "It can be quite busy here during the tourist ............ .", "options": [{"label": "A", "html": "season", "isCorrect": true}, {"label": "B", "html": "period", "isCorrect": false}, {"label": "C", "html": "phase", "isCorrect": false}, {"label": "D", "html": "stage", "isCorrect": false}], "explanationHTML": "<b>D\u1ecbch c\u00e2u h\u1ecfi:</b> \u1ede \u0111\u00e2y c\u00f3 th\u1ec3 kh\u00e1 \u0111\u00f4ng \u0111\u00fac trong m\u00f9a du l\u1ecbch.<br><b>Gi\u1ea3i th\u00edch:</b> C\u1ee5m t\u1eeb c\u1ed1 \u0111\u1ecbnh 'tourist season' (m\u00f9a du l\u1ecbch). 'period', 'phase', 'stage' (giai \u0111o\u1ea1n, th\u1eddi k\u1ef3) kh\u00f4ng k\u1ebft h\u1ee3p v\u1edbi 'tourist'."}, {"id": "A5", "type": "multiple_choice", "questionHTML": "David ............ me to the train station every morning.", "options": [{"label": "A", "html": "goes", "isCorrect": false}, {"label": "B", "html": "takes", "isCorrect": true}, {"label": "C", "html": "has", "isCorrect": false}, {"label": "D", "html": "makes", "isCorrect": false}], "explanationHTML": "<b>D\u1ecbch c\u00e2u h\u1ecfi:</b> David \u0111\u01b0a t\u00f4i \u0111\u1ebfn ga t\u00e0u m\u1ed7i s\u00e1ng.<br><b>Gi\u1ea3i th\u00edch:</b> 'take someone to somewhere' (\u0111\u01b0a ai \u0111i \u0111\u00e2u). C\u00e1c \u0111\u1ed9ng t\u1eeb kh\u00e1c kh\u00f4ng ph\u00f9 h\u1ee3p v\u1ec1 ngh\u0129a v\u00e0 c\u1ea5u tr\u00fac."}, {"id": "A6", "type": "multiple_choice", "questionHTML": "I always enjoy our school ............ to France.", "options": [{"label": "A", "html": "excursion", "isCorrect": false}, {"label": "B", "html": "journey", "isCorrect": false}, {"label": "C", "html": "trip", "isCorrect": true}, {"label": "D", "html": "travel", "isCorrect": false}], "explanationHTML": "<b>D\u1ecbch c\u00e2u h\u1ecfi:</b> T\u00f4i lu\u00f4n th\u00edch chuy\u1ebfn \u0111i c\u1ee7a tr\u01b0\u1eddng ch\u00fang t\u00f4i t\u1edbi Ph\u00e1p.<br><b>Gi\u1ea3i th\u00edch:</b> 'school trip' (chuy\u1ebfn \u0111i c\u1ee7a tr\u01b0\u1eddng). 'journey' th\u01b0\u1eddng ch\u1ec9 h\u00e0nh tr\u00ecnh d\u00e0i, 'travel' l\u00e0 danh t\u1eeb kh\u00f4ng \u0111\u1ebfm \u0111\u01b0\u1ee3c ch\u1ec9 vi\u1ec7c \u0111i l\u1ea1i chung chung, 'excursion' l\u00e0 chuy\u1ebfn tham quan ng\u1eafn nh\u01b0ng \u00edt d\u00f9ng k\u1ebft h\u1ee3p 'school excursion' b\u1eb1ng 'school trip'."}, {"id": "A7", "type": "multiple_choice", "questionHTML": "Hurry up, or we'll ............ the bus!", "options": [{"label": "A", "html": "avoid", "isCorrect": false}, {"label": "B", "html": "miss", "isCorrect": true}, {"label": "C", "html": "drop", "isCorrect": false}, {"label": "D", "html": "lose", "isCorrect": false}], "explanationHTML": "<b>D\u1ecbch c\u00e2u h\u1ecfi:</b> Nhanh l\u00ean, n\u1ebfu kh\u00f4ng ch\u00fang ta s\u1ebd l\u1ee1 xe bu\u00fdt!<br><b>Gi\u1ea3i th\u00edch:</b> 'miss the bus' (l\u1ee1 xe bu\u00fdt). 'lose' (\u0111\u00e1nh m\u1ea5t), 'avoid' (tr\u00e1nh), 'drop' (l\u00e0m r\u01a1i) kh\u00f4ng h\u1ee3p ngh\u0129a."}, {"id": "A8", "type": "multiple_choice", "questionHTML": "The brochure says that the hotel has a great ............ of the sea.", "options": [{"label": "A", "html": "appearance", "isCorrect": false}, {"label": "B", "html": "look", "isCorrect": false}, {"label": "C", "html": "sight", "isCorrect": false}, {"label": "D", "html": "view", "isCorrect": true}], "explanationHTML": "<b>D\u1ecbch c\u00e2u h\u1ecfi:</b> T\u1edd qu\u1ea3ng c\u00e1o n\u00f3i r\u1eb1ng kh\u00e1ch s\u1ea1n c\u00f3 t\u1ea7m nh\u00ecn tuy\u1ec7t v\u1eddi ra bi\u1ec3n.<br><b>Gi\u1ea3i th\u00edch:</b> 'view of' (t\u1ea7m nh\u00ecn ra). 'appearance' (v\u1ebb b\u1ec1 ngo\u00e0i), 'look' (c\u00e1i nh\u00ecn), 'sight' (c\u1ea3nh t\u01b0\u1ee3ng) kh\u00f4ng ph\u00f9 h\u1ee3p."}, {"id": "A9", "type": "multiple_choice", "questionHTML": "I must remember to ............ a souvenir back from Spain for my grandmother.", "options": [{"label": "A", "html": "go", "isCorrect": false}, {"label": "B", "html": "take", "isCorrect": false}, {"label": "C", "html": "bring", "isCorrect": true}, {"label": "D", "html": "keep", "isCorrect": false}], "explanationHTML": "<b>D\u1ecbch c\u00e2u h\u1ecfi:</b> T\u00f4i ph\u1ea3i nh\u1edb mang m\u1ed9t m\u00f3n qu\u00e0 l\u01b0u ni\u1ec7m t\u1eeb T\u00e2y Ban Nha v\u1ec1 cho b\u00e0 t\u00f4i.<br><b>Gi\u1ea3i th\u00edch:</b> 'bring back' (mang v\u1ec1). 'take' l\u00e0 mang \u0111i, 'bring' l\u00e0 mang l\u1ea1i/mang v\u1ec1 g\u1ea7n ng\u01b0\u1eddi n\u00f3i ho\u1eb7c ng\u01b0\u1eddi nh\u1eadn."}, {"id": "A10", "type": "multiple_choice", "questionHTML": "The ............ from London to Berlin is about 919 kilometres.", "options": [{"label": "A", "html": "measure", "isCorrect": false}, {"label": "B", "html": "length", "isCorrect": false}, {"label": "C", "html": "gap", "isCorrect": false}, {"label": "D", "html": "distance", "isCorrect": true}], "explanationHTML": "<b>D\u1ecbch c\u00e2u h\u1ecfi:</b> Kho\u1ea3ng c\u00e1ch t\u1eeb London \u0111\u1ebfn Berlin l\u00e0 kho\u1ea3ng 919 kilomet.<br><b>Gi\u1ea3i th\u00edch:</b> 'distance' (kho\u1ea3ng c\u00e1ch) gi\u1eefa hai \u0111\u1ecba \u0111i\u1ec3m. 'measure' (\u0111o l\u01b0\u1eddng), 'length' (chi\u1ec1u d\u00e0i), 'gap' (khe h\u1edf) kh\u00f4ng \u0111\u00fang."}, {"id": "A11", "type": "multiple_choice", "questionHTML": "Make sure you ............ a hotel before you come to our island, especially in the summer.", "options": [{"label": "A", "html": "book", "isCorrect": true}, {"label": "B", "html": "keep", "isCorrect": false}, {"label": "C", "html": "put", "isCorrect": false}, {"label": "D", "html": "take", "isCorrect": false}], "explanationHTML": "<b>D\u1ecbch c\u00e2u h\u1ecfi:</b> \u0110\u1ea3m b\u1ea3o r\u1eb1ng b\u1ea1n \u0111\u00e3 \u0111\u1eb7t kh\u00e1ch s\u1ea1n tr\u01b0\u1edbc khi \u0111\u1ebfn h\u00f2n \u0111\u1ea3o c\u1ee7a ch\u00fang t\u00f4i, \u0111\u1eb7c bi\u1ec7t l\u00e0 v\u00e0o m\u00f9a h\u00e8.<br><b>Gi\u1ea3i th\u00edch:</b> 'book a hotel' (\u0111\u1eb7t ph\u00f2ng kh\u00e1ch s\u1ea1n). C\u00e1c \u0111\u1ed9ng t\u1eeb kh\u00e1c kh\u00f4ng k\u1ebft h\u1ee3p \u0111\u00fang."}, {"id": "A12", "type": "multiple_choice", "questionHTML": "I live in Barcelona, but my ............ town is Madrid.", "options": [{"label": "A", "html": "birth", "isCorrect": false}, {"label": "B", "html": "home", "isCorrect": true}, {"label": "C", "html": "native", "isCorrect": false}, {"label": "D", "html": "origin", "isCorrect": false}], "explanationHTML": "<b>D\u1ecbch c\u00e2u h\u1ecfi:</b> T\u00f4i s\u1ed1ng \u1edf Barcelona, nh\u01b0ng qu\u00ea nh\u00e0 c\u1ee7a t\u00f4i l\u00e0 Madrid.<br><b>Gi\u1ea3i th\u00edch:</b> 'hometown' (qu\u00ea nh\u00e0). 'native' \u0111i v\u1edbi 'town' c\u0169ng \u0111\u01b0\u1ee3c nh\u01b0ng th\u01b0\u1eddng d\u00f9ng 'hometown', \u1edf \u0111\u00e2y 'home' l\u00e0 \u0111\u00e1p \u00e1n \u0111\u00fang."}, {"id": "B1", "type": "multiple_choice", "questionHTML": "I hope to go on a trip round the <b>world / earth</b> one day.", "options": [{"label": "A", "html": "world", "isCorrect": true}, {"label": "B", "html": "earth", "isCorrect": false}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> C\u1ee5m t\u1eeb c\u1ed1 \u0111\u1ecbnh 'round the world' (v\u00f2ng quanh th\u1ebf gi\u1edbi). Kh\u00f4ng d\u00f9ng 'round the earth' trong ng\u1eef c\u1ea3nh du l\u1ecbch."}, {"id": "B2", "type": "multiple_choice", "questionHTML": "You learn a lot about the local <b>territory / area</b> by speaking to local people.", "options": [{"label": "A", "html": "territory", "isCorrect": false}, {"label": "B", "html": "area", "isCorrect": true}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'local area' (khu v\u1ef1c \u0111\u1ecba ph\u01b0\u01a1ng). 'territory' (l\u00e3nh th\u1ed5) mang ngh\u0129a ch\u00ednh tr\u1ecb ho\u1eb7c \u0111\u1ecba l\u00fd r\u1ed9ng l\u1edbn."}, {"id": "B3", "type": "multiple_choice", "questionHTML": "It's good to have someone to <b>lead / guide</b> you when you are on holiday.", "options": [{"label": "A", "html": "lead", "isCorrect": false}, {"label": "B", "html": "guide", "isCorrect": true}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'guide' (h\u01b0\u1edbng d\u1eabn) th\u01b0\u1eddng d\u00f9ng cho du l\u1ecbch. 'lead' (d\u1eabn d\u1eaft) d\u00f9ng mang t\u00ednh l\u00e3nh \u0111\u1ea1o."}, {"id": "B4", "type": "multiple_choice", "questionHTML": "I get the train to work every day and the <b>fare / fee</b> is quite expensive.", "options": [{"label": "A", "html": "fare", "isCorrect": true}, {"label": "B", "html": "fee", "isCorrect": false}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'fare' (ti\u1ec1n v\u00e9) d\u00f9ng cho ph\u01b0\u01a1ng ti\u1ec7n giao th\u00f4ng. 'fee' (l\u1ec7 ph\u00ed, h\u1ecdc ph\u00ed) d\u00f9ng cho d\u1ecbch v\u1ee5."}, {"id": "B5", "type": "multiple_choice", "questionHTML": "Captain Cook discovered Australia on a <b>voyage / travel</b> to the Pacific.", "options": [{"label": "A", "html": "voyage", "isCorrect": true}, {"label": "B", "html": "travel", "isCorrect": false}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'voyage' (chuy\u1ebfn \u0111i d\u00e0i ng\u00e0y tr\u00ean bi\u1ec3n). 'travel' l\u00e0 danh t\u1eeb kh\u00f4ng \u0111\u1ebfm \u0111\u01b0\u1ee3c ch\u1ec9 vi\u1ec7c \u0111i l\u1ea1i."}, {"id": "B6", "type": "multiple_choice", "questionHTML": "Most tourist attractions in London charge an admission <b>fee / ticket</b>.", "options": [{"label": "A", "html": "fee", "isCorrect": true}, {"label": "B", "html": "ticket", "isCorrect": false}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'admission fee' (ph\u00ed v\u00e0o c\u1eeda). Kh\u00f4ng d\u00f9ng 'admission ticket' trong tr\u01b0\u1eddng h\u1ee3p 'charge a...'."}, {"id": "B7", "type": "multiple_choice", "questionHTML": "The sunset over Niagara Falls really is a magnificent <b>look / sight</b>.", "options": [{"label": "A", "html": "look", "isCorrect": false}, {"label": "B", "html": "sight", "isCorrect": true}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'sight' (c\u1ea3nh t\u01b0\u1ee3ng). 'look' (c\u00e1i nh\u00ecn, v\u1ebb ngo\u00e0i) kh\u00f4ng mi\u00eau t\u1ea3 c\u1ea3nh \u0111\u1eb9p."}, {"id": "C1", "type": "gap_fill_text", "questionHTML": "Let's go to the airport to {{blank:b1}} Grandpa off when he flies back home.", "blanks": [{"blankId": "b1", "correctAnswers": ["see"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> Phrasal verb 'see someone off' (ti\u1ec5n ai \u0111\u00f3)."}, {"id": "C2", "type": "gap_fill_text", "questionHTML": "If it starts to rain, {{blank:b1}} for a nearby cave to wait for it to pass.", "blanks": [{"blankId": "b1", "correctAnswers": ["make"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> Phrasal verb 'make for' (\u0111i v\u1ec1 h\u01b0\u1edbng)."}, {"id": "C3", "type": "gap_fill_text", "questionHTML": "We would like to remind all guests that they must {{blank:b1}} out before midday.", "blanks": [{"blankId": "b1", "correctAnswers": ["check"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> Phrasal verb 'check out' (tr\u1ea3 ph\u00f2ng kh\u00e1ch s\u1ea1n)."}, {"id": "C4", "type": "gap_fill_text", "questionHTML": "Please {{blank:b1}} in and stop so that I can buy something to drink.", "blanks": [{"blankId": "b1", "correctAnswers": ["pull"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> Phrasal verb 'pull in' (t\u1ea5p xe v\u00e0o l\u1ec1)."}, {"id": "C5", "type": "gap_fill_text", "questionHTML": "Every Saturday night my dad {{blank:b1}} us up outside the cinema.", "blanks": [{"blankId": "b1", "correctAnswers": ["picks"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> Phrasal verb 'pick up' (\u0111\u00f3n). Ch\u1ee7 ng\u1eef 'my dad' s\u1ed1 \u00edt n\u00ean \u0111\u1ed9ng t\u1eeb chia 'picks'."}, {"id": "C6", "type": "gap_fill_text", "questionHTML": "I think the neighbours have {{blank:b1}} away for the weekend.", "blanks": [{"blankId": "b1", "correctAnswers": ["gone"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> Phrasal verb 'go away' (\u0111i v\u1eafng). Th\u00ec hi\u1ec7n t\u1ea1i ho\u00e0n th\u00e0nh (have + V3) n\u00ean d\u00f9ng 'gone'."}, {"id": "C7", "type": "gap_fill_text", "questionHTML": "John's up ahead so Greg is pedalling fast to {{blank:b1}} up with him.", "blanks": [{"blankId": "b1", "correctAnswers": ["catch"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> Phrasal verb 'catch up with' (b\u1eaft k\u1ecbp)."}, {"id": "C8", "type": "gap_fill_text", "questionHTML": "We're going on holiday tomorrow, but we'll call you when we {{blank:b1}} back.", "blanks": [{"blankId": "b1", "correctAnswers": ["get"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> Phrasal verb 'get back' (tr\u1edf v\u1ec1)."}, {"id": "D1", "type": "gap_fill_text", "questionHTML": "We can <i>start our journey</i> <b>{{blank:b1}}</b> towards the mountains at dawn.", "blanks": [{"blankId": "b1", "correctAnswers": ["set off", "start out"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'set off' ho\u1eb7c 'start out' c\u00f3 ngh\u0129a l\u00e0 b\u1eaft \u0111\u1ea7u cu\u1ed9c h\u00e0nh tr\u00ecnh (start a journey)."}, {"id": "D2", "type": "gap_fill_text", "questionHTML": "Dad fetched the luggage while Mum <i>registered</i> <b>{{blank:b1}}</b> at the hotel.", "blanks": [{"blankId": "b1", "correctAnswers": ["checked in"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'check in' c\u00f3 ngh\u0129a l\u00e0 l\u00e0m th\u1ee7 t\u1ee5c \u0111\u0103ng k\u00fd (register) t\u1ea1i kh\u00e1ch s\u1ea1n. Qu\u00e1 kh\u1ee9 l\u00e0 'checked in'."}, {"id": "D3", "type": "gap_fill_text", "questionHTML": "I asked the taxi driver to <i>let me get out</i> <b>{{blank:b1}}</b> outside the train station.", "blanks": [{"blankId": "b1", "correctAnswers": ["drop me off"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'drop someone off' c\u00f3 ngh\u0129a l\u00e0 cho ai \u0111\u00f3 xu\u1ed1ng xe (let someone get out)."}, {"id": "D4", "type": "gap_fill_text", "questionHTML": "Oh, no! I've forgotten my passport! We'll have to <i>go back</i> <b>{{blank:b1}}</b> and get it!", "blanks": [{"blankId": "b1", "correctAnswers": ["turn back", "go back"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'turn back' ho\u1eb7c 'go back' c\u00f3 ngh\u0129a l\u00e0 quay l\u1ea1i."}, {"id": "D5", "type": "gap_fill_text", "questionHTML": "The most exciting moment is when the plane <i>leaves the ground</i> <b>{{blank:b1}}</b>.", "blanks": [{"blankId": "b1", "correctAnswers": ["takes off"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'take off' c\u00f3 ngh\u0129a l\u00e0 c\u1ea5t c\u00e1nh (leaves the ground). \u0110\u1ed9ng t\u1eeb chia 'takes off'."}, {"id": "D6", "type": "gap_fill_text", "questionHTML": "Stop the car! I think we've <i>hit</i> <b>{{blank:b1}}</b> a dog.", "blanks": [{"blankId": "b1", "correctAnswers": ["run over"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'run over' c\u00f3 ngh\u0129a l\u00e0 c\u00e1n qua, \u0111\u1ee5ng xe v\u00e0o (hit)."}, {"id": "D7", "type": "gap_fill_text", "questionHTML": "I don't think a horse can ever <i>stay at the same speed as</i> <b>{{blank:b1}}</b> a car.", "blanks": [{"blankId": "b1", "correctAnswers": ["keep up with"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'keep up with' c\u00f3 ngh\u0129a l\u00e0 theo k\u1ecbp, duy tr\u00ec c\u00f9ng t\u1ed1c \u0111\u1ed9 (stay at the same speed as)."}, {"id": "E1", "type": "gap_fill_text", "questionHTML": "The speed {{blank:b1}} in towns is 50 km/h and you shouldn't go faster than that.", "blanks": [{"blankId": "b1", "correctAnswers": ["limit"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'speed limit' (gi\u1edbi h\u1ea1n t\u1ed1c \u0111\u1ed9)."}, {"id": "E2", "type": "gap_fill_text", "questionHTML": "Why don't we {{blank:b1}} the scenic route along the coast?", "blanks": [{"blankId": "b1", "correctAnswers": ["take"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'take a route' (\u0111i theo tuy\u1ebfn \u0111\u01b0\u1eddng)."}, {"id": "E3", "type": "gap_fill_text", "questionHTML": "If you buy your plane ticket {{blank:b1}} advance, it's often cheaper than if you wait.", "blanks": [{"blankId": "b1", "correctAnswers": ["in"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'in advance' (tr\u01b0\u1edbc)."}, {"id": "E4", "type": "gap_fill_text", "questionHTML": "I can't remember the name of the hotel we stayed at off the {{blank:b1}} of my head.", "blanks": [{"blankId": "b1", "correctAnswers": ["top"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'off the top of my head' (ngay t\u1ee9c th\u00ec, kh\u00f4ng c\u1ea7n suy ngh\u0129 l\u00e2u)."}, {"id": "E5", "type": "gap_fill_text", "questionHTML": "I'm sorry I'm late! I {{blank:b1}} my way and had to ask for directions.", "blanks": [{"blankId": "b1", "correctAnswers": ["lost"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'lose one's way' (l\u1ea1c \u0111\u01b0\u1eddng). Qu\u00e1 kh\u1ee9 l\u00e0 'lost'."}, {"id": "E6", "type": "gap_fill_text", "questionHTML": "My mum's away in Germany on a business {{blank:b1}} at the moment.", "blanks": [{"blankId": "b1", "correctAnswers": ["trip"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'on a business trip' (\u0111i c\u00f4ng t\u00e1c)."}, {"id": "E7", "type": "gap_fill_text", "questionHTML": "The bank? Well, turn left here, then go {{blank:b1}} ahead for a kilometre and it's on the left.", "blanks": [{"blankId": "b1", "correctAnswers": ["straight"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'go straight ahead' (\u0111i th\u1eb3ng)."}, {"id": "E8", "type": "gap_fill_text", "questionHTML": "If you look on your left-hand {{blank:b1}} as we turn this corner, you'll see Big Ben.", "blanks": [{"blankId": "b1", "correctAnswers": ["side"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'on your left-hand side' (\u1edf ph\u00eda b\u00ean tay tr\u00e1i c\u1ee7a b\u1ea1n)."}, {"id": "E9", "type": "gap_fill_text", "questionHTML": "I'll look round the shops in the morning and then {{blank:b1}} sightseeing in the afternoon.", "blanks": [{"blankId": "b1", "correctAnswers": ["go"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'go sightseeing' (\u0111i ng\u1eafm c\u1ea3nh)."}, {"id": "E10", "type": "gap_fill_text", "questionHTML": "My grandma hasn't driven since she {{blank:b1}} an accident last year.", "blanks": [{"blankId": "b1", "correctAnswers": ["had"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'have an accident' (b\u1ecb tai n\u1ea1n). Qu\u00e1 kh\u1ee9 l\u00e0 'had'."}, {"id": "E11", "type": "gap_fill_text", "questionHTML": "I love visiting foreign places, {{blank:b1}} the sights and learning about other cultures.", "blanks": [{"blankId": "b1", "correctAnswers": ["seeing"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'see the sights' (ng\u1eafm c\u1ea3nh). Song song v\u1edbi 'visiting' n\u00ean d\u00f9ng 'seeing'."}, {"id": "E12", "type": "gap_fill_text", "questionHTML": "During the 70s, many British people started to go {{blank:b1}} holiday to Spain.", "blanks": [{"blankId": "b1", "correctAnswers": ["on"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'go on holiday' (\u0111i ngh\u1ec9 m\u00e1t)."}, {"id": "E13", "type": "gap_fill_text", "questionHTML": "While you're in London, you should take a tour {{blank:b1}} the Houses of Parliament.", "blanks": [{"blankId": "b1", "correctAnswers": ["round", "of", "around"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'take a tour round/of' (\u0111i tham quan v\u00f2ng quanh)."}, {"id": "F1", "type": "multiple_choice", "questionHTML": "I've always dreamt ............ China.", "options": [{"label": "A", "html": "to visit", "isCorrect": false}, {"label": "B", "html": "of visiting", "isCorrect": true}, {"label": "C", "html": "I visit", "isCorrect": false}, {"label": "D", "html": "visit", "isCorrect": false}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'dream of + V-ing' (m\u01a1 v\u1ec1 vi\u1ec7c g\u00ec)."}, {"id": "F2", "type": "multiple_choice", "questionHTML": "The travel agency is arranging for us ............ at a really nice hotel.", "options": [{"label": "A", "html": "stay", "isCorrect": false}, {"label": "B", "html": "of staying", "isCorrect": false}, {"label": "C", "html": "to stay", "isCorrect": true}, {"label": "D", "html": "staying", "isCorrect": false}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'arrange for sb to do sth' (s\u1eafp x\u1ebfp cho ai l\u00e0m g\u00ec)."}, {"id": "F3", "type": "multiple_choice", "questionHTML": "My dad says he always regrets ............ more.", "options": [{"label": "A", "html": "to not travel", "isCorrect": false}, {"label": "B", "html": "not travelling", "isCorrect": true}, {"label": "C", "html": "he not travel", "isCorrect": false}, {"label": "D", "html": "of not travelling", "isCorrect": false}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'regret + V-ing' (h\u1ed1i ti\u1ebfc \u0111\u00e3 l\u00e0m/kh\u00f4ng l\u00e0m g\u00ec). Ph\u1ee7 \u0111\u1ecbnh l\u00e0 'not V-ing'."}, {"id": "F4", "type": "multiple_choice", "questionHTML": "John seems keen ............ how to drive as soon as he can.", "options": [{"label": "A", "html": "of learning", "isCorrect": false}, {"label": "B", "html": "he learn", "isCorrect": false}, {"label": "C", "html": "for learn", "isCorrect": false}, {"label": "D", "html": "to learn", "isCorrect": true}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'keen to do sth' (h\u00e1o h\u1ee9c l\u00e0m g\u00ec) ho\u1eb7c 'keen on V-ing'. \u1ede \u0111\u00e2y c\u00f3 'to learn'."}, {"id": "F5", "type": "multiple_choice", "questionHTML": "Now, class, I'd like you all to write ............ a description of your last holiday.", "options": [{"label": "A", "html": "me", "isCorrect": true}, {"label": "B", "html": "to me", "isCorrect": false}, {"label": "C", "html": "it me", "isCorrect": false}, {"label": "D", "html": "about me", "isCorrect": false}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'write someone something' (vi\u1ebft cho ai c\u00e1i g\u00ec)."}, {"id": "F6", "type": "multiple_choice", "questionHTML": "When you arrive ............ , have your passport ready.", "options": [{"label": "A", "html": "to the airport", "isCorrect": false}, {"label": "B", "html": "in the airport", "isCorrect": false}, {"label": "C", "html": "on the airport", "isCorrect": false}, {"label": "D", "html": "at the airport", "isCorrect": true}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'arrive at + \u0111\u1ecba \u0111i\u1ec3m nh\u1ecf' (nh\u01b0 s\u00e2n bay, nh\u00e0 ga)."}, {"id": "F7", "type": "multiple_choice", "questionHTML": "The Joneses have invited us ............ to Australia with them this summer.", "options": [{"label": "A", "html": "going", "isCorrect": false}, {"label": "B", "html": "for going", "isCorrect": false}, {"label": "C", "html": "about going", "isCorrect": false}, {"label": "D", "html": "to go", "isCorrect": true}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'invite sb to do sth' (m\u1eddi ai l\u00e0m g\u00ec)."}, {"id": "F8", "type": "multiple_choice", "questionHTML": "The in-flight entertainment may differ ............ that advertised.", "options": [{"label": "A", "html": "to", "isCorrect": false}, {"label": "B", "html": "from", "isCorrect": true}, {"label": "C", "html": "in", "isCorrect": false}, {"label": "D", "html": "at", "isCorrect": false}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> 'differ from' (kh\u00e1c v\u1edbi)."}, {"id": "G1", "type": "gap_fill_text", "questionHTML": "<b>T\u00ecm l\u1ed7i sai (t\u1eeb th\u1eeba):</b> Oh, let me tell you about our trip. Did you know that Sara is afraid of <i>be</i> flying?", "blanks": [{"blankId": "b1", "correctAnswers": ["be"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> T\u1eeb th\u1eeba l\u00e0 'be'. C\u1ea5u tr\u00fac \u0111\u00fang l\u00e0 'afraid of + V-ing', n\u00ean 'afraid of flying' l\u00e0 \u0111\u1ee7."}, {"id": "G2", "type": "gap_fill_text", "questionHTML": "<b>T\u00ecm l\u1ed7i sai (t\u1eeb th\u1eeba):</b> flying? We had arranged <i>it</i> with her family to go to France for a few days.", "blanks": [{"blankId": "b1", "correctAnswers": ["it"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> T\u1eeb th\u1eeba l\u00e0 'it'. C\u1ea5u tr\u00fac 'arrange with sb to do sth' (s\u1eafp x\u1ebfp v\u1edbi ai l\u00e0m g\u00ec)."}, {"id": "G3", "type": "gap_fill_text", "questionHTML": "<b>T\u00ecm l\u1ed7i sai (t\u1eeb th\u1eeba):</b> I have always wanted to see Paris and would love to live <i>in</i> there one day.", "blanks": [{"blankId": "b1", "correctAnswers": ["in"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> T\u1eeb th\u1eeba l\u00e0 'in'. 'there' l\u00e0 tr\u1ea1ng t\u1eeb ch\u1ec9 n\u01a1i ch\u1ed1n, kh\u00f4ng c\u1ea7n gi\u1edbi t\u1eeb 'in' \u0111i k\u00e8m (live there)."}, {"id": "G4", "type": "gap_fill_text", "questionHTML": "<b>T\u00ecm l\u1ed7i sai (t\u1eeb th\u1eeba):</b> Well, we got to the airport and Sara appeared <i>being</i> nervous. I asked her if", "blanks": [{"blankId": "b1", "correctAnswers": ["being"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> T\u1eeb th\u1eeba l\u00e0 'being'. C\u1ea5u tr\u00fac 'appear + adj' (tr\u00f4ng c\u00f3 v\u1ebb), 'appeared nervous' l\u00e0 \u0111\u1ee7."}, {"id": "G5", "type": "gap_fill_text", "questionHTML": "<b>T\u00ecm l\u1ed7i sai (t\u1eeb th\u1eeba):</b> she was okay and she said she was fine, so we continued on <i>to</i> our way.", "blanks": [{"blankId": "b1", "correctAnswers": ["to"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> T\u1eeb th\u1eeba l\u00e0 'to'. C\u1ee5m t\u1eeb \u0111\u00fang l\u00e0 'continue on our way' (ti\u1ebfp t\u1ee5c l\u00ean \u0111\u01b0\u1eddng)."}, {"id": "G6", "type": "gap_fill_text", "questionHTML": "<b>T\u00ecm l\u1ed7i sai (t\u1eeb th\u1eeba):</b> We went through passport control and I could see <i>so</i> that Sara wasn't", "blanks": [{"blankId": "b1", "correctAnswers": ["so"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> T\u1eeb th\u1eeba l\u00e0 'so'. 'see that' (th\u1ea5y r\u1eb1ng) l\u00e0 \u0111\u1ee7, kh\u00f4ng c\u1ea7n 'so'."}, {"id": "G7", "type": "gap_fill_text", "questionHTML": "<b>T\u00ecm l\u1ed7i sai (t\u1eeb th\u1eeba):</b> keen on going any further. Just then, a voice announced: 'We regret <i>it</i> to", "blanks": [{"blankId": "b1", "correctAnswers": ["it"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> T\u1eeb th\u1eeba l\u00e0 'it'. C\u1ea5u tr\u00fac 'regret to do sth' (ti\u1ebfc ph\u1ea3i l\u00e0m g\u00ec), kh\u00f4ng c\u00f3 t\u00e2n ng\u1eef 'it'."}, {"id": "G8", "type": "gap_fill_text", "questionHTML": "<b>T\u00ecm l\u1ed7i sai (t\u1eeb th\u1eeba):</b> inform passengers that Flight 114 to France <i>is</i> been cancelled.' That was", "blanks": [{"blankId": "b1", "correctAnswers": ["is"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> T\u1eeb th\u1eeba l\u00e0 'is'. Th\u00ec hi\u1ec7n t\u1ea1i ho\u00e0n th\u00e0nh b\u1ecb \u0111\u1ed9ng 'has been cancelled'."}, {"id": "G9", "type": "gap_fill_text", "questionHTML": "<b>T\u00ecm l\u1ed7i sai (t\u1eeb th\u1eeba):</b> our flight! Sarah said she was glad because <i>of</i> she was too frightened to", "blanks": [{"blankId": "b1", "correctAnswers": ["of"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> T\u1eeb th\u1eeba l\u00e0 'of'. 'because' \u0111i v\u1edbi m\u1ec7nh \u0111\u1ec1, 'because of' \u0111i v\u1edbi danh t\u1eeb. \u1ede \u0111\u00e2y l\u00e0 m\u1ec7nh \u0111\u1ec1 'she was...', n\u00ean kh\u00f4ng d\u00f9ng 'of'."}, {"id": "G10", "type": "gap_fill_text", "questionHTML": "<b>T\u00ecm l\u1ed7i sai (t\u1eeb th\u1eeba):</b> fly anyway! So, we all went <i>to</i> home. That was the end of that trip!", "blanks": [{"blankId": "b1", "correctAnswers": ["to"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> T\u1eeb th\u1eeba l\u00e0 'to'. 'go home' (v\u1ec1 nh\u00e0), kh\u00f4ng c\u00f3 gi\u1edbi t\u1eeb 'to'."}, {"id": "H1", "type": "gap_fill_text", "questionHTML": "It's not always easy being a {{blank:b1}}. (TOUR)", "blanks": [{"blankId": "b1", "correctAnswers": ["tourist"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> Sau m\u1ea1o t\u1eeb 'a' c\u1ea7n m\u1ed9t danh t\u1eeb ch\u1ec9 ng\u01b0\u1eddi. TOUR -> tourist (kh\u00e1ch du l\u1ecbch)."}, {"id": "H2", "type": "gap_fill_text", "questionHTML": "You spend half your time making {{blank:b1}} for your holiday and the other half worrying... (ARRANGE)", "blanks": [{"blankId": "b1", "correctAnswers": ["arrangements"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> C\u1ee5m t\u1eeb 'make arrangements' (s\u1eafp x\u1ebfp). Danh t\u1eeb s\u1ed1 nhi\u1ec1u c\u1ee7a ARRANGE l\u00e0 arrangements."}, {"id": "H3", "type": "gap_fill_text", "questionHTML": "...worrying about sticking to the {{blank:b1}}. (TIME)", "blanks": [{"blankId": "b1", "correctAnswers": ["timetable", "timing"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> Danh t\u1eeb ph\u00f9 h\u1ee3p v\u1edbi \u00fd ngh\u0129a th\u1eddi gian bi\u1ec3u l\u1ecbch tr\u00ecnh l\u00e0 timetable. TIME -> timetable."}, {"id": "H4", "type": "gap_fill_text", "questionHTML": "I think it's relaxing sometimes to spend a holiday at home. There are no {{blank:b1}} problems... (CULTURE)", "blanks": [{"blankId": "b1", "correctAnswers": ["cultural"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> \u0110\u1ee9ng tr\u01b0\u1edbc danh t\u1eeb 'problems' c\u1ea7n m\u1ed9t t\u00ednh t\u1eeb. CULTURE -> cultural (thu\u1ed9c v\u1ec1 v\u0103n h\u00f3a)."}, {"id": "H5", "type": "gap_fill_text", "questionHTML": "...you don't need someone to be the {{blank:b1}}... (PHOTOGRAPH)", "blanks": [{"blankId": "b1", "correctAnswers": ["photographer"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> Sau 'the' v\u00e0 ng\u1eef c\u1ea3nh ch\u1ec9 ng\u01b0\u1eddi ch\u1ee5p \u1ea3nh. PHOTOGRAPH -> photographer."}, {"id": "H6", "type": "gap_fill_text", "questionHTML": "...and you know that the local {{blank:b1}} are always friendly! (INHABIT)", "blanks": [{"blankId": "b1", "correctAnswers": ["inhabitants"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> Danh t\u1eeb ch\u1ec9 c\u01b0 d\u00e2n, s\u1ed1 nhi\u1ec1u do \u0111\u1ed9ng t\u1eeb 'are'. INHABIT -> inhabitants."}, {"id": "I1", "type": "gap_fill_text", "questionHTML": "Beijing has changed so much in the last few years that it's almost {{blank:b1}}. (RECOGNISE)", "blanks": [{"blankId": "b1", "correctAnswers": ["unrecognisable"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> C\u1ea7n t\u00ednh t\u1eeb m\u00f4 t\u1ea3 s\u1ef1 thay \u0111\u1ed5i \u0111\u1ebfn m\u1ee9c kh\u00f4ng nh\u1eadn ra. RECOGNISE -> unrecognisable."}, {"id": "I2", "type": "gap_fill_text", "questionHTML": "The number of cars {{blank:b1}} (WORLD) is about a billion and is increasing all the time.", "blanks": [{"blankId": "b1", "correctAnswers": ["worldwide"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> C\u1ea7n tr\u1ea1ng t\u1eeb ho\u1eb7c t\u00ednh t\u1eeb b\u1ed5 ngh\u0129a cho 'cars' tr\u00ean to\u00e0n th\u1ebf gi\u1edbi. WORLD -> worldwide."}, {"id": "I3", "type": "gap_fill_text", "questionHTML": "The new maglev trains run on a completely {{blank:b1}} (DIFFER) system from ordinary trains.", "blanks": [{"blankId": "b1", "correctAnswers": ["different"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> C\u1ea7n t\u00ednh t\u1eeb \u0111\u1ee9ng tr\u01b0\u1edbc danh t\u1eeb 'system'. DIFFER -> different."}, {"id": "I4", "type": "gap_fill_text", "questionHTML": "Living in a foreign country really does {{blank:b1}} (BROAD) your horizons.", "blanks": [{"blankId": "b1", "correctAnswers": ["broaden"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> C\u1ea7n \u0111\u1ed9ng t\u1eeb sau tr\u1ee3 \u0111\u1ed9ng t\u1eeb 'does'. BROAD -> broaden (m\u1edf r\u1ed9ng)."}, {"id": "I5", "type": "gap_fill_text", "questionHTML": "I can't find a {{blank:b1}} (DIRECT) flight from London to Delhi so I've booked one that changes in Frankfurt.", "blanks": [{"blankId": "b1", "correctAnswers": ["direct"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> C\u1ea7n t\u00ednh t\u1eeb \u0111\u1ee9ng tr\u01b0\u1edbc 'flight'. DIRECT -> direct (gi\u1eef nguy\u00ean, t\u00ednh t\u1eeb)."}, {"id": "I6", "type": "gap_fill_text", "questionHTML": "All passengers must complete a visa form upon {{blank:b1}} (ARRIVE) at Singapore airport.", "blanks": [{"blankId": "b1", "correctAnswers": ["arrival"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> C\u1ea7n danh t\u1eeb sau gi\u1edbi t\u1eeb 'upon'. ARRIVE -> arrival."}, {"id": "I7", "type": "gap_fill_text", "questionHTML": "You can still see old milestones by the side of the road in England, showing the {{blank:b1}} (DISTANT) to the nearest town.", "blanks": [{"blankId": "b1", "correctAnswers": ["distance"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> C\u1ea7n danh t\u1eeb sau 'the'. DISTANT -> distance (kho\u1ea3ng c\u00e1ch)."}, {"id": "I8", "type": "gap_fill_text", "questionHTML": "The Museum of Transport has a full-sized jet plane next to the {{blank:b1}} (ENTER).", "blanks": [{"blankId": "b1", "correctAnswers": ["entrance"]}], "explanationHTML": "<b>Gi\u1ea3i th\u00edch:</b> C\u1ea7n danh t\u1eeb sau 'the' ch\u1ec9 l\u1ed1i v\u00e0o. ENTER -> entrance."}];
-let userState = {};
-let audioCtx = null;
-let studentName = "";
+    <div id="testScreen" class="screen">
+        <h2>Travel and Transport Unit 2</h2>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div id="questionsContainer"></div>
+        <div style="text-align: center; margin-top: 30px;">
+            <button id="submitBtn" onclick="confirmSubmit()" style="background: #2ecc71; font-weight: bold; padding: 15px 40px;">NỘP BÀI</button>
+        </div>
+    </div>
 
-function escapeHTML(str) { const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
-function normalizeAnswer(str) { return (str || "").trim().replace(/\s+/g,' ').toLowerCase(); }
+    <div id="resultScreen" class="screen" style="text-align: center;">
+        <h1 style="color: #2ecc71; font-size: 36px;">Hoàn thành!</h1>
+        <h2 id="scoreDisplay" style="font-size: 48px; margin: 20px 0; color: #2c3e50;"></h2>
+        <p id="feedbackText" style="font-size: 18px; color: #7f8c8d;"></p>
+        <div class="result-details" id="resultDetails"></div>
+    </div>
 
-function initAudio() {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-}
-
-function playTone(freq, type, duration, vol) {
-    if (!audioCtx) return;
-    try {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = type;
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(vol, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + duration);
-    } catch(e) {}
-}
-
-function playSelectSound() { playTone(600, 'sine', 0.08, 0.15); }
-function playCorrectSound() { playTone(800, 'sine', 0.1, 0.2); setTimeout(()=>playTone(1200, 'sine', 0.15, 0.2), 100); }
-function playWrongSound() { playTone(150, 'square', 0.2, 0.12); }
-function playSubmitSound() { playTone(500, 'sine', 0.12, 0.15); }
-
-function startQuiz() {
-    const nameInput = document.getElementById('student-name').value.trim();
-    if (!nameInput) { alert("Vui lòng nhập tên trước khi bắt đầu!"); return; }
-    studentName = nameInput;
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('quiz-container').style.display = 'block';
-    initAudio();
-    renderQuiz();
-}
-
-function updateProgress() {
-    const total = quizData.length;
-    const answered = Object.values(userState).filter(s => s.answer !== null && s.answer !== "").length;
-    document.getElementById('progress-bar').style.width = (answered / total * 100) + '%';
-}
-
-function shuffleOptions(options) {
-    let shuffled = [...options];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    const labels = ['A', 'B', 'C', 'D'];
-    shuffled.forEach((opt, idx) => { opt.displayLabel = labels[idx]; });
-    return shuffled;
-}
-
-function renderQuiz() {
-    const area = document.getElementById('questions-area');
-    quizData.forEach((q, index) => {
-        userState[q.id] = { answer: null, checked: false, isCorrect: null };
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.id = 'card-' + q.id;
+    <script>
+        const testName = 'Travel and Transport Unit 2';
+        const quizData = [{"id": "A1", "type": "multiple_choice", "questionHTML": "<b>A. Choose the correct word or phrase.</b><br>You need a passport to cross the ............ between Mexico and the United States.", "options": [{"label": "A", "html": "edge", "isCorrect": false}, {"label": "B", "html": "line", "isCorrect": false}, {"label": "C", "html": "border", "isCorrect": true}, {"label": "D", "html": "rim", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> Bạn cần hộ chiếu để vượt qua biên giới giữa Mexico và Hoa Kỳ.<br><b>Giải thích:</b> 'border' (biên giới) là ranh giới giữa hai quốc gia. 'edge' (rìa), 'line' (đường kẻ), 'rim' (vành) không dùng cho ranh giới quốc gia."}, {"id": "A2", "type": "multiple_choice", "questionHTML": "The hotel where we are ............ is quite luxurious.", "options": [{"label": "A", "html": "living", "isCorrect": false}, {"label": "B", "html": "remaining", "isCorrect": false}, {"label": "C", "html": "existing", "isCorrect": false}, {"label": "D", "html": "staying", "isCorrect": true}], "explanationHTML": "<b>Dịch câu hỏi:</b> Khách sạn nơi chúng tôi đang ở khá sang trọng.<br><b>Giải thích:</b> 'stay' (ở lại) dùng cho việc ở tạm thời tại khách sạn. 'live' (sống) dùng cho nơi ở thường xuyên. 'remain' (còn lại), 'exist' (tồn tại) không phù hợp ngữ cảnh."}, {"id": "A3", "type": "multiple_choice", "questionHTML": "When you ............ your destination, your tour guide will meet you at the airport.", "options": [{"label": "A", "html": "arrive", "isCorrect": false}, {"label": "B", "html": "get", "isCorrect": false}, {"label": "C", "html": "reach", "isCorrect": true}, {"label": "D", "html": "achieve", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> Khi bạn đến điểm đến, hướng dẫn viên sẽ đón bạn tại sân bay.<br><b>Giải thích:</b> 'reach' (đến) đi trực tiếp với tân ngữ (reach your destination). 'arrive' đi với 'at/in', 'get' đi với 'to'. 'achieve' (đạt được) dùng cho mục tiêu."}, {"id": "A4", "type": "multiple_choice", "questionHTML": "It can be quite busy here during the tourist ............ .", "options": [{"label": "A", "html": "season", "isCorrect": true}, {"label": "B", "html": "period", "isCorrect": false}, {"label": "C", "html": "phase", "isCorrect": false}, {"label": "D", "html": "stage", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> Ở đây có thể khá đông đúc trong mùa du lịch.<br><b>Giải thích:</b> Cụm từ cố định 'tourist season' (mùa du lịch). 'period', 'phase', 'stage' (giai đoạn, thời kỳ) không kết hợp với 'tourist'."}, {"id": "A5", "type": "multiple_choice", "questionHTML": "David ............ me to the train station every morning.", "options": [{"label": "A", "html": "goes", "isCorrect": false}, {"label": "B", "html": "takes", "isCorrect": true}, {"label": "C", "html": "has", "isCorrect": false}, {"label": "D", "html": "makes", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> David đưa tôi đến ga tàu mỗi sáng.<br><b>Giải thích:</b> 'take someone to somewhere' (đưa ai đi đâu). Các động từ khác không phù hợp về nghĩa và cấu trúc."}, {"id": "A6", "type": "multiple_choice", "questionHTML": "I always enjoy our school ............ to France.", "options": [{"label": "A", "html": "excursion", "isCorrect": false}, {"label": "B", "html": "journey", "isCorrect": false}, {"label": "C", "html": "trip", "isCorrect": true}, {"label": "D", "html": "travel", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> Tôi luôn thích chuyến đi của trường chúng tôi tới Pháp.<br><b>Giải thích:</b> 'school trip' (chuyến đi của trường). 'journey' thường chỉ hành trình dài, 'travel' là danh từ không đếm được chỉ việc đi lại chung chung, 'excursion' là chuyến tham quan ngắn nhưng ít dùng kết hợp 'school excursion' bằng 'school trip'."}, {"id": "A7", "type": "multiple_choice", "questionHTML": "Hurry up, or we'll ............ the bus!", "options": [{"label": "A", "html": "avoid", "isCorrect": false}, {"label": "B", "html": "miss", "isCorrect": true}, {"label": "C", "html": "drop", "isCorrect": false}, {"label": "D", "html": "lose", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> Nhanh lên, nếu không chúng ta sẽ lỡ xe buýt!<br><b>Giải thích:</b> 'miss the bus' (lỡ xe buýt). 'lose' (đánh mất), 'avoid' (tránh), 'drop' (làm rơi) không hợp nghĩa."}, {"id": "A8", "type": "multiple_choice", "questionHTML": "The brochure says that the hotel has a great ............ of the sea.", "options": [{"label": "A", "html": "appearance", "isCorrect": false}, {"label": "B", "html": "look", "isCorrect": false}, {"label": "C", "html": "sight", "isCorrect": false}, {"label": "D", "html": "view", "isCorrect": true}], "explanationHTML": "<b>Dịch câu hỏi:</b> Tờ quảng cáo nói rằng khách sạn có tầm nhìn tuyệt vời ra biển.<br><b>Giải thích:</b> 'view of' (tầm nhìn ra). 'appearance' (vẻ bề ngoài), 'look' (cái nhìn), 'sight' (cảnh tượng) không phù hợp."}, {"id": "A9", "type": "multiple_choice", "questionHTML": "I must remember to ............ a souvenir back from Spain for my grandmother.", "options": [{"label": "A", "html": "go", "isCorrect": false}, {"label": "B", "html": "take", "isCorrect": false}, {"label": "C", "html": "bring", "isCorrect": true}, {"label": "D", "html": "keep", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> Tôi phải nhớ mang một món quà lưu niệm từ Tây Ban Nha về cho bà tôi.<br><b>Giải thích:</b> 'bring back' (mang về). 'take' là mang đi, 'bring' là mang lại/mang về gần người nói hoặc người nhận."}, {"id": "A10", "type": "multiple_choice", "questionHTML": "The ............ from London to Berlin is about 919 kilometres.", "options": [{"label": "A", "html": "measure", "isCorrect": false}, {"label": "B", "html": "length", "isCorrect": false}, {"label": "C", "html": "gap", "isCorrect": false}, {"label": "D", "html": "distance", "isCorrect": true}], "explanationHTML": "<b>Dịch câu hỏi:</b> Khoảng cách từ London đến Berlin là khoảng 919 kilomet.<br><b>Giải thích:</b> 'distance' (khoảng cách) giữa hai địa điểm. 'measure' (đo lường), 'length' (chiều dài), 'gap' (khe hở) không đúng."}, {"id": "A11", "type": "multiple_choice", "questionHTML": "Make sure you ............ a hotel before you come to our island, especially in the summer.", "options": [{"label": "A", "html": "book", "isCorrect": true}, {"label": "B", "html": "keep", "isCorrect": false}, {"label": "C", "html": "put", "isCorrect": false}, {"label": "D", "html": "take", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> Đảm bảo rằng bạn đã đặt khách sạn trước khi đến hòn đảo của chúng tôi, đặc biệt là vào mùa hè.<br><b>Giải thích:</b> 'book a hotel' (đặt phòng khách sạn). Các động từ khác không kết hợp đúng."}, {"id": "A12", "type": "multiple_choice", "questionHTML": "I live in Barcelona, but my ............ town is Madrid.", "options": [{"label": "A", "html": "birth", "isCorrect": false}, {"label": "B", "html": "home", "isCorrect": true}, {"label": "C", "html": "native", "isCorrect": false}, {"label": "D", "html": "origin", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> Tôi sống ở Barcelona, nhưng quê nhà của tôi là Madrid.<br><b>Giải thích:</b> 'hometown' (quê nhà). 'native' đi với 'town' cũng được nhưng thường dùng 'hometown', ở đây 'home' là đáp án đúng."}, {"id": "B1", "type": "multiple_choice", "questionHTML": "<b>B. Choose the correct word in bold.</b><br>I hope to go on a trip round the <b>world / earth</b> one day.", "options": [{"label": "A", "html": "world", "isCorrect": true}, {"label": "B", "html": "earth", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> Cụm từ cố định 'round the world' (vòng quanh thế giới). Không dùng 'round the earth' trong ngữ cảnh du lịch."}, {"id": "B2", "type": "multiple_choice", "questionHTML": "You learn a lot about the local <b>territory / area</b> by speaking to local people.", "options": [{"label": "A", "html": "territory", "isCorrect": false}, {"label": "B", "html": "area", "isCorrect": true}], "explanationHTML": "<b>Giải thích:</b> 'local area' (khu vực địa phương). 'territory' (lãnh thổ) mang nghĩa chính trị hoặc địa lý rộng lớn."}, {"id": "B3", "type": "multiple_choice", "questionHTML": "It's good to have someone to <b>lead / guide</b> you when you are on holiday.", "options": [{"label": "A", "html": "lead", "isCorrect": false}, {"label": "B", "html": "guide", "isCorrect": true}], "explanationHTML": "<b>Giải thích:</b> 'guide' (hướng dẫn) thường dùng cho du lịch. 'lead' (dẫn dắt) dùng mang tính lãnh đạo."}, {"id": "B4", "type": "multiple_choice", "questionHTML": "I get the train to work every day and the <b>fare / fee</b> is quite expensive.", "options": [{"label": "A", "html": "fare", "isCorrect": true}, {"label": "B", "html": "fee", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> 'fare' (tiền vé) dùng cho phương tiện giao thông. 'fee' (lệ phí, học phí) dùng cho dịch vụ."}, {"id": "B5", "type": "multiple_choice", "questionHTML": "Captain Cook discovered Australia on a <b>voyage / travel</b> to the Pacific.", "options": [{"label": "A", "html": "voyage", "isCorrect": true}, {"label": "B", "html": "travel", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> 'voyage' (chuyến đi dài ngày trên biển). 'travel' là danh từ không đếm được chỉ việc đi lại."}, {"id": "B6", "type": "multiple_choice", "questionHTML": "Most tourist attractions in London charge an admission <b>fee / ticket</b>.", "options": [{"label": "A", "html": "fee", "isCorrect": true}, {"label": "B", "html": "ticket", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> 'admission fee' (phí vào cửa). Không dùng 'admission ticket' trong trường hợp 'charge a...'."}, {"id": "B7", "type": "multiple_choice", "questionHTML": "The sunset over Niagara Falls really is a magnificent <b>look / sight</b>.", "options": [{"label": "A", "html": "look", "isCorrect": false}, {"label": "B", "html": "sight", "isCorrect": true}], "explanationHTML": "<b>Giải thích:</b> 'sight' (cảnh tượng). 'look' (cái nhìn, vẻ ngoài) không miêu tả cảnh đẹp."}, {"id": "C1", "type": "gap_fill_text", "questionHTML": "<b>C. Complete the sentences using phrasal verbs.</b><br>Let's go to the airport to {{blank:b1}} Grandpa off when he flies back home.", "blanks": [{"blankId": "b1", "correctAnswers": ["see"]}], "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'see someone off' (tiễn ai đó)."}, {"id": "C2", "type": "gap_fill_text", "questionHTML": "If it starts to rain, {{blank:b1}} for a nearby cave to wait for it to pass.", "blanks": [{"blankId": "b1", "correctAnswers": ["make"]}], "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'make for' (đi về hướng)."}, {"id": "C3", "type": "gap_fill_text", "questionHTML": "We would like to remind all guests that they must {{blank:b1}} out before midday.", "blanks": [{"blankId": "b1", "correctAnswers": ["check"]}], "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'check out' (trả phòng khách sạn)."}, {"id": "C4", "type": "gap_fill_text", "questionHTML": "Please {{blank:b1}} in and stop so that I can buy something to drink.", "blanks": [{"blankId": "b1", "correctAnswers": ["pull"]}], "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'pull in' (tấp xe vào lề)."}, {"id": "C5", "type": "gap_fill_text", "questionHTML": "Every Saturday night my dad {{blank:b1}} us up outside the cinema.", "blanks": [{"blankId": "b1", "correctAnswers": ["picks"]}], "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'pick up' (đón). Chủ ngữ 'my dad' số ít nên động từ chia 'picks'."}, {"id": "C6", "type": "gap_fill_text", "questionHTML": "I think the neighbours have {{blank:b1}} away for the weekend.", "blanks": [{"blankId": "b1", "correctAnswers": ["gone"]}], "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'go away' (đi vắng). Thì hiện tại hoàn thành (have + V3) nên dùng 'gone'."}, {"id": "C7", "type": "gap_fill_text", "questionHTML": "John's up ahead so Greg is pedalling fast to {{blank:b1}} up with him.", "blanks": [{"blankId": "b1", "correctAnswers": ["catch"]}], "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'catch up with' (bắt kịp)."}, {"id": "C8", "type": "gap_fill_text", "questionHTML": "We're going on holiday tomorrow, but we'll call you when we {{blank:b1}} back.", "blanks": [{"blankId": "b1", "correctAnswers": ["get"]}], "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'get back' (trở về)."}, {"id": "D1", "type": "gap_fill_text", "questionHTML": "<b>D. Replace the phrase in italics with a phrasal verb.</b><br>We can <i>start our journey</i> <b>{{blank:b1}}</b> towards the mountains at dawn.", "blanks": [{"blankId": "b1", "correctAnswers": ["set off", "start out"]}], "explanationHTML": "<b>Giải thích:</b> 'set off' hoặc 'start out' có nghĩa là bắt đầu cuộc hành trình (start a journey)."}, {"id": "D2", "type": "gap_fill_text", "questionHTML": "Dad fetched the luggage while Mum <i>registered</i> <b>{{blank:b1}}</b> at the hotel.", "blanks": [{"blankId": "b1", "correctAnswers": ["checked in"]}], "explanationHTML": "<b>Giải thích:</b> 'check in' có nghĩa là làm thủ tục đăng ký (register) tại khách sạn. Quá khứ là 'checked in'."}, {"id": "D3", "type": "gap_fill_text", "questionHTML": "I asked the taxi driver to <i>let me get out</i> <b>{{blank:b1}}</b> outside the train station.", "blanks": [{"blankId": "b1", "correctAnswers": ["drop me off"]}], "explanationHTML": "<b>Giải thích:</b> 'drop someone off' có nghĩa là cho ai đó xuống xe (let someone get out)."}, {"id": "D4", "type": "gap_fill_text", "questionHTML": "Oh, no! I've forgotten my passport! We'll have to <i>go back</i> <b>{{blank:b1}}</b> and get it!", "blanks": [{"blankId": "b1", "correctAnswers": ["turn back", "go back"]}], "explanationHTML": "<b>Giải thích:</b> 'turn back' hoặc 'go back' có nghĩa là quay lại."}, {"id": "D5", "type": "gap_fill_text", "questionHTML": "The most exciting moment is when the plane <i>leaves the ground</i> <b>{{blank:b1}}</b>.", "blanks": [{"blankId": "b1", "correctAnswers": ["takes off"]}], "explanationHTML": "<b>Giải thích:</b> 'take off' có nghĩa là cất cánh (leaves the ground). Động từ chia 'takes off'."}, {"id": "D6", "type": "gap_fill_text", "questionHTML": "Stop the car! I think we've <i>hit</i> <b>{{blank:b1}}</b> a dog.", "blanks": [{"blankId": "b1", "correctAnswers": ["run over"]}], "explanationHTML": "<b>Giải thích:</b> 'run over' có nghĩa là cán qua, đụng xe vào (hit)."}, {"id": "D7", "type": "gap_fill_text", "questionHTML": "I don't think a horse can ever <i>stay at the same speed as</i> <b>{{blank:b1}}</b> a car.", "blanks": [{"blankId": "b1", "correctAnswers": ["keep up with"]}], "explanationHTML": "<b>Giải thích:</b> 'keep up with' có nghĩa là theo kịp, duy trì cùng tốc độ (stay at the same speed as)."}, {"id": "E1", "type": "gap_fill_text", "questionHTML": "<b>E. Complete the sentences.</b><br>The speed {{blank:b1}} in towns is 50 km/h and you shouldn't go faster than that.", "blanks": [{"blankId": "b1", "correctAnswers": ["limit"]}], "explanationHTML": "<b>Giải thích:</b> 'speed limit' (giới hạn tốc độ)."}, {"id": "E2", "type": "gap_fill_text", "questionHTML": "Why don't we {{blank:b1}} the scenic route along the coast?", "blanks": [{"blankId": "b1", "correctAnswers": ["take"]}], "explanationHTML": "<b>Giải thích:</b> 'take a route' (đi theo tuyến đường)."}, {"id": "E3", "type": "gap_fill_text", "questionHTML": "If you buy your plane ticket {{blank:b1}} advance, it's often cheaper than if you wait.", "blanks": [{"blankId": "b1", "correctAnswers": ["in"]}], "explanationHTML": "<b>Giải thích:</b> 'in advance' (trước)."}, {"id": "E4", "type": "gap_fill_text", "questionHTML": "I can't remember the name of the hotel we stayed at off the {{blank:b1}} of my head.", "blanks": [{"blankId": "b1", "correctAnswers": ["top"]}], "explanationHTML": "<b>Giải thích:</b> 'off the top of my head' (ngay tức thì, không cần suy nghĩ lâu)."}, {"id": "E5", "type": "gap_fill_text", "questionHTML": "I'm sorry I'm late! I {{blank:b1}} my way and had to ask for directions.", "blanks": [{"blankId": "b1", "correctAnswers": ["lost"]}], "explanationHTML": "<b>Giải thích:</b> 'lose one's way' (lạc đường). Quá khứ là 'lost'."}, {"id": "E6", "type": "gap_fill_text", "questionHTML": "My mum's away in Germany on a business {{blank:b1}} at the moment.", "blanks": [{"blankId": "b1", "correctAnswers": ["trip"]}], "explanationHTML": "<b>Giải thích:</b> 'on a business trip' (đi công tác)."}, {"id": "E7", "type": "gap_fill_text", "questionHTML": "The bank? Well, turn left here, then go {{blank:b1}} ahead for a kilometre and it's on the left.", "blanks": [{"blankId": "b1", "correctAnswers": ["straight"]}], "explanationHTML": "<b>Giải thích:</b> 'go straight ahead' (đi thẳng)."}, {"id": "E8", "type": "gap_fill_text", "questionHTML": "If you look on your left-hand {{blank:b1}} as we turn this corner, you'll see Big Ben.", "blanks": [{"blankId": "b1", "correctAnswers": ["side"]}], "explanationHTML": "<b>Giải thích:</b> 'on your left-hand side' (ở phía bên tay trái của bạn)."}, {"id": "E9", "type": "gap_fill_text", "questionHTML": "I'll look round the shops in the morning and then {{blank:b1}} sightseeing in the afternoon.", "blanks": [{"blankId": "b1", "correctAnswers": ["go"]}], "explanationHTML": "<b>Giải thích:</b> 'go sightseeing' (đi ngắm cảnh)."}, {"id": "E10", "type": "gap_fill_text", "questionHTML": "My grandma hasn't driven since she {{blank:b1}} an accident last year.", "blanks": [{"blankId": "b1", "correctAnswers": ["had"]}], "explanationHTML": "<b>Giải thích:</b> 'have an accident' (bị tai nạn). Quá khứ là 'had'."}, {"id": "E11", "type": "gap_fill_text", "questionHTML": "I love visiting foreign places, {{blank:b1}} the sights and learning about other cultures.", "blanks": [{"blankId": "b1", "correctAnswers": ["seeing"]}], "explanationHTML": "<b>Giải thích:</b> 'see the sights' (ngắm cảnh). Song song với 'visiting' nên dùng 'seeing'."}, {"id": "E12", "type": "gap_fill_text", "questionHTML": "During the 70s, many British people started to go {{blank:b1}} holiday to Spain.", "blanks": [{"blankId": "b1", "correctAnswers": ["on"]}], "explanationHTML": "<b>Giải thích:</b> 'go on holiday' (đi nghỉ mát)."}, {"id": "E13", "type": "gap_fill_text", "questionHTML": "While you're in London, you should take a tour {{blank:b1}} the Houses of Parliament.", "blanks": [{"blankId": "b1", "correctAnswers": ["round", "of", "around"]}], "explanationHTML": "<b>Giải thích:</b> 'take a tour round/of' (đi tham quan vòng quanh)."}, {"id": "F1", "type": "multiple_choice", "questionHTML": "<b>F. Choose the correct preposition.</b><br>I've always dreamt ............ China.", "options": [{"label": "A", "html": "to visit", "isCorrect": false}, {"label": "B", "html": "of visiting", "isCorrect": true}, {"label": "C", "html": "I visit", "isCorrect": false}, {"label": "D", "html": "visit", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> 'dream of + V-ing' (mơ về việc gì)."}, {"id": "F2", "type": "multiple_choice", "questionHTML": "The travel agency is arranging for us ............ at a really nice hotel.", "options": [{"label": "A", "html": "stay", "isCorrect": false}, {"label": "B", "html": "of staying", "isCorrect": false}, {"label": "C", "html": "to stay", "isCorrect": true}, {"label": "D", "html": "staying", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> 'arrange for sb to do sth' (sắp xếp cho ai làm gì)."}, {"id": "F3", "type": "multiple_choice", "questionHTML": "My dad says he always regrets ............ more.", "options": [{"label": "A", "html": "to not travel", "isCorrect": false}, {"label": "B", "html": "not travelling", "isCorrect": true}, {"label": "C", "html": "he not travel", "isCorrect": false}, {"label": "D", "html": "of not travelling", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> 'regret + V-ing' (hối tiếc đã làm/không làm gì). Phủ định là 'not V-ing'."}, {"id": "F4", "type": "multiple_choice", "questionHTML": "John seems keen ............ how to drive as soon as he can.", "options": [{"label": "A", "html": "of learning", "isCorrect": false}, {"label": "B", "html": "he learn", "isCorrect": false}, {"label": "C", "html": "for learn", "isCorrect": false}, {"label": "D", "html": "to learn", "isCorrect": true}], "explanationHTML": "<b>Giải thích:</b> 'keen to do sth' (háo hức làm gì) hoặc 'keen on V-ing'. Ở đây có 'to learn'."}, {"id": "F5", "type": "multiple_choice", "questionHTML": "Now, class, I'd like you all to write ............ a description of your last holiday.", "options": [{"label": "A", "html": "me", "isCorrect": true}, {"label": "B", "html": "to me", "isCorrect": false}, {"label": "C", "html": "it me", "isCorrect": false}, {"label": "D", "html": "about me", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> 'write someone something' (viết cho ai cái gì)."}, {"id": "F6", "type": "multiple_choice", "questionHTML": "When you arrive ............ , have your passport ready.", "options": [{"label": "A", "html": "to the airport", "isCorrect": false}, {"label": "B", "html": "in the airport", "isCorrect": false}, {"label": "C", "html": "on the airport", "isCorrect": false}, {"label": "D", "html": "at the airport", "isCorrect": true}], "explanationHTML": "<b>Giải thích:</b> 'arrive at + địa điểm nhỏ' (như sân bay, nhà ga)."}, {"id": "F7", "type": "multiple_choice", "questionHTML": "The Joneses have invited us ............ to Australia with them this summer.", "options": [{"label": "A", "html": "going", "isCorrect": false}, {"label": "B", "html": "for going", "isCorrect": false}, {"label": "C", "html": "about going", "isCorrect": false}, {"label": "D", "html": "to go", "isCorrect": true}], "explanationHTML": "<b>Giải thích:</b> 'invite sb to do sth' (mời ai làm gì)."}, {"id": "F8", "type": "multiple_choice", "questionHTML": "The in-flight entertainment may differ ............ that advertised.", "options": [{"label": "A", "html": "to", "isCorrect": false}, {"label": "B", "html": "from", "isCorrect": true}, {"label": "C", "html": "in", "isCorrect": false}, {"label": "D", "html": "at", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> 'differ from' (khác với)."}, {"id": "G1", "type": "gap_fill_text", "questionHTML": "<b>G. Find the extra word.</b><br><b>Tìm lỗi sai (từ thừa):</b> Oh, let me tell you about our trip. Did you know that Sara is afraid of <i>be</i> flying?", "blanks": [{"blankId": "b1", "correctAnswers": ["be"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'be'. Cấu trúc đúng là 'afraid of + V-ing', nên 'afraid of flying' là đủ."}, {"id": "G2", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> flying? We had arranged <i>it</i> with her family to go to France for a few days.", "blanks": [{"blankId": "b1", "correctAnswers": ["it"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'it'. Cấu trúc 'arrange with sb to do sth' (sắp xếp với ai làm gì)."}, {"id": "G3", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> I have always wanted to see Paris and would love to live <i>in</i> there one day.", "blanks": [{"blankId": "b1", "correctAnswers": ["in"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'in'. 'there' là trạng từ chỉ nơi chốn, không cần giới từ 'in' đi kèm (live there)."}, {"id": "G4", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> Well, we got to the airport and Sara appeared <i>being</i> nervous. I asked her if", "blanks": [{"blankId": "b1", "correctAnswers": ["being"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'being'. Cấu trúc 'appear + adj' (trông có vẻ), 'appeared nervous' là đủ."}, {"id": "G5", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> she was okay and she said she was fine, so we continued on <i>to</i> our way.", "blanks": [{"blankId": "b1", "correctAnswers": ["to"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'to'. Cụm từ đúng là 'continue on our way' (tiếp tục lên đường)."}, {"id": "G6", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> We went through passport control and I could see <i>so</i> that Sara wasn't", "blanks": [{"blankId": "b1", "correctAnswers": ["so"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'so'. 'see that' (thấy rằng) là đủ, không cần 'so'."}, {"id": "G7", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> keen on going any further. Just then, a voice announced: 'We regret <i>it</i> to", "blanks": [{"blankId": "b1", "correctAnswers": ["it"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'it'. Cấu trúc 'regret to do sth' (tiếc phải làm gì), không có tân ngữ 'it'."}, {"id": "G8", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> inform passengers that Flight 114 to France <i>is</i> been cancelled.' That was", "blanks": [{"blankId": "b1", "correctAnswers": ["is"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'is'. Thì hiện tại hoàn thành bị động 'has been cancelled'."}, {"id": "G9", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> our flight! Sarah said she was glad because <i>of</i> she was too frightened to", "blanks": [{"blankId": "b1", "correctAnswers": ["of"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'of'. 'because' đi với mệnh đề, 'because of' đi với danh từ. Ở đây là mệnh đề 'she was...', nên không dùng 'of'."}, {"id": "G10", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> fly anyway! So, we all went <i>to</i> home. That was the end of that trip!", "blanks": [{"blankId": "b1", "correctAnswers": ["to"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'to'. 'go home' (về nhà), không có giới từ 'to'."}, {"id": "H1", "type": "gap_fill_text", "questionHTML": "<b>H. Word formation: Write the correct form of the word in brackets.</b><br>It's not always easy being a {{blank:b1}}. (TOUR)", "blanks": [{"blankId": "b1", "correctAnswers": ["tourist"]}], "explanationHTML": "<b>Giải thích:</b> Sau mạo từ 'a' cần một danh từ chỉ người. TOUR -> tourist (khách du lịch)."}, {"id": "H2", "type": "gap_fill_text", "questionHTML": "You spend half your time making {{blank:b1}} for your holiday and the other half worrying... (ARRANGE)", "blanks": [{"blankId": "b1", "correctAnswers": ["arrangements"]}], "explanationHTML": "<b>Giải thích:</b> Cụm từ 'make arrangements' (sắp xếp). Danh từ số nhiều của ARRANGE là arrangements."}, {"id": "H3", "type": "gap_fill_text", "questionHTML": "...worrying about sticking to the {{blank:b1}}. (TIME)", "blanks": [{"blankId": "b1", "correctAnswers": ["timetable", "timing"]}], "explanationHTML": "<b>Giải thích:</b> Danh từ phù hợp với ý nghĩa thời gian biểu lịch trình là timetable. TIME -> timetable."}, {"id": "H4", "type": "gap_fill_text", "questionHTML": "I think it's relaxing sometimes to spend a holiday at home. There are no {{blank:b1}} problems... (CULTURE)", "blanks": [{"blankId": "b1", "correctAnswers": ["cultural"]}], "explanationHTML": "<b>Giải thích:</b> Đứng trước danh từ 'problems' cần một tính từ. CULTURE -> cultural (thuộc về văn hóa)."}, {"id": "H5", "type": "gap_fill_text", "questionHTML": "...you don't need someone to be the {{blank:b1}}... (PHOTOGRAPH)", "blanks": [{"blankId": "b1", "correctAnswers": ["photographer"]}], "explanationHTML": "<b>Giải thích:</b> Sau 'the' và ngữ cảnh chỉ người chụp ảnh. PHOTOGRAPH -> photographer."}, {"id": "H6", "type": "gap_fill_text", "questionHTML": "...and you know that the local {{blank:b1}} are always friendly! (INHABIT)", "blanks": [{"blankId": "b1", "correctAnswers": ["inhabitants"]}], "explanationHTML": "<b>Giải thích:</b> Danh từ chỉ cư dân, số nhiều do động từ 'are'. INHABIT -> inhabitants."}, {"id": "I1", "type": "gap_fill_text", "questionHTML": "<b>I. Word formation: Write the correct form of the word in brackets.</b><br>Beijing has changed so much in the last few years that it's almost {{blank:b1}}. (RECOGNISE)", "blanks": [{"blankId": "b1", "correctAnswers": ["unrecognisable"]}], "explanationHTML": "<b>Giải thích:</b> Cần tính từ mô tả sự thay đổi đến mức không nhận ra. RECOGNISE -> unrecognisable."}, {"id": "I2", "type": "gap_fill_text", "questionHTML": "The number of cars {{blank:b1}} (WORLD) is about a billion and is increasing all the time.", "blanks": [{"blankId": "b1", "correctAnswers": ["worldwide"]}], "explanationHTML": "<b>Giải thích:</b> Cần trạng từ hoặc tính từ bổ nghĩa cho 'cars' trên toàn thế giới. WORLD -> worldwide."}, {"id": "I3", "type": "gap_fill_text", "questionHTML": "The new maglev trains run on a completely {{blank:b1}} (DIFFER) system from ordinary trains.", "blanks": [{"blankId": "b1", "correctAnswers": ["different"]}], "explanationHTML": "<b>Giải thích:</b> Cần tính từ đứng trước danh từ 'system'. DIFFER -> different."}, {"id": "I4", "type": "gap_fill_text", "questionHTML": "Living in a foreign country really does {{blank:b1}} (BROAD) your horizons.", "blanks": [{"blankId": "b1", "correctAnswers": ["broaden"]}], "explanationHTML": "<b>Giải thích:</b> Cần động từ sau trợ động từ 'does'. BROAD -> broaden (mở rộng)."}, {"id": "I5", "type": "gap_fill_text", "questionHTML": "I can't find a {{blank:b1}} (DIRECT) flight from London to Delhi so I've booked one that changes in Frankfurt.", "blanks": [{"blankId": "b1", "correctAnswers": ["direct"]}], "explanationHTML": "<b>Giải thích:</b> Cần tính từ đứng trước 'flight'. DIRECT -> direct (giữ nguyên, tính từ)."}, {"id": "I6", "type": "gap_fill_text", "questionHTML": "All passengers must complete a visa form upon {{blank:b1}} (ARRIVE) at Singapore airport.", "blanks": [{"blankId": "b1", "correctAnswers": ["arrival"]}], "explanationHTML": "<b>Giải thích:</b> Cần danh từ sau giới từ 'upon'. ARRIVE -> arrival."}, {"id": "I7", "type": "gap_fill_text", "questionHTML": "You can still see old milestones by the side of the road in England, showing the {{blank:b1}} (DISTANT) to the nearest town.", "blanks": [{"blankId": "b1", "correctAnswers": ["distance"]}], "explanationHTML": "<b>Giải thích:</b> Cần danh từ sau 'the'. DISTANT -> distance (khoảng cách)."}, {"id": "I8", "type": "gap_fill_text", "questionHTML": "The Museum of Transport has a full-sized jet plane next to the {{blank:b1}} (ENTER).", "blanks": [{"blankId": "b1", "correctAnswers": ["entrance"]}], "explanationHTML": "<b>Giải thích:</b> Cần danh từ sau 'the' chỉ lối vào. ENTER -> entrance."}];
         
-        let html = `<div class="question-text">Câu ${index + 1}: ${q.questionHTML.replace(/\{\{blank:b1\}\}/g, `<input type="text" class="gap-input" id="input-${q.id}" onchange="handleInput('${q.id}', this.value)">`)}</div>`;
+        let state = {};
         
-        if (q.type === 'multiple_choice') {
-            const opts = shuffleOptions(q.options);
-            html += `<div class="options">`;
-            opts.forEach(opt => {
-                html += `<div class="option" id="opt-${q.id}-${opt.label}" onclick="selectOption('${q.id}', '${opt.label}')">
-                    <b>${opt.displayLabel}.</b> &nbsp; ${opt.html}
-                </div>`;
+        function init() {
+            const container = document.getElementById('questionsContainer');
+            quizData.forEach((q, index) => {
+                state[q.id] = { checked: false, isCorrect: false, value: null };
+                
+                let block = document.createElement('div');
+                block.className = 'question-block';
+                block.id = 'q-block-' + q.id;
+                
+                let qText = q.questionHTML || q.question;
+                if (q.type === 'sentence_rewrite' && q.originalSentenceHTML) {
+                    // If questionHTML starts with a section title, put it before the original sentence
+                    let titleMatch = qText.match(/^(<b>.*?<\/b>\s*<br\s*\/?>\s*)/i);
+                    if (titleMatch) {
+                        qText = titleMatch[1] + q.originalSentenceHTML + '<br>' + qText.substring(titleMatch[1].length);
+                    } else {
+                        qText = q.originalSentenceHTML + '<br>' + qText;
+                    }
+                }
+                
+                // Wrap instruction in a nice box if it exists
+                if (qText.startsWith('<b>') && qText.match(/^<b>(.*?)<\/b>\s*<br\s*\/?>\s*/i)) {
+                    qText = qText.replace(/^<b>(.*?)<\/b>\s*<br\s*\/?>\s*/i, '<div class="instruction-box">$1</div>');
+                }
+                
+                if (q.type === 'gap_fill_text') {
+                    if (q.blanks) {
+                        q.blanks.forEach(b => {
+                            let blankStr = '{{blank:' + b.blankId + '}}';
+                            let inpStr = '<input type="text" id="input-' + q.id + '-' + b.blankId + '" class="gap-fill-input" autocomplete="off">';
+                            qText = qText.replace(blankStr, inpStr);
+                        });
+                    }
+                }
+                
+                let html = '<div class="question-text">' + qText + '</div>';
+                
+                if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                    html += '<div class="options">';
+                    q.options.forEach((opt, index) => {
+                        let optText = opt.text || opt.html || '';
+                        let label = opt.label || String.fromCharCode(65 + index);
+                        html += '<div class="option" data-index="' + index + '" onclick="selectOption(\'' + q.id + '\', ' + index + ')">';
+                        html += '<div class="radio-circle"></div>';
+                        html += '<b>' + label + '.</b> ' + optText.replace(/^[A-D]\.\s*/, '');
+                        html += '</div>';
+                    });
+                    html += '</div>';
+                }
+                else if (q.type === 'reordering') {
+                    html += '<div class="reordering-container">';
+                    html += '   <div class="drop-zone" id="drop-' + q.id + '"></div>';
+                    html += '   <div class="word-bank" id="bank-' + q.id + '">';
+                    if (q.words) {
+                        let shuffledWords = [...q.words].sort(() => Math.random() - 0.5);
+                        shuffledWords.forEach(w => {
+                            html += '<span class="word-chip" id="chip-' + q.id + '-' + w.tokenId + '" data-token="' + w.tokenId + '" onclick="moveChip(\'' + q.id + '\', \'' + w.tokenId + '\')">' + w.text + '</span>';
+                        });
+                    }
+                    html += '</div></div>';
+                }
+                else if (q.type === 'sentence_rewrite') {
+                    html += '<textarea class="rewrite-input" id="input-' + q.id + '" placeholder="Nhập câu trả lời của bạn..."></textarea>';
+                }
+                
+                html += '<button class="check-btn" id="check-btn-' + q.id + '" onclick="checkQuestion(\'' + q.id + '\')">Kiểm tra</button>';
+                html += '<div class="explanation" id="expl-' + q.id + '"></div>';
+                
+                block.innerHTML = html;
+                container.appendChild(block);
             });
-            html += `</div>`;
         }
         
-        html += `<button class="check-btn" id="check-${q.id}" onclick="checkAnswer('${q.id}')" disabled>Kiểm tra</button>`;
-        html += `<div class="explanation" id="expl-${q.id}">${q.explanationHTML}</div>`;
-        card.innerHTML = html;
-        area.appendChild(card);
-    });
-}
-
-window.handleInput = function(qId, val) {
-    if (userState[qId].checked) return;
-    userState[qId].answer = val;
-    playSelectSound();
-    document.getElementById(`check-${qId}`).disabled = !val.trim();
-    updateProgress();
-}
-
-window.selectOption = function(qId, label) {
-    if (userState[qId].checked) return;
-    userState[qId].answer = label;
-    playSelectSound();
-    
-    document.querySelectorAll(`[id^="opt-${qId}-"]`).forEach(el => el.classList.remove('selected'));
-    document.getElementById(`opt-${qId}-${label}`).classList.add('selected');
-    
-    document.getElementById(`check-${qId}`).disabled = false;
-    updateProgress();
-}
-
-window.checkAnswer = function(qId) {
-    const state = userState[qId];
-    if (state.checked || !state.answer) return;
-    
-    const q = quizData.find(x => x.id === qId);
-    let correct = false;
-    
-    if (q.type === 'multiple_choice') {
-        const correctOpt = q.options.find(o => o.isCorrect);
-        correct = (state.answer === correctOpt.label);
-        document.querySelectorAll(`[id^="opt-${qId}-"]`).forEach(el => el.classList.add('disabled'));
-        const selEl = document.getElementById(`opt-${qId}-${state.answer}`);
-        selEl.classList.remove('selected');
-        if (correct) { selEl.classList.add('correct'); playCorrectSound(); }
-        else { 
-            selEl.classList.add('wrong'); 
-            document.getElementById(`opt-${qId}-${correctOpt.label}`).classList.add('correct');
-            playWrongSound(); 
+        function selectOption(qid, index) {
+            if (state[qid].checked) return;
+            const q = quizData.find(x => x.id.toString() === qid.toString());
+            const options = document.querySelectorAll('#q-block-' + qid + ' .option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            options[index].classList.add('selected');
+            state[qid].value = q.options[index].label || String.fromCharCode(65 + index);
+            updateProgress();
         }
-    } else if (q.type === 'gap_fill_text') {
-        const inputEl = document.getElementById(`input-${qId}`);
-        inputEl.disabled = true;
-        const normAns = normalizeAnswer(state.answer);
-        correct = q.blanks[0].correctAnswers.map(normalizeAnswer).includes(normAns);
-        if (correct) { inputEl.classList.add('correct'); playCorrectSound(); }
-        else { 
-            inputEl.classList.add('wrong'); 
-            const corrSpan = document.createElement('span');
-            corrSpan.style.color = 'var(--color-correct)';
-            corrSpan.style.fontWeight = 'bold';
-            corrSpan.style.marginLeft = '10px';
-            corrSpan.textContent = "✓ " + q.blanks[0].correctAnswers.join(" / ");
-            inputEl.parentNode.insertBefore(corrSpan, inputEl.nextSibling);
-            playWrongSound();
-        }
-    }
-    
-    state.isCorrect = correct;
-    state.checked = true;
-    document.getElementById(`check-${qId}`).disabled = true;
-    document.getElementById(`expl-${qId}`).style.display = 'block';
-}
 
-window.submitQuiz = function() {
-    let correctCount = 0;
-    let wrongDetails = "";
-    
-    quizData.forEach((q, index) => {
-        if (!userState[q.id].checked) {
-            if (!userState[q.id].answer) userState[q.id].answer = "";
-            userState[q.id].isCorrect = false;
-            userState[q.id].checked = true;
-            document.getElementById(`check-${q.id}`).disabled = true;
-        }
-        if (userState[q.id].isCorrect) {
-            correctCount++;
-        } else {
-            let userAnsStr = userState[q.id].answer;
-            let corrAnsStr = "";
-            if (q.type === 'multiple_choice') {
-                const sel = q.options.find(o => o.label === userState[q.id].answer);
-                userAnsStr = sel ? sel.html.replace(/<[^>]+>/g, '') : "(Chưa chọn)";
-                corrAnsStr = q.options.find(o => o.isCorrect).html.replace(/<[^>]+>/g, '');
-            } else {
-                userAnsStr = userAnsStr || "(Bỏ trống)";
-                corrAnsStr = q.blanks[0].correctAnswers.join(" / ");
+        function startTest() {
+            const nameInput = document.getElementById('studentName').value.trim();
+            if (!nameInput) {
+                alert('Vui lòng nhập họ và tên của bạn!');
+                document.getElementById('studentName').focus();
+                return;
             }
-            wrongDetails += `Câu ${index+1}: Học sinh chọn/điền '${userAnsStr}' (sai), đáp án đúng là '${corrAnsStr}'.\n`;
-            
-            const wrongCard = document.createElement('div');
-            wrongCard.className = 'card';
-            wrongCard.innerHTML = `<h3>Câu ${index+1}</h3>
-            <div class="question-text">${q.questionHTML}</div>
-            <p style="color:red">Trả lời của bạn: ${escapeHTML(userAnsStr)}</p>
-            <p style="color:green; font-weight:bold">Đáp án đúng: ${escapeHTML(corrAnsStr)}</p>
-            <div class="explanation" style="display:block">${q.explanationHTML}</div>`;
-            document.getElementById('wrong-questions-area').appendChild(wrongCard);
+            document.getElementById('startScreen').classList.remove('active');
+            document.getElementById('testScreen').classList.add('active');
+            window.scrollTo(0, 0);
         }
-    });
-    
-    const total = quizData.length;
-    const scoreText = `${correctCount}/${total}`;
-    
-    if (correctCount === total) {
-        playCorrectSound();
-        document.getElementById('wrong-questions-area').innerHTML = "<h3 style='color:green; text-align:center'>Chúc mừng! Bạn đã trả lời đúng tất cả các câu hỏi!</h3>";
-    } else {
-        playSubmitSound();
-    }
-    
-    alert(`Bạn đã đạt: ${scoreText}`);
-    document.getElementById('submit-btn').disabled = true;
-    document.getElementById('results-screen').style.display = 'block';
-    
-    const formData = new URLSearchParams();
-    formData.append('entry.1861648410', studentName);
-    formData.append('entry.1691800437', scoreText);
-    formData.append('entry.639295732', wrongDetails.trim() || "Không có lỗi sai");
-    formData.append('entry.370465671', "Travel and Transport Unit 2");
-    
-    fetch('https://docs.google.com/forms/d/e/1FAIpQLSfZCAK2lpNE8O8Ieqwc3SI1ubr6HZDvGZR91AsSpUk8kEBqaA/formResponse', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: formData.toString()
-    }).catch(e => console.log(e));
-    
-    document.getElementById('results-screen').scrollIntoView({behavior: 'smooth'});
-}
-</script>
+        
+        function moveChip(qid, tokenId) {
+            if (state[qid].checked) return;
+            const chip = document.getElementById('chip-' + qid + '-' + tokenId);
+            const bank = document.getElementById('bank-' + qid);
+            const drop = document.getElementById('drop-' + qid);
+            
+            if (chip.parentElement === bank) {
+                drop.appendChild(chip);
+            } else {
+                bank.appendChild(chip);
+            }
+        }
+        
+        function checkQuestion(qid) {
+            if (state[qid].checked) return;
+            const q = quizData.find(x => x.id.toString() === qid.toString());
+            if (!q) return;
+            
+            // Validate answered
+            if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                let val = state[qid].value;
+                if (!val) { alert("Vui lòng chọn một đáp án!"); return; }
+            } else if (q.type === 'gap_fill_text') {
+                let allFilled = true;
+                if (q.blanks) {
+                    q.blanks.forEach(b => {
+                        const el = document.getElementById('input-' + qid + '-' + b.blankId);
+                        if (!el || !el.value.trim()) allFilled = false;
+                    });
+                }
+                if (!allFilled) { alert("Vui lòng điền vào tất cả chỗ trống!"); return; }
+            } else if (q.type === 'reordering') {
+                const bank = document.getElementById('bank-' + qid);
+                if (bank && bank.children.length > 0) { alert("Vui lòng ghép tất cả các từ!"); return; }
+            } else if (q.type === 'sentence_rewrite') {
+                const el = document.getElementById('input-' + qid);
+                if (!el || !el.value.trim()) { alert("Vui lòng nhập câu trả lời!"); return; }
+            }
+            
+            // Check logic
+            state[qid].checked = true;
+            document.getElementById('check-btn-' + qid).disabled = true;
+            const expl = document.getElementById('expl-' + qid);
+            expl.innerHTML = q.explanationHTML || q.explanation || '';
+            expl.style.display = 'block';
+            
+            let isCorrect = false;
+            let errorDetails = "";
+            
+            if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                const selectedVal = state[qid].value;
+                const correctOptIndex = q.options.findIndex(o => o.isCorrect);
+                const correctOptLabel = q.options[correctOptIndex].label || String.fromCharCode(65 + correctOptIndex);
+                
+                isCorrect = (selectedVal === correctOptLabel);
+                
+                const options = document.querySelectorAll('#q-block-' + qid + ' .option');
+                options.forEach(opt => opt.style.pointerEvents = 'none');
+                
+                const selectedIndex = q.options.findIndex((o, i) => (o.label || String.fromCharCode(65 + i)) === selectedVal);
+                
+                if (isCorrect) {
+                    if(options[selectedIndex]) options[selectedIndex].classList.add('correct-opt');
+                } else {
+                    if(options[selectedIndex]) options[selectedIndex].classList.add('wrong-opt');
+                    if(options[correctOptIndex]) options[correctOptIndex].classList.add('correct-opt');
+                    errorDetails = 'Câu ' + qid + ': Học sinh chọn ' + selectedVal + ' (sai), đáp án đúng là ' + correctOptLabel;
+                }
+            } 
+            else if (q.type === 'gap_fill_text') {
+                let allCorrect = true;
+                let userAnswersArr = [];
+                let correctAnswersArr = [];
+                
+                if (q.blanks) {
+                    q.blanks.forEach(b => {
+                        const input = document.getElementById('input-' + qid + '-' + b.blankId);
+                        const val = input.value.trim().toLowerCase();
+                        input.disabled = true;
+                        
+                        const isAnsCorrect = b.correctAnswers.some(ans => ans.toLowerCase() === val);
+                        if (isAnsCorrect) {
+                            input.style.backgroundColor = '#eafaf1';
+                            input.style.borderColor = '#2ecc71';
+                        } else {
+                            allCorrect = false;
+                            input.style.backgroundColor = '#fdedec';
+                            input.style.borderColor = '#e74c3c';
+                        }
+                        userAnswersArr.push(input.value.trim());
+                        correctAnswersArr.push(b.correctAnswers.join(' / '));
+                    });
+                }
+                
+                isCorrect = allCorrect;
+                if (!isCorrect) {
+                    errorDetails = 'Câu ' + qid + ': Điền sai. Đáp án đúng: ' + correctAnswersArr.join(', ');
+                }
+                let ansHtml = '<div style="margin-top:10px; padding:10px; background:#f8f9fa; border-left:4px solid #2ecc71;"><b>Đáp án đúng:</b><br>' + correctAnswersArr.map((ans, i) => 'Ô ' + (i+1) + ': <b>' + ans + '</b>').join('<br>') + '</div>';
+                expl.innerHTML = ansHtml + expl.innerHTML;
+            }
+            else if (q.type === 'reordering') {
+                const drop = document.getElementById('drop-' + qid);
+                const currentOrder = Array.from(drop.children).map(c => c.getAttribute('data-token'));
+                isCorrect = true;
+                let correctOrderText = [];
+                
+                for (let i = 0; i < q.correctOrder.length; i++) {
+                    const expectedToken = q.correctOrder[i];
+                    const expectedWord = q.words.find(w => w.tokenId === expectedToken).text;
+                    correctOrderText.push(expectedWord);
+                    
+                    if (currentOrder[i] !== expectedToken) {
+                        isCorrect = false;
+                    }
+                }
+                
+                Array.from(drop.children).forEach(chip => {
+                    chip.style.pointerEvents = 'none';
+                    if (isCorrect) chip.classList.add('correct');
+                    else chip.classList.add('wrong');
+                });
+                
+                if (!isCorrect) {
+                    let ansDiv = document.createElement('div');
+                    ansDiv.style.marginTop = '10px';
+                    ansDiv.innerHTML = '<b>Đáp án đúng:</b><br><div class="drop-zone" style="background:#eafaf1;border-color:#2ecc71;">' + 
+                        correctOrderText.map(t => '<span class="word-chip correct" style="pointer-events:none;">' + t + '</span>').join('') + 
+                        '</div>';
+                    drop.parentElement.appendChild(ansDiv);
+                    errorDetails = 'Câu ghép từ ' + qid + ' sai. Thứ tự đúng: ' + correctOrderText.join(' ');
+                }
+            }
+            else if (q.type === 'sentence_rewrite') {
+                const input = document.getElementById('input-' + qid);
+                const val = input.value.trim().toLowerCase();
+                input.disabled = true;
+                
+                const stripHtml = s => s.replace(/<[^>]*>?/gm, '');
+                const normalize = s => stripHtml(s).replace(/[.,!?]/g, '').replace(/\s+/g, ' ').trim();
+                const normVal = normalize(val);
+                
+                let ansArr = q.correctAnswers || q.sampleAnswers || [];
+                let qHtml = q.questionHTML || '';
+                let parts = qHtml.split(/_+|\.{3,}/);
+                let exactMissingPart = '';
+                
+                isCorrect = ansArr.some(ans => {
+                    let normAns = normalize(ans.toLowerCase());
+                    if (normAns === normVal) return true;
+                    
+                    if (parts.length >= 2) {
+                        let prefix = normalize(parts[0].replace(/^(->|\?|→)\s*/, '').toLowerCase());
+                        let suffix = normalize(parts[parts.length - 1].toLowerCase());
+                        
+                        let partialAns = normAns;
+                        // Use regex to strip prefix (with optional trailing space)
+                        if (prefix) {
+                            let prefixEsc = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                            partialAns = partialAns.replace(new RegExp('^' + prefixEsc + '\\s*'), '').trim();
+                        }
+                        // Use regex to strip suffix (with optional leading space)
+                        if (suffix) {
+                            let suffixEsc = suffix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                            partialAns = partialAns.replace(new RegExp('\\s*' + suffixEsc + '$'), '').trim();
+                        }
+                        
+                        exactMissingPart = partialAns;
+                        if (partialAns && partialAns === normVal) return true;
+                    }
+                    return false;
+                });
+                
+                let correctDisplay = ansArr[0] || '';
+                
+                if (isCorrect) {
+                    input.style.backgroundColor = '#eafaf1';
+                    input.style.borderColor = '#2ecc71';
+                } else {
+                    input.style.backgroundColor = '#fdedec';
+                    input.style.borderColor = '#e74c3c';
+                    errorDetails = 'Câu viết lại ' + qid + ' sai. Đáp án mẫu:<br><b>' + correctDisplay + '</b>' + (exactMissingPart ? '<br><i>(Hoặc chỉ cần điền: <b>' + exactMissingPart + '</b>)</i>' : '');
+                }
+                
+                let firstMissingPart = '';
+                if (parts.length >= 2 && correctDisplay) {
+                    let prefix = normalize(parts[0].replace(/^(->|\?|→)\s*/, '').toLowerCase());
+                    let suffix = normalize(parts[parts.length - 1].toLowerCase());
+                    let partialAns = normalize(correctDisplay.toLowerCase());
+                    if (prefix) {
+                        let prefixEsc = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                        partialAns = partialAns.replace(new RegExp('^' + prefixEsc + '\\s*'), '').trim();
+                    }
+                    if (suffix) {
+                        let suffixEsc = suffix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                        partialAns = partialAns.replace(new RegExp('\\s*' + suffixEsc + '$'), '').trim();
+                    }
+                    if (partialAns) firstMissingPart = partialAns;
+                }
+                
+                let ansHtml = '<div style="margin-top:10px; padding:10px; background:#f8f9fa; border-left:4px solid #2ecc71;"><b>Đáp án đúng:</b><br>' + correctDisplay + (firstMissingPart ? '<br><i>(Hoặc chỉ cần điền: <b>' + firstMissingPart + '</b>)</i>' : '') + '</div>';
+                expl.innerHTML = ansHtml + expl.innerHTML;
+            }
+            
+            state[qid].isCorrect = isCorrect;
+            state[qid].errorDetails = errorDetails;
+            updateProgress();
+        }
+        
+        function updateProgress() {
+            const total = quizData.length;
+            const checkedCount = Object.values(state).filter(s => s.checked).length;
+            const pct = (checkedCount / total) * 100;
+            document.getElementById('progressFill').style.width = pct + '%';
+        }
+        
+        function confirmSubmit() {
+            const total = quizData.length;
+            const checkedCount = Object.values(state).filter(s => s.checked).length;
+            if (checkedCount < total) {
+                if (!confirm(`Bạn mới kiểm tra ${checkedCount}/${total} câu. Bạn có chắc chắn muốn nộp bài?`)) {
+                    return;
+                }
+            }
+            submitTest();
+        }
+        
+        function submitTest() {
+            const studentName = document.getElementById('studentName').value.trim();
+            const total = quizData.length;
+            const correctCount = Object.values(state).filter(s => s.isCorrect).length;
+            const score = (correctCount / total) * 10;
+            
+            const errors = Object.values(state)
+                .filter(s => s.checked && !s.isCorrect && s.errorDetails)
+                .map(s => s.errorDetails);
+            const errorReport = errors.length > 0 ? errors.join('\n') : "Không có lỗi sai";
+            
+            document.getElementById('testScreen').classList.remove('active');
+            document.getElementById('resultScreen').classList.add('active');
+            
+            document.getElementById('scoreDisplay').innerText = score.toFixed(1) + ' / 10';
+            
+            let feedback = '';
+            if (score >= 9) feedback = 'Xuất sắc! Bạn nắm bài rất vững.';
+            else if (score >= 7) feedback = 'Khá tốt! Hãy cố gắng hơn một chút nhé.';
+            else if (score >= 5) feedback = 'Đạt yêu cầu. Bạn cần ôn tập thêm.';
+            else feedback = 'Chưa đạt. Bạn cần xem lại kỹ bài học!';
+            document.getElementById('feedbackText').innerText = feedback;
+            
+            const detailsDiv = document.getElementById('resultDetails');
+            if (errors.length > 0) {
+                detailsDiv.innerHTML = '<h3>Chi tiết các câu sai:</h3>' + 
+                    errors.map(e => '<div class="error-item">' + e + '</div>').join('');
+            } else {
+                detailsDiv.innerHTML = '<h3 style="color:#2ecc71;">Chúc mừng bạn đã trả lời đúng tất cả các câu hỏi!</h3>';
+            }
+            
+            // Submit to Google Form
+            const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfZCAK2lpNE8O8Ieqwc3SI1ubr6HZDvGZR91AsSpUk8kEBqaA/formResponse';
+            const formData = new FormData();
+            formData.append('entry.1861648410', studentName);
+            formData.append('entry.1691800437', score.toFixed(2));
+            formData.append('entry.639295732', errorReport);
+            formData.append('entry.370465671', testName);
+            
+            fetch(formUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            }).then(() => {
+                window.scrollTo(0, 0);
+            }).catch(err => {
+                alert('Có lỗi khi gửi kết quả. Vui lòng thử lại!');
+                console.error(err);
+            });
+        }
+        
+        init();
+    </script>
 </body>
 </html>
