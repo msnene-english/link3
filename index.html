@@ -380,13 +380,13 @@
                         let partialAns = normAns;
                         // Use regex to strip prefix (with optional trailing space)
                         if (prefix) {
-                            let prefixEsc = prefix.replace(/[.*+?^${}()|[\]\]/g, '\$&');
-                            partialAns = partialAns.replace(new RegExp('^' + prefixEsc + '\s*'), '').trim();
+                            let prefixEsc = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                            partialAns = partialAns.replace(new RegExp('^' + prefixEsc + '\\s*'), '').trim();
                         }
                         // Use regex to strip suffix (with optional leading space)
                         if (suffix) {
-                            let suffixEsc = suffix.replace(/[.*+?^${}()|[\]\]/g, '\$&');
-                            partialAns = partialAns.replace(new RegExp('\s*' + suffixEsc + '$'), '').trim();
+                            let suffixEsc = suffix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                            partialAns = partialAns.replace(new RegExp('\\s*' + suffixEsc + '$'), '').trim();
                         }
                         
                         exactMissingPart = partialAns;
@@ -413,12 +413,12 @@
                     let suffix = normalize(parts[parts.length - 1].toLowerCase());
                     let partialAns = normalize(correctDisplay.toLowerCase());
                     if (prefix) {
-                        let prefixEsc = prefix.replace(/[.*+?^${}()|[\]\]/g, '\$&');
-                        partialAns = partialAns.replace(new RegExp('^' + prefixEsc + '\s*'), '').trim();
+                        let prefixEsc = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                        partialAns = partialAns.replace(new RegExp('^' + prefixEsc + '\\s*'), '').trim();
                     }
                     if (suffix) {
-                        let suffixEsc = suffix.replace(/[.*+?^${}()|[\]\]/g, '\$&');
-                        partialAns = partialAns.replace(new RegExp('\s*' + suffixEsc + '$'), '').trim();
+                        let suffixEsc = suffix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                        partialAns = partialAns.replace(new RegExp('\\s*' + suffixEsc + '$'), '').trim();
                     }
                     if (partialAns) firstMissingPart = partialAns;
                 }
@@ -460,8 +460,7 @@
             const errors = Object.values(state)
                 .filter(s => s.checked && !s.isCorrect && s.errorDetails)
                 .map(s => s.errorDetails);
-            const errorReport = errors.length > 0 ? errors.join('
-') : "Không có lỗi sai";
+            const errorReport = errors.length > 0 ? errors.join('\n') : "Không có lỗi sai";
             
             document.getElementById('testScreen').classList.remove('active');
             document.getElementById('resultScreen').classList.add('active');
