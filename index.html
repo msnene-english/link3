@@ -127,13 +127,18 @@
                     if (q.blanks) {
                         q.blanks.forEach(b => {
                             let blankStr = '{{blank:' + b.blankId + '}}';
-                            let inpStr = '<span style="white-space:nowrap;"><input type="text" id="input-' + q.id + '-' + b.blankId + '" class="gap-fill-input" autocomplete="off"><button class="inline-check-btn" onclick="checkSingleBlank(this, \'' + q.id + '\', \'' + b.blankId + '\')">Kiểm tra</button></span>';
-                            qText = qText.replace(blankStr, inpStr);
+                            let inpStr = '<input type="text" id="input-' + q.id + '-' + b.blankId + '" class="gap-fill-input" autocomplete="off">';
+                              if (qText.includes(blankStr)) {
+                                  qText = qText.replace(blankStr, inpStr);
+                              } else {
+                                  qText += ' ' + inpStr;
+                              }
                         });
                     }
                 }
                 
                 qText = qText.replace(/<\/?i>/gi, '');
+                  qText = qText.replace(/<\/?i>/gi, '');
                   qText = qText.replace(/<\/?i>/gi, '');
                   let html = '<div class="question-text">' + qText + '</div>';
                 
