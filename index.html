@@ -137,9 +137,9 @@
                     }
                 }
                 
-                qText = qText.replace(/<\/?i>/gi, '');
-                  qText = qText.replace(/<\/?i>/gi, '');
-                  qText = qText.replace(/<\/?i>/gi, '');
+                                    if (qText.includes('Find the extra word') || qText.includes('từ thừa') || qText.toLowerCase().includes('từ thừa') || qText.includes('từ sai')) {
+                      qText = qText.replace(/<\/?i>/gi, '');
+                  }
                   let html = '<div class="question-text">' + qText + '</div>';
                 
                 if (q.type === 'multiple_choice' || q.type === 'mcq') {
