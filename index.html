@@ -128,7 +128,11 @@
                         q.blanks.forEach(b => {
                             let blankStr = '{{blank:' + b.blankId + '}}';
                             let inpStr = '<input type="text" id="input-' + q.id + '-' + b.blankId + '" class="gap-fill-input" autocomplete="off">';
-                            qText = qText.replace(blankStr, inpStr);
+                              if (qText.includes(blankStr)) {
+                                  qText = qText.replace(blankStr, inpStr);
+                              } else {
+                                  qText += ' ' + inpStr;
+                              }
                         });
                     }
                 }
