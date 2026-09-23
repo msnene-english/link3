@@ -95,1260 +95,155 @@
     
     <script>
         const testName = 'Travel and Transport Unit 2';
-        const quizData = [
-  {
-    "id": "A1",
-    "type": "multiple_choice",
-    "questionHTML": "<b>A. Choose the correct word or phrase.</b><br>You need a passport to cross the ............ between Mexico and the United States.",
-    "options": [
-      {
-        "label": "A",
-        "html": "edge",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "line",
-        "isCorrect": false
-      },
-      {
-        "label": "C",
-        "html": "border",
-        "isCorrect": true
-      },
-      {
-        "label": "D",
-        "html": "rim",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Dịch câu hỏi:</b> Bạn cần hộ chiếu để vượt qua biên giới giữa Mexico và Hoa Kỳ.<br><b>Giải thích:</b> 'border' (biên giới) là ranh giới giữa hai quốc gia. 'edge' (rìa), 'line' (đường kẻ), 'rim' (vành) không dùng cho ranh giới quốc gia."
-  },
-  {
-    "id": "A2",
-    "type": "multiple_choice",
-    "questionHTML": "The hotel where we are ............ is quite luxurious.",
-    "options": [
-      {
-        "label": "A",
-        "html": "living",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "remaining",
-        "isCorrect": false
-      },
-      {
-        "label": "C",
-        "html": "existing",
-        "isCorrect": false
-      },
-      {
-        "label": "D",
-        "html": "staying",
-        "isCorrect": true
-      }
-    ],
-    "explanationHTML": "<b>Dịch câu hỏi:</b> Khách sạn nơi chúng tôi đang ở khá sang trọng.<br><b>Giải thích:</b> 'stay' (ở lại) dùng cho việc ở tạm thời tại khách sạn. 'live' (sống) dùng cho nơi ở thường xuyên. 'remain' (còn lại), 'exist' (tồn tại) không phù hợp ngữ cảnh."
-  },
-  {
-    "id": "A3",
-    "type": "multiple_choice",
-    "questionHTML": "When you ............ your destination, your tour guide will meet you at the airport.",
-    "options": [
-      {
-        "label": "A",
-        "html": "arrive",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "get",
-        "isCorrect": false
-      },
-      {
-        "label": "C",
-        "html": "reach",
-        "isCorrect": true
-      },
-      {
-        "label": "D",
-        "html": "achieve",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Dịch câu hỏi:</b> Khi bạn đến điểm đến, hướng dẫn viên sẽ đón bạn tại sân bay.<br><b>Giải thích:</b> 'reach' (đến) đi trực tiếp với tân ngữ (reach your destination). 'arrive' đi với 'at/in', 'get' đi với 'to'. 'achieve' (đạt được) dùng cho mục tiêu."
-  },
-  {
-    "id": "A4",
-    "type": "multiple_choice",
-    "questionHTML": "It can be quite busy here during the tourist ............ .",
-    "options": [
-      {
-        "label": "A",
-        "html": "season",
-        "isCorrect": true
-      },
-      {
-        "label": "B",
-        "html": "period",
-        "isCorrect": false
-      },
-      {
-        "label": "C",
-        "html": "phase",
-        "isCorrect": false
-      },
-      {
-        "label": "D",
-        "html": "stage",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Dịch câu hỏi:</b> Ở đây có thể khá đông đúc trong mùa du lịch.<br><b>Giải thích:</b> Cụm từ cố định 'tourist season' (mùa du lịch). 'period', 'phase', 'stage' (giai đoạn, thời kỳ) không kết hợp với 'tourist'."
-  },
-  {
-    "id": "A5",
-    "type": "multiple_choice",
-    "questionHTML": "David ............ me to the train station every morning.",
-    "options": [
-      {
-        "label": "A",
-        "html": "goes",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "takes",
-        "isCorrect": true
-      },
-      {
-        "label": "C",
-        "html": "has",
-        "isCorrect": false
-      },
-      {
-        "label": "D",
-        "html": "makes",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Dịch câu hỏi:</b> David đưa tôi đến ga tàu mỗi sáng.<br><b>Giải thích:</b> 'take someone to somewhere' (đưa ai đi đâu). Các động từ khác không phù hợp về nghĩa và cấu trúc."
-  },
-  {
-    "id": "A6",
-    "type": "multiple_choice",
-    "questionHTML": "I always enjoy our school ............ to France.",
-    "options": [
-      {
-        "label": "A",
-        "html": "excursion",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "journey",
-        "isCorrect": false
-      },
-      {
-        "label": "C",
-        "html": "trip",
-        "isCorrect": true
-      },
-      {
-        "label": "D",
-        "html": "travel",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Dịch câu hỏi:</b> Tôi luôn thích chuyến đi của trường chúng tôi tới Pháp.<br><b>Giải thích:</b> 'school trip' (chuyến đi của trường). 'journey' thường chỉ hành trình dài, 'travel' là danh từ không đếm được chỉ việc đi lại chung chung, 'excursion' là chuyến tham quan ngắn nhưng ít dùng kết hợp 'school excursion' bằng 'school trip'."
-  },
-  {
-    "id": "A7",
-    "type": "multiple_choice",
-    "questionHTML": "Hurry up, or we'll ............ the bus!",
-    "options": [
-      {
-        "label": "A",
-        "html": "avoid",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "miss",
-        "isCorrect": true
-      },
-      {
-        "label": "C",
-        "html": "drop",
-        "isCorrect": false
-      },
-      {
-        "label": "D",
-        "html": "lose",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Dịch câu hỏi:</b> Nhanh lên, nếu không chúng ta sẽ lỡ xe buýt!<br><b>Giải thích:</b> 'miss the bus' (lỡ xe buýt). 'lose' (đánh mất), 'avoid' (tránh), 'drop' (làm rơi) không hợp nghĩa."
-  },
-  {
-    "id": "A8",
-    "type": "multiple_choice",
-    "questionHTML": "The brochure says that the hotel has a great ............ of the sea.",
-    "options": [
-      {
-        "label": "A",
-        "html": "appearance",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "look",
-        "isCorrect": false
-      },
-      {
-        "label": "C",
-        "html": "sight",
-        "isCorrect": false
-      },
-      {
-        "label": "D",
-        "html": "view",
-        "isCorrect": true
-      }
-    ],
-    "explanationHTML": "<b>Dịch câu hỏi:</b> Tờ quảng cáo nói rằng khách sạn có tầm nhìn tuyệt vời ra biển.<br><b>Giải thích:</b> 'view of' (tầm nhìn ra). 'appearance' (vẻ bề ngoài), 'look' (cái nhìn), 'sight' (cảnh tượng) không phù hợp."
-  },
-  {
-    "id": "A9",
-    "type": "multiple_choice",
-    "questionHTML": "I must remember to ............ a souvenir back from Spain for my grandmother.",
-    "options": [
-      {
-        "label": "A",
-        "html": "go",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "take",
-        "isCorrect": false
-      },
-      {
-        "label": "C",
-        "html": "bring",
-        "isCorrect": true
-      },
-      {
-        "label": "D",
-        "html": "keep",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Dịch câu hỏi:</b> Tôi phải nhớ mang một món quà lưu niệm từ Tây Ban Nha về cho bà tôi.<br><b>Giải thích:</b> 'bring back' (mang về). 'take' là mang đi, 'bring' là mang lại/mang về gần người nói hoặc người nhận."
-  },
-  {
-    "id": "A10",
-    "type": "multiple_choice",
-    "questionHTML": "The ............ from London to Berlin is about 919 kilometres.",
-    "options": [
-      {
-        "label": "A",
-        "html": "measure",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "length",
-        "isCorrect": false
-      },
-      {
-        "label": "C",
-        "html": "gap",
-        "isCorrect": false
-      },
-      {
-        "label": "D",
-        "html": "distance",
-        "isCorrect": true
-      }
-    ],
-    "explanationHTML": "<b>Dịch câu hỏi:</b> Khoảng cách từ London đến Berlin là khoảng 919 kilomet.<br><b>Giải thích:</b> 'distance' (khoảng cách) giữa hai địa điểm. 'measure' (đo lường), 'length' (chiều dài), 'gap' (khe hở) không đúng."
-  },
-  {
-    "id": "A11",
-    "type": "multiple_choice",
-    "questionHTML": "Make sure you ............ a hotel before you come to our island, especially in the summer.",
-    "options": [
-      {
-        "label": "A",
-        "html": "book",
-        "isCorrect": true
-      },
-      {
-        "label": "B",
-        "html": "keep",
-        "isCorrect": false
-      },
-      {
-        "label": "C",
-        "html": "put",
-        "isCorrect": false
-      },
-      {
-        "label": "D",
-        "html": "take",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Dịch câu hỏi:</b> Đảm bảo rằng bạn đã đặt khách sạn trước khi đến hòn đảo của chúng tôi, đặc biệt là vào mùa hè.<br><b>Giải thích:</b> 'book a hotel' (đặt phòng khách sạn). Các động từ khác không kết hợp đúng."
-  },
-  {
-    "id": "A12",
-    "type": "multiple_choice",
-    "questionHTML": "I live in Barcelona, but my ............ town is Madrid.",
-    "options": [
-      {
-        "label": "A",
-        "html": "birth",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "home",
-        "isCorrect": true
-      },
-      {
-        "label": "C",
-        "html": "native",
-        "isCorrect": false
-      },
-      {
-        "label": "D",
-        "html": "origin",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Dịch câu hỏi:</b> Tôi sống ở Barcelona, nhưng quê nhà của tôi là Madrid.<br><b>Giải thích:</b> 'hometown' (quê nhà). 'native' đi với 'town' cũng được nhưng thường dùng 'hometown', ở đây 'home' là đáp án đúng."
-  },
-  {
-    "id": "B1",
-    "type": "multiple_choice",
-    "questionHTML": "<b>B. Choose the correct word in bold.</b><br>I hope to go on a trip round the <b>world / earth</b> one day.",
-    "options": [
-      {
-        "label": "A",
-        "html": "world",
-        "isCorrect": true
-      },
-      {
-        "label": "B",
-        "html": "earth",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> Cụm từ cố định 'round the world' (vòng quanh thế giới). Không dùng 'round the earth' trong ngữ cảnh du lịch."
-  },
-  {
-    "id": "B2",
-    "type": "multiple_choice",
-    "questionHTML": "You learn a lot about the local <b>territory / area</b> by speaking to local people.",
-    "options": [
-      {
-        "label": "A",
-        "html": "territory",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "area",
-        "isCorrect": true
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'local area' (khu vực địa phương). 'territory' (lãnh thổ) mang nghĩa chính trị hoặc địa lý rộng lớn."
-  },
-  {
-    "id": "B3",
-    "type": "multiple_choice",
-    "questionHTML": "It's good to have someone to <b>lead / guide</b> you when you are on holiday.",
-    "options": [
-      {
-        "label": "A",
-        "html": "lead",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "guide",
-        "isCorrect": true
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'guide' (hướng dẫn) thường dùng cho du lịch. 'lead' (dẫn dắt) dùng mang tính lãnh đạo."
-  },
-  {
-    "id": "B4",
-    "type": "multiple_choice",
-    "questionHTML": "I get the train to work every day and the <b>fare / fee</b> is quite expensive.",
-    "options": [
-      {
-        "label": "A",
-        "html": "fare",
-        "isCorrect": true
-      },
-      {
-        "label": "B",
-        "html": "fee",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'fare' (tiền vé) dùng cho phương tiện giao thông. 'fee' (lệ phí, học phí) dùng cho dịch vụ."
-  },
-  {
-    "id": "B5",
-    "type": "multiple_choice",
-    "questionHTML": "Captain Cook discovered Australia on a <b>voyage / travel</b> to the Pacific.",
-    "options": [
-      {
-        "label": "A",
-        "html": "voyage",
-        "isCorrect": true
-      },
-      {
-        "label": "B",
-        "html": "travel",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'voyage' (chuyến đi dài ngày trên biển). 'travel' là danh từ không đếm được chỉ việc đi lại."
-  },
-  {
-    "id": "B6",
-    "type": "multiple_choice",
-    "questionHTML": "Most tourist attractions in London charge an admission <b>fee / ticket</b>.",
-    "options": [
-      {
-        "label": "A",
-        "html": "fee",
-        "isCorrect": true
-      },
-      {
-        "label": "B",
-        "html": "ticket",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'admission fee' (phí vào cửa). Không dùng 'admission ticket' trong trường hợp 'charge a...'."
-  },
-  {
-    "id": "B7",
-    "type": "multiple_choice",
-    "questionHTML": "The sunset over Niagara Falls really is a magnificent <b>look / sight</b>.",
-    "options": [
-      {
-        "label": "A",
-        "html": "look",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "sight",
-        "isCorrect": true
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'sight' (cảnh tượng). 'look' (cái nhìn, vẻ ngoài) không miêu tả cảnh đẹp."
-  },
-  {
-    "id": "C1",
-    "type": "gap_fill_text",
-    "questionHTML": "<b>C. Complete the sentences using phrasal verbs.</b><br>Let's go to the airport to {{blank:b1}} Grandpa off when he flies back home.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "see"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'see someone off' (tiễn ai đó)."
-  },
-  {
-    "id": "C2",
-    "type": "gap_fill_text",
-    "questionHTML": "If it starts to rain, {{blank:b1}} for a nearby cave to wait for it to pass.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "make"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'make for' (đi về hướng)."
-  },
-  {
-    "id": "C3",
-    "type": "gap_fill_text",
-    "questionHTML": "We would like to remind all guests that they must {{blank:b1}} out before midday.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "check"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'check out' (trả phòng khách sạn)."
-  },
-  {
-    "id": "C4",
-    "type": "gap_fill_text",
-    "questionHTML": "Please {{blank:b1}} in and stop so that I can buy something to drink.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "pull"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'pull in' (tấp xe vào lề)."
-  },
-  {
-    "id": "C5",
-    "type": "gap_fill_text",
-    "questionHTML": "Every Saturday night my dad {{blank:b1}} us up outside the cinema.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "picks"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'pick up' (đón). Chủ ngữ 'my dad' số ít nên động từ chia 'picks'."
-  },
-  {
-    "id": "C6",
-    "type": "gap_fill_text",
-    "questionHTML": "I think the neighbours have {{blank:b1}} away for the weekend.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "gone"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'go away' (đi vắng). Thì hiện tại hoàn thành (have + V3) nên dùng 'gone'."
-  },
-  {
-    "id": "C7",
-    "type": "gap_fill_text",
-    "questionHTML": "John's up ahead so Greg is pedalling fast to {{blank:b1}} up with him.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "catch"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'catch up with' (bắt kịp)."
-  },
-  {
-    "id": "C8",
-    "type": "gap_fill_text",
-    "questionHTML": "We're going on holiday tomorrow, but we'll call you when we {{blank:b1}} back.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "get"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'get back' (trở về)."
-  },
-  {
-    "id": "D1",
-    "type": "gap_fill_text",
-    "questionHTML": "<b>D. Replace the phrase in italics with a phrasal verb.</b><br>We can <i>start our journey</i> <b>{{blank:b1}}</b> towards the mountains at dawn.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "set off",
-          "start out"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'set off' hoặc 'start out' có nghĩa là bắt đầu cuộc hành trình (start a journey)."
-  },
-  {
-    "id": "D2",
-    "type": "gap_fill_text",
-    "questionHTML": "Dad fetched the luggage while Mum <i>registered</i> <b>{{blank:b1}}</b> at the hotel.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "checked in"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'check in' có nghĩa là làm thủ tục đăng ký (register) tại khách sạn. Quá khứ là 'checked in'."
-  },
-  {
-    "id": "D3",
-    "type": "gap_fill_text",
-    "questionHTML": "I asked the taxi driver to <i>let me get out</i> <b>{{blank:b1}}</b> outside the train station.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "drop me off"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'drop someone off' có nghĩa là cho ai đó xuống xe (let someone get out)."
-  },
-  {
-    "id": "D4",
-    "type": "gap_fill_text",
-    "questionHTML": "Oh, no! I've forgotten my passport! We'll have to <i>go back</i> <b>{{blank:b1}}</b> and get it!",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "turn back",
-          "go back"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'turn back' hoặc 'go back' có nghĩa là quay lại."
-  },
-  {
-    "id": "D5",
-    "type": "gap_fill_text",
-    "questionHTML": "The most exciting moment is when the plane <i>leaves the ground</i> <b>{{blank:b1}}</b>.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "takes off"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'take off' có nghĩa là cất cánh (leaves the ground). Động từ chia 'takes off'."
-  },
-  {
-    "id": "D6",
-    "type": "gap_fill_text",
-    "questionHTML": "Stop the car! I think we've <i>hit</i> <b>{{blank:b1}}</b> a dog.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "run over"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'run over' có nghĩa là cán qua, đụng xe vào (hit)."
-  },
-  {
-    "id": "D7",
-    "type": "gap_fill_text",
-    "questionHTML": "I don't think a horse can ever <i>stay at the same speed as</i> <b>{{blank:b1}}</b> a car.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "keep up with"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'keep up with' có nghĩa là theo kịp, duy trì cùng tốc độ (stay at the same speed as)."
-  },
-  {
-    "id": "E1",
-    "type": "gap_fill_text",
-    "questionHTML": "<b>E. Complete the sentences.</b><br>The speed {{blank:b1}} in towns is 50 km/h and you shouldn't go faster than that.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "limit"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'speed limit' (giới hạn tốc độ)."
-  },
-  {
-    "id": "E2",
-    "type": "gap_fill_text",
-    "questionHTML": "Why don't we {{blank:b1}} the scenic route along the coast?",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "take"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'take a route' (đi theo tuyến đường)."
-  },
-  {
-    "id": "E3",
-    "type": "gap_fill_text",
-    "questionHTML": "If you buy your plane ticket {{blank:b1}} advance, it's often cheaper than if you wait.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "in"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'in advance' (trước)."
-  },
-  {
-    "id": "E4",
-    "type": "gap_fill_text",
-    "questionHTML": "I can't remember the name of the hotel we stayed at off the {{blank:b1}} of my head.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "top"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'off the top of my head' (ngay tức thì, không cần suy nghĩ lâu)."
-  },
-  {
-    "id": "E5",
-    "type": "gap_fill_text",
-    "questionHTML": "I'm sorry I'm late! I {{blank:b1}} my way and had to ask for directions.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "lost"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'lose one's way' (lạc đường). Quá khứ là 'lost'."
-  },
-  {
-    "id": "E6",
-    "type": "gap_fill_text",
-    "questionHTML": "My mum's away in Germany on a business {{blank:b1}} at the moment.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "trip"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'on a business trip' (đi công tác)."
-  },
-  {
-    "id": "E7",
-    "type": "gap_fill_text",
-    "questionHTML": "The bank? Well, turn left here, then go {{blank:b1}} ahead for a kilometre and it's on the left.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "straight"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'go straight ahead' (đi thẳng)."
-  },
-  {
-    "id": "E8",
-    "type": "gap_fill_text",
-    "questionHTML": "If you look on your left-hand {{blank:b1}} as we turn this corner, you'll see Big Ben.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "side"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'on your left-hand side' (ở phía bên tay trái của bạn)."
-  },
-  {
-    "id": "E9",
-    "type": "gap_fill_text",
-    "questionHTML": "I'll look round the shops in the morning and then {{blank:b1}} sightseeing in the afternoon.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "go"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'go sightseeing' (đi ngắm cảnh)."
-  },
-  {
-    "id": "E10",
-    "type": "gap_fill_text",
-    "questionHTML": "My grandma hasn't driven since she {{blank:b1}} an accident last year.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "had"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'have an accident' (bị tai nạn). Quá khứ là 'had'."
-  },
-  {
-    "id": "E11",
-    "type": "gap_fill_text",
-    "questionHTML": "I love visiting foreign places, {{blank:b1}} the sights and learning about other cultures.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "seeing"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'see the sights' (ngắm cảnh). Song song với 'visiting' nên dùng 'seeing'."
-  },
-  {
-    "id": "E12",
-    "type": "gap_fill_text",
-    "questionHTML": "During the 70s, many British people started to go {{blank:b1}} holiday to Spain.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "on"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'go on holiday' (đi nghỉ mát)."
-  },
-  {
-    "id": "E13",
-    "type": "gap_fill_text",
-    "questionHTML": "While you're in London, you should take a tour {{blank:b1}} the Houses of Parliament.",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "round",
-          "of",
-          "around"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'take a tour round/of' (đi tham quan vòng quanh)."
-  },
-  {
-    "id": "F1",
-    "type": "multiple_choice",
-    "questionHTML": "<b>F. Choose the correct preposition.</b><br>I've always dreamt ............ China.",
-    "options": [
-      {
-        "label": "A",
-        "html": "to visit",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "of visiting",
-        "isCorrect": true
-      },
-      {
-        "label": "C",
-        "html": "I visit",
-        "isCorrect": false
-      },
-      {
-        "label": "D",
-        "html": "visit",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'dream of + V-ing' (mơ về việc gì)."
-  },
-  {
-    "id": "F2",
-    "type": "multiple_choice",
-    "questionHTML": "The travel agency is arranging for us ............ at a really nice hotel.",
-    "options": [
-      {
-        "label": "A",
-        "html": "stay",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "of staying",
-        "isCorrect": false
-      },
-      {
-        "label": "C",
-        "html": "to stay",
-        "isCorrect": true
-      },
-      {
-        "label": "D",
-        "html": "staying",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'arrange for sb to do sth' (sắp xếp cho ai làm gì)."
-  },
-  {
-    "id": "F3",
-    "type": "multiple_choice",
-    "questionHTML": "My dad says he always regrets ............ more.",
-    "options": [
-      {
-        "label": "A",
-        "html": "to not travel",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "not travelling",
-        "isCorrect": true
-      },
-      {
-        "label": "C",
-        "html": "he not travel",
-        "isCorrect": false
-      },
-      {
-        "label": "D",
-        "html": "of not travelling",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'regret + V-ing' (hối tiếc đã làm/không làm gì). Phủ định là 'not V-ing'."
-  },
-  {
-    "id": "F4",
-    "type": "multiple_choice",
-    "questionHTML": "John seems keen ............ how to drive as soon as he can.",
-    "options": [
-      {
-        "label": "A",
-        "html": "of learning",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "he learn",
-        "isCorrect": false
-      },
-      {
-        "label": "C",
-        "html": "for learn",
-        "isCorrect": false
-      },
-      {
-        "label": "D",
-        "html": "to learn",
-        "isCorrect": true
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'keen to do sth' (háo hức làm gì) hoặc 'keen on V-ing'. Ở đây có 'to learn'."
-  },
-  {
-    "id": "F5",
-    "type": "multiple_choice",
-    "questionHTML": "Now, class, I'd like you all to write ............ a description of your last holiday.",
-    "options": [
-      {
-        "label": "A",
-        "html": "me",
-        "isCorrect": true
-      },
-      {
-        "label": "B",
-        "html": "to me",
-        "isCorrect": false
-      },
-      {
-        "label": "C",
-        "html": "it me",
-        "isCorrect": false
-      },
-      {
-        "label": "D",
-        "html": "about me",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'write someone something' (viết cho ai cái gì)."
-  },
-  {
-    "id": "F6",
-    "type": "multiple_choice",
-    "questionHTML": "When you arrive ............ , have your passport ready.",
-    "options": [
-      {
-        "label": "A",
-        "html": "to the airport",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "in the airport",
-        "isCorrect": false
-      },
-      {
-        "label": "C",
-        "html": "on the airport",
-        "isCorrect": false
-      },
-      {
-        "label": "D",
-        "html": "at the airport",
-        "isCorrect": true
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'arrive at + địa điểm nhỏ' (như sân bay, nhà ga)."
-  },
-  {
-    "id": "F7",
-    "type": "multiple_choice",
-    "questionHTML": "The Joneses have invited us ............ to Australia with them this summer.",
-    "options": [
-      {
-        "label": "A",
-        "html": "going",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "for going",
-        "isCorrect": false
-      },
-      {
-        "label": "C",
-        "html": "about going",
-        "isCorrect": false
-      },
-      {
-        "label": "D",
-        "html": "to go",
-        "isCorrect": true
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'invite sb to do sth' (mời ai làm gì)."
-  },
-  {
-    "id": "F8",
-    "type": "multiple_choice",
-    "questionHTML": "The in-flight entertainment may differ ............ that advertised.",
-    "options": [
-      {
-        "label": "A",
-        "html": "to",
-        "isCorrect": false
-      },
-      {
-        "label": "B",
-        "html": "from",
-        "isCorrect": true
-      },
-      {
-        "label": "C",
-        "html": "in",
-        "isCorrect": false
-      },
-      {
-        "label": "D",
-        "html": "at",
-        "isCorrect": false
-      }
-    ],
-    "explanationHTML": "<b>Giải thích:</b> 'differ from' (khác với)."
-  },
-  {
-    "id": "G",
-    "type": "gap_fill_text",
-    "questionHTML": "<b>G. Find the extra word.</b><br><b>Tìm lỗi sai (từ thừa):</b> Oh, let me tell you about our trip. Did you know that Sara is afraid of <i>{{blank:b1}}</i> flying? We had arranged <i>{{blank:b2}}</i> with her family to go to France for a few days. I have always wanted to see Paris and would love to live <i>{{blank:b3}}</i> there one day. Well, we got to the airport and Sara appeared <i>{{blank:b4}}</i> nervous. I asked her if she was okay and she said she was fine, so we continued on <i>{{blank:b5}}</i> our way. We went through passport control and I could see <i>{{blank:b6}}</i> that Sara wasn't keen on going any further. Just then, a voice announced: 'We regret <i>{{blank:b7}}</i> to inform passengers that Flight 114 to France <i>{{blank:b8}}</i> been cancelled.' That was our flight! Sarah said she was glad because <i>{{blank:b9}}</i> she was too frightened to fly anyway! So, we all went <i>{{blank:b10}}</i> home. That was the end of that trip!",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "be"
-        ]
-      },
-      {
-        "blankId": "b2",
-        "correctAnswers": [
-          "it"
-        ]
-      },
-      {
-        "blankId": "b3",
-        "correctAnswers": [
-          "in"
-        ]
-      },
-      {
-        "blankId": "b4",
-        "correctAnswers": [
-          "being"
-        ]
-      },
-      {
-        "blankId": "b5",
-        "correctAnswers": [
-          "to"
-        ]
-      },
-      {
-        "blankId": "b6",
-        "correctAnswers": [
-          "so"
-        ]
-      },
-      {
-        "blankId": "b7",
-        "correctAnswers": [
-          "it"
-        ]
-      },
-      {
-        "blankId": "b8",
-        "correctAnswers": [
-          "is"
-        ]
-      },
-      {
-        "blankId": "b9",
-        "correctAnswers": [
-          "of"
-        ]
-      },
-      {
-        "blankId": "b10",
-        "correctAnswers": [
-          "to"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Câu 1:</b> Từ thừa là 'be'. Cấu trúc đúng là 'afraid of + V-ing', nên 'afraid of flying' là đủ.<br><br><b>Câu 2:</b> Từ thừa là 'it'. Cấu trúc 'arrange with sb to do sth' (sắp xếp với ai làm gì).<br><br><b>Câu 3:</b> Từ thừa là 'in'. 'there' là trạng từ chỉ nơi chốn, không cần giới từ 'in' đi kèm (live there).<br><br><b>Câu 4:</b> Từ thừa là 'being'. Cấu trúc 'appear + adj' (trông có vẻ), 'appeared nervous' là đủ.<br><br><b>Câu 5:</b> Từ thừa là 'to'. Cụm từ đúng là 'continue on our way' (tiếp tục lên đường).<br><br><b>Câu 6:</b> Từ thừa là 'so'. 'see that' (thấy rằng) là đủ, không cần 'so'.<br><br><b>Câu 7:</b> Từ thừa là 'it'. Cấu trúc 'regret to do sth' (tiếc phải làm gì), không có tân ngữ 'it'.<br><br><b>Câu 8:</b> Từ thừa là 'is'. Thì hiện tại hoàn thành bị động 'has been cancelled'.<br><br><b>Câu 9:</b> Từ thừa là 'of'. 'because' đi với mệnh đề, 'because of' đi với danh từ. Ở đây là mệnh đề 'she was...', nên không dùng 'of'.<br><br><b>Câu 10:</b> Từ thừa là 'to'. 'go home' (về nhà), không có giới từ 'to'.<br><br>"
-  },
-  {
-    "id": "H",
-    "type": "gap_fill_text",
-    "questionHTML": "<b>H. Word formation: Write the correct form of the word in brackets.</b><br>It's not always easy being a {{blank:b1}} (TOUR). You spend half your time making {{blank:b2}} (ARRANGE) for your holiday and the other half worrying about sticking to the {{blank:b3}} (TIME). I think it's relaxing sometimes to spend a holiday at home. There are no {{blank:b4}} (CULTURE) problems, you don't need someone to be the {{blank:b5}} (PHOTOGRAPH) and you know that the local {{blank:b6}} (INHABIT) are always friendly!",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "tourist"
-        ]
-      },
-      {
-        "blankId": "b2",
-        "correctAnswers": [
-          "arrangements"
-        ]
-      },
-      {
-        "blankId": "b3",
-        "correctAnswers": [
-          "timetable",
-          "timing"
-        ]
-      },
-      {
-        "blankId": "b4",
-        "correctAnswers": [
-          "cultural"
-        ]
-      },
-      {
-        "blankId": "b5",
-        "correctAnswers": [
-          "photographer"
-        ]
-      },
-      {
-        "blankId": "b6",
-        "correctAnswers": [
-          "inhabitants"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Câu 1:</b> Sau mạo từ 'a' cần một danh từ chỉ người. TOUR -> tourist (khách du lịch).<br><br><b>Câu 2:</b> Cụm từ 'make arrangements' (sắp xếp). Danh từ số nhiều của ARRANGE là arrangements.<br><br><b>Câu 3:</b> Danh từ phù hợp với ý nghĩa thời gian biểu lịch trình là timetable. TIME -> timetable.<br><br><b>Câu 4:</b> Đứng trước danh từ 'problems' cần một tính từ. CULTURE -> cultural (thuộc về văn hóa).<br><br><b>Câu 5:</b> Sau 'the' và ngữ cảnh chỉ người chụp ảnh. PHOTOGRAPH -> photographer.<br><br><b>Câu 6:</b> Danh từ chỉ cư dân, số nhiều do động từ 'are'. INHABIT -> inhabitants.<br><br>"
-  },
-  {
-    "id": "I",
-    "type": "gap_fill_text",
-    "questionHTML": "<b>I. Word formation: Write the correct form of the word in brackets.</b><br>Beijing has changed so much in the last few years that it's almost {{blank:b1}} (RECOGNISE). The number of cars {{blank:b2}} (WORLD) is about a billion and is increasing all the time. The new maglev trains run on a completely {{blank:b3}} (DIFFER) system from ordinary trains. Living in a foreign country really does {{blank:b4}} (BROAD) your horizons. I can't find a {{blank:b5}} (DIRECT) flight from London to Delhi so I've booked one that changes in Frankfurt. All passengers must complete a visa form upon {{blank:b6}} (ARRIVE) at Singapore airport. You can still see old milestones by the side of the road in England, showing the {{blank:b7}} (DISTANT) to the nearest town. The Museum of Transport has a full-sized jet plane next to the {{blank:b8}} (ENTER).",
-    "blanks": [
-      {
-        "blankId": "b1",
-        "correctAnswers": [
-          "unrecognisable"
-        ]
-      },
-      {
-        "blankId": "b2",
-        "correctAnswers": [
-          "worldwide"
-        ]
-      },
-      {
-        "blankId": "b3",
-        "correctAnswers": [
-          "different"
-        ]
-      },
-      {
-        "blankId": "b4",
-        "correctAnswers": [
-          "broaden"
-        ]
-      },
-      {
-        "blankId": "b5",
-        "correctAnswers": [
-          "direct"
-        ]
-      },
-      {
-        "blankId": "b6",
-        "correctAnswers": [
-          "arrival"
-        ]
-      },
-      {
-        "blankId": "b7",
-        "correctAnswers": [
-          "distance"
-        ]
-      },
-      {
-        "blankId": "b8",
-        "correctAnswers": [
-          "entrance"
-        ]
-      }
-    ],
-    "explanationHTML": "<b>Câu 1:</b> Cần tính từ mô tả sự thay đổi đến mức không nhận ra. RECOGNISE -> unrecognisable.<br><br><b>Câu 2:</b> Cần trạng từ hoặc tính từ bổ nghĩa cho 'cars' trên toàn thế giới. WORLD -> worldwide.<br><br><b>Câu 3:</b> Cần tính từ đứng trước danh từ 'system'. DIFFER -> different.<br><br><b>Câu 4:</b> Cần động từ sau trợ động từ 'does'. BROAD -> broaden (mở rộng).<br><br><b>Câu 5:</b> Cần tính từ đứng trước 'flight'. DIRECT -> direct (giữ nguyên, tính từ).<br><br><b>Câu 6:</b> Cần danh từ sau giới từ 'upon'. ARRIVE -> arrival.<br><br><b>Câu 7:</b> Cần danh từ sau 'the'. DISTANT -> distance (khoảng cách).<br><br><b>Câu 8:</b> Cần danh từ sau 'the' chỉ lối vào. ENTER -> entrance.<br><br>"
-  }
-];
-const testName = "Travel and Transport Unit 2";
+        const quizData = [{"id": "A1", "type": "multiple_choice", "questionHTML": "<b>A. Choose the correct word or phrase.</b><br>You need a passport to cross the ............ between Mexico and the United States.", "options": [{"label": "A", "html": "edge", "isCorrect": false}, {"label": "B", "html": "line", "isCorrect": false}, {"label": "C", "html": "border", "isCorrect": true}, {"label": "D", "html": "rim", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> Bạn cần hộ chiếu để vượt qua biên giới giữa Mexico và Hoa Kỳ.<br><b>Giải thích:</b> 'border' (biên giới) là ranh giới giữa hai quốc gia. 'edge' (rìa), 'line' (đường kẻ), 'rim' (vành) không dùng cho ranh giới quốc gia."}, {"id": "A2", "type": "multiple_choice", "questionHTML": "The hotel where we are ............ is quite luxurious.", "options": [{"label": "A", "html": "living", "isCorrect": false}, {"label": "B", "html": "remaining", "isCorrect": false}, {"label": "C", "html": "existing", "isCorrect": false}, {"label": "D", "html": "staying", "isCorrect": true}], "explanationHTML": "<b>Dịch câu hỏi:</b> Khách sạn nơi chúng tôi đang ở khá sang trọng.<br><b>Giải thích:</b> 'stay' (ở lại) dùng cho việc ở tạm thời tại khách sạn. 'live' (sống) dùng cho nơi ở thường xuyên. 'remain' (còn lại), 'exist' (tồn tại) không phù hợp ngữ cảnh."}, {"id": "A3", "type": "multiple_choice", "questionHTML": "When you ............ your destination, your tour guide will meet you at the airport.", "options": [{"label": "A", "html": "arrive", "isCorrect": false}, {"label": "B", "html": "get", "isCorrect": false}, {"label": "C", "html": "reach", "isCorrect": true}, {"label": "D", "html": "achieve", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> Khi bạn đến điểm đến, hướng dẫn viên sẽ đón bạn tại sân bay.<br><b>Giải thích:</b> 'reach' (đến) đi trực tiếp với tân ngữ (reach your destination). 'arrive' đi với 'at/in', 'get' đi với 'to'. 'achieve' (đạt được) dùng cho mục tiêu."}, {"id": "A4", "type": "multiple_choice", "questionHTML": "It can be quite busy here during the tourist ............ .", "options": [{"label": "A", "html": "season", "isCorrect": true}, {"label": "B", "html": "period", "isCorrect": false}, {"label": "C", "html": "phase", "isCorrect": false}, {"label": "D", "html": "stage", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> Ở đây có thể khá đông đúc trong mùa du lịch.<br><b>Giải thích:</b> Cụm từ cố định 'tourist season' (mùa du lịch). 'period', 'phase', 'stage' (giai đoạn, thời kỳ) không kết hợp với 'tourist'."}, {"id": "A5", "type": "multiple_choice", "questionHTML": "David ............ me to the train station every morning.", "options": [{"label": "A", "html": "goes", "isCorrect": false}, {"label": "B", "html": "takes", "isCorrect": true}, {"label": "C", "html": "has", "isCorrect": false}, {"label": "D", "html": "makes", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> David đưa tôi đến ga tàu mỗi sáng.<br><b>Giải thích:</b> 'take someone to somewhere' (đưa ai đi đâu). Các động từ khác không phù hợp về nghĩa và cấu trúc."}, {"id": "A6", "type": "multiple_choice", "questionHTML": "I always enjoy our school ............ to France.", "options": [{"label": "A", "html": "excursion", "isCorrect": false}, {"label": "B", "html": "journey", "isCorrect": false}, {"label": "C", "html": "trip", "isCorrect": true}, {"label": "D", "html": "travel", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> Tôi luôn thích chuyến đi của trường chúng tôi tới Pháp.<br><b>Giải thích:</b> 'school trip' (chuyến đi của trường). 'journey' thường chỉ hành trình dài, 'travel' là danh từ không đếm được chỉ việc đi lại chung chung, 'excursion' là chuyến tham quan ngắn nhưng ít dùng kết hợp 'school excursion' bằng 'school trip'."}, {"id": "A7", "type": "multiple_choice", "questionHTML": "Hurry up, or we'll ............ the bus!", "options": [{"label": "A", "html": "avoid", "isCorrect": false}, {"label": "B", "html": "miss", "isCorrect": true}, {"label": "C", "html": "drop", "isCorrect": false}, {"label": "D", "html": "lose", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> Nhanh lên, nếu không chúng ta sẽ lỡ xe buýt!<br><b>Giải thích:</b> 'miss the bus' (lỡ xe buýt). 'lose' (đánh mất), 'avoid' (tránh), 'drop' (làm rơi) không hợp nghĩa."}, {"id": "A8", "type": "multiple_choice", "questionHTML": "The brochure says that the hotel has a great ............ of the sea.", "options": [{"label": "A", "html": "appearance", "isCorrect": false}, {"label": "B", "html": "look", "isCorrect": false}, {"label": "C", "html": "sight", "isCorrect": false}, {"label": "D", "html": "view", "isCorrect": true}], "explanationHTML": "<b>Dịch câu hỏi:</b> Tờ quảng cáo nói rằng khách sạn có tầm nhìn tuyệt vời ra biển.<br><b>Giải thích:</b> 'view of' (tầm nhìn ra). 'appearance' (vẻ bề ngoài), 'look' (cái nhìn), 'sight' (cảnh tượng) không phù hợp."}, {"id": "A9", "type": "multiple_choice", "questionHTML": "I must remember to ............ a souvenir back from Spain for my grandmother.", "options": [{"label": "A", "html": "go", "isCorrect": false}, {"label": "B", "html": "take", "isCorrect": false}, {"label": "C", "html": "bring", "isCorrect": true}, {"label": "D", "html": "keep", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> Tôi phải nhớ mang một món quà lưu niệm từ Tây Ban Nha về cho bà tôi.<br><b>Giải thích:</b> 'bring back' (mang về). 'take' là mang đi, 'bring' là mang lại/mang về gần người nói hoặc người nhận."}, {"id": "A10", "type": "multiple_choice", "questionHTML": "The ............ from London to Berlin is about 919 kilometres.", "options": [{"label": "A", "html": "measure", "isCorrect": false}, {"label": "B", "html": "length", "isCorrect": false}, {"label": "C", "html": "gap", "isCorrect": false}, {"label": "D", "html": "distance", "isCorrect": true}], "explanationHTML": "<b>Dịch câu hỏi:</b> Khoảng cách từ London đến Berlin là khoảng 919 kilomet.<br><b>Giải thích:</b> 'distance' (khoảng cách) giữa hai địa điểm. 'measure' (đo lường), 'length' (chiều dài), 'gap' (khe hở) không đúng."}, {"id": "A11", "type": "multiple_choice", "questionHTML": "Make sure you ............ a hotel before you come to our island, especially in the summer.", "options": [{"label": "A", "html": "book", "isCorrect": true}, {"label": "B", "html": "keep", "isCorrect": false}, {"label": "C", "html": "put", "isCorrect": false}, {"label": "D", "html": "take", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> Đảm bảo rằng bạn đã đặt khách sạn trước khi đến hòn đảo của chúng tôi, đặc biệt là vào mùa hè.<br><b>Giải thích:</b> 'book a hotel' (đặt phòng khách sạn). Các động từ khác không kết hợp đúng."}, {"id": "A12", "type": "multiple_choice", "questionHTML": "I live in Barcelona, but my ............ town is Madrid.", "options": [{"label": "A", "html": "birth", "isCorrect": false}, {"label": "B", "html": "home", "isCorrect": true}, {"label": "C", "html": "native", "isCorrect": false}, {"label": "D", "html": "origin", "isCorrect": false}], "explanationHTML": "<b>Dịch câu hỏi:</b> Tôi sống ở Barcelona, nhưng quê nhà của tôi là Madrid.<br><b>Giải thích:</b> 'hometown' (quê nhà). 'native' đi với 'town' cũng được nhưng thường dùng 'hometown', ở đây 'home' là đáp án đúng."}, {"id": "B1", "type": "multiple_choice", "questionHTML": "<b>B. Choose the correct word in bold.</b><br>I hope to go on a trip round the <b>world / earth</b> one day.", "options": [{"label": "A", "html": "world", "isCorrect": true}, {"label": "B", "html": "earth", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> Cụm từ cố định 'round the world' (vòng quanh thế giới). Không dùng 'round the earth' trong ngữ cảnh du lịch."}, {"id": "B2", "type": "multiple_choice", "questionHTML": "You learn a lot about the local <b>territory / area</b> by speaking to local people.", "options": [{"label": "A", "html": "territory", "isCorrect": false}, {"label": "B", "html": "area", "isCorrect": true}], "explanationHTML": "<b>Giải thích:</b> 'local area' (khu vực địa phương). 'territory' (lãnh thổ) mang nghĩa chính trị hoặc địa lý rộng lớn."}, {"id": "B3", "type": "multiple_choice", "questionHTML": "It's good to have someone to <b>lead / guide</b> you when you are on holiday.", "options": [{"label": "A", "html": "lead", "isCorrect": false}, {"label": "B", "html": "guide", "isCorrect": true}], "explanationHTML": "<b>Giải thích:</b> 'guide' (hướng dẫn) thường dùng cho du lịch. 'lead' (dẫn dắt) dùng mang tính lãnh đạo."}, {"id": "B4", "type": "multiple_choice", "questionHTML": "I get the train to work every day and the <b>fare / fee</b> is quite expensive.", "options": [{"label": "A", "html": "fare", "isCorrect": true}, {"label": "B", "html": "fee", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> 'fare' (tiền vé) dùng cho phương tiện giao thông. 'fee' (lệ phí, học phí) dùng cho dịch vụ."}, {"id": "B5", "type": "multiple_choice", "questionHTML": "Captain Cook discovered Australia on a <b>voyage / travel</b> to the Pacific.", "options": [{"label": "A", "html": "voyage", "isCorrect": true}, {"label": "B", "html": "travel", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> 'voyage' (chuyến đi dài ngày trên biển). 'travel' là danh từ không đếm được chỉ việc đi lại."}, {"id": "B6", "type": "multiple_choice", "questionHTML": "Most tourist attractions in London charge an admission <b>fee / ticket</b>.", "options": [{"label": "A", "html": "fee", "isCorrect": true}, {"label": "B", "html": "ticket", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> 'admission fee' (phí vào cửa). Không dùng 'admission ticket' trong trường hợp 'charge a...'."}, {"id": "B7", "type": "multiple_choice", "questionHTML": "The sunset over Niagara Falls really is a magnificent <b>look / sight</b>.", "options": [{"label": "A", "html": "look", "isCorrect": false}, {"label": "B", "html": "sight", "isCorrect": true}], "explanationHTML": "<b>Giải thích:</b> 'sight' (cảnh tượng). 'look' (cái nhìn, vẻ ngoài) không miêu tả cảnh đẹp."}, {"id": "C1", "type": "gap_fill_text", "questionHTML": "<b>C. Complete the sentences using phrasal verbs.</b><br>Let's go to the airport to {{blank:b1}} Grandpa off when he flies back home.", "blanks": [{"blankId": "b1", "correctAnswers": ["see"]}], "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'see someone off' (tiễn ai đó)."}, {"id": "C2", "type": "gap_fill_text", "questionHTML": "If it starts to rain, {{blank:b1}} for a nearby cave to wait for it to pass.", "blanks": [{"blankId": "b1", "correctAnswers": ["make"]}], "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'make for' (đi về hướng)."}, {"id": "C3", "type": "gap_fill_text", "questionHTML": "We would like to remind all guests that they must {{blank:b1}} out before midday.", "blanks": [{"blankId": "b1", "correctAnswers": ["check"]}], "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'check out' (trả phòng khách sạn)."}, {"id": "C4", "type": "gap_fill_text", "questionHTML": "Please {{blank:b1}} in and stop so that I can buy something to drink.", "blanks": [{"blankId": "b1", "correctAnswers": ["pull"]}], "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'pull in' (tấp xe vào lề)."}, {"id": "C5", "type": "gap_fill_text", "questionHTML": "Every Saturday night my dad {{blank:b1}} us up outside the cinema.", "blanks": [{"blankId": "b1", "correctAnswers": ["picks"]}], "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'pick up' (đón). Chủ ngữ 'my dad' số ít nên động từ chia 'picks'."}, {"id": "C6", "type": "gap_fill_text", "questionHTML": "I think the neighbours have {{blank:b1}} away for the weekend.", "blanks": [{"blankId": "b1", "correctAnswers": ["gone"]}], "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'go away' (đi vắng). Thì hiện tại hoàn thành (have + V3) nên dùng 'gone'."}, {"id": "C7", "type": "gap_fill_text", "questionHTML": "John's up ahead so Greg is pedalling fast to {{blank:b1}} up with him.", "blanks": [{"blankId": "b1", "correctAnswers": ["catch"]}], "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'catch up with' (bắt kịp)."}, {"id": "C8", "type": "gap_fill_text", "questionHTML": "We're going on holiday tomorrow, but we'll call you when we {{blank:b1}} back.", "blanks": [{"blankId": "b1", "correctAnswers": ["get"]}], "explanationHTML": "<b>Giải thích:</b> Phrasal verb 'get back' (trở về)."}, {"id": "D1", "type": "gap_fill_text", "questionHTML": "<b>D. Replace the phrase in italics with a phrasal verb.</b><br>We can <i>start our journey</i> <b>{{blank:b1}}</b> towards the mountains at dawn.", "blanks": [{"blankId": "b1", "correctAnswers": ["set off", "start out"]}], "explanationHTML": "<b>Giải thích:</b> 'set off' hoặc 'start out' có nghĩa là bắt đầu cuộc hành trình (start a journey)."}, {"id": "D2", "type": "gap_fill_text", "questionHTML": "Dad fetched the luggage while Mum <i>registered</i> <b>{{blank:b1}}</b> at the hotel.", "blanks": [{"blankId": "b1", "correctAnswers": ["checked in"]}], "explanationHTML": "<b>Giải thích:</b> 'check in' có nghĩa là làm thủ tục đăng ký (register) tại khách sạn. Quá khứ là 'checked in'."}, {"id": "D3", "type": "gap_fill_text", "questionHTML": "I asked the taxi driver to <i>let me get out</i> <b>{{blank:b1}}</b> outside the train station.", "blanks": [{"blankId": "b1", "correctAnswers": ["drop me off"]}], "explanationHTML": "<b>Giải thích:</b> 'drop someone off' có nghĩa là cho ai đó xuống xe (let someone get out)."}, {"id": "D4", "type": "gap_fill_text", "questionHTML": "Oh, no! I've forgotten my passport! We'll have to <i>go back</i> <b>{{blank:b1}}</b> and get it!", "blanks": [{"blankId": "b1", "correctAnswers": ["turn back", "go back"]}], "explanationHTML": "<b>Giải thích:</b> 'turn back' hoặc 'go back' có nghĩa là quay lại."}, {"id": "D5", "type": "gap_fill_text", "questionHTML": "The most exciting moment is when the plane <i>leaves the ground</i> <b>{{blank:b1}}</b>.", "blanks": [{"blankId": "b1", "correctAnswers": ["takes off"]}], "explanationHTML": "<b>Giải thích:</b> 'take off' có nghĩa là cất cánh (leaves the ground). Động từ chia 'takes off'."}, {"id": "D6", "type": "gap_fill_text", "questionHTML": "Stop the car! I think we've <i>hit</i> <b>{{blank:b1}}</b> a dog.", "blanks": [{"blankId": "b1", "correctAnswers": ["run over"]}], "explanationHTML": "<b>Giải thích:</b> 'run over' có nghĩa là cán qua, đụng xe vào (hit)."}, {"id": "D7", "type": "gap_fill_text", "questionHTML": "I don't think a horse can ever <i>stay at the same speed as</i> <b>{{blank:b1}}</b> a car.", "blanks": [{"blankId": "b1", "correctAnswers": ["keep up with"]}], "explanationHTML": "<b>Giải thích:</b> 'keep up with' có nghĩa là theo kịp, duy trì cùng tốc độ (stay at the same speed as)."}, {"id": "E1", "type": "gap_fill_text", "questionHTML": "<b>E. Complete the sentences.</b><br>The speed {{blank:b1}} in towns is 50 km/h and you shouldn't go faster than that.", "blanks": [{"blankId": "b1", "correctAnswers": ["limit"]}], "explanationHTML": "<b>Giải thích:</b> 'speed limit' (giới hạn tốc độ)."}, {"id": "E2", "type": "gap_fill_text", "questionHTML": "Why don't we {{blank:b1}} the scenic route along the coast?", "blanks": [{"blankId": "b1", "correctAnswers": ["take"]}], "explanationHTML": "<b>Giải thích:</b> 'take a route' (đi theo tuyến đường)."}, {"id": "E3", "type": "gap_fill_text", "questionHTML": "If you buy your plane ticket {{blank:b1}} advance, it's often cheaper than if you wait.", "blanks": [{"blankId": "b1", "correctAnswers": ["in"]}], "explanationHTML": "<b>Giải thích:</b> 'in advance' (trước)."}, {"id": "E4", "type": "gap_fill_text", "questionHTML": "I can't remember the name of the hotel we stayed at off the {{blank:b1}} of my head.", "blanks": [{"blankId": "b1", "correctAnswers": ["top"]}], "explanationHTML": "<b>Giải thích:</b> 'off the top of my head' (ngay tức thì, không cần suy nghĩ lâu)."}, {"id": "E5", "type": "gap_fill_text", "questionHTML": "I'm sorry I'm late! I {{blank:b1}} my way and had to ask for directions.", "blanks": [{"blankId": "b1", "correctAnswers": ["lost"]}], "explanationHTML": "<b>Giải thích:</b> 'lose one's way' (lạc đường). Quá khứ là 'lost'."}, {"id": "E6", "type": "gap_fill_text", "questionHTML": "My mum's away in Germany on a business {{blank:b1}} at the moment.", "blanks": [{"blankId": "b1", "correctAnswers": ["trip"]}], "explanationHTML": "<b>Giải thích:</b> 'on a business trip' (đi công tác)."}, {"id": "E7", "type": "gap_fill_text", "questionHTML": "The bank? Well, turn left here, then go {{blank:b1}} ahead for a kilometre and it's on the left.", "blanks": [{"blankId": "b1", "correctAnswers": ["straight"]}], "explanationHTML": "<b>Giải thích:</b> 'go straight ahead' (đi thẳng)."}, {"id": "E8", "type": "gap_fill_text", "questionHTML": "If you look on your left-hand {{blank:b1}} as we turn this corner, you'll see Big Ben.", "blanks": [{"blankId": "b1", "correctAnswers": ["side"]}], "explanationHTML": "<b>Giải thích:</b> 'on your left-hand side' (ở phía bên tay trái của bạn)."}, {"id": "E9", "type": "gap_fill_text", "questionHTML": "I'll look round the shops in the morning and then {{blank:b1}} sightseeing in the afternoon.", "blanks": [{"blankId": "b1", "correctAnswers": ["go"]}], "explanationHTML": "<b>Giải thích:</b> 'go sightseeing' (đi ngắm cảnh)."}, {"id": "E10", "type": "gap_fill_text", "questionHTML": "My grandma hasn't driven since she {{blank:b1}} an accident last year.", "blanks": [{"blankId": "b1", "correctAnswers": ["had"]}], "explanationHTML": "<b>Giải thích:</b> 'have an accident' (bị tai nạn). Quá khứ là 'had'."}, {"id": "E11", "type": "gap_fill_text", "questionHTML": "I love visiting foreign places, {{blank:b1}} the sights and learning about other cultures.", "blanks": [{"blankId": "b1", "correctAnswers": ["seeing"]}], "explanationHTML": "<b>Giải thích:</b> 'see the sights' (ngắm cảnh). Song song với 'visiting' nên dùng 'seeing'."}, {"id": "E12", "type": "gap_fill_text", "questionHTML": "During the 70s, many British people started to go {{blank:b1}} holiday to Spain.", "blanks": [{"blankId": "b1", "correctAnswers": ["on"]}], "explanationHTML": "<b>Giải thích:</b> 'go on holiday' (đi nghỉ mát)."}, {"id": "E13", "type": "gap_fill_text", "questionHTML": "While you're in London, you should take a tour {{blank:b1}} the Houses of Parliament.", "blanks": [{"blankId": "b1", "correctAnswers": ["round", "of", "around"]}], "explanationHTML": "<b>Giải thích:</b> 'take a tour round/of' (đi tham quan vòng quanh)."}, {"id": "F1", "type": "multiple_choice", "questionHTML": "<b>F. Choose the correct preposition.</b><br>I've always dreamt ............ China.", "options": [{"label": "A", "html": "to visit", "isCorrect": false}, {"label": "B", "html": "of visiting", "isCorrect": true}, {"label": "C", "html": "I visit", "isCorrect": false}, {"label": "D", "html": "visit", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> 'dream of + V-ing' (mơ về việc gì)."}, {"id": "F2", "type": "multiple_choice", "questionHTML": "The travel agency is arranging for us ............ at a really nice hotel.", "options": [{"label": "A", "html": "stay", "isCorrect": false}, {"label": "B", "html": "of staying", "isCorrect": false}, {"label": "C", "html": "to stay", "isCorrect": true}, {"label": "D", "html": "staying", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> 'arrange for sb to do sth' (sắp xếp cho ai làm gì)."}, {"id": "F3", "type": "multiple_choice", "questionHTML": "My dad says he always regrets ............ more.", "options": [{"label": "A", "html": "to not travel", "isCorrect": false}, {"label": "B", "html": "not travelling", "isCorrect": true}, {"label": "C", "html": "he not travel", "isCorrect": false}, {"label": "D", "html": "of not travelling", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> 'regret + V-ing' (hối tiếc đã làm/không làm gì). Phủ định là 'not V-ing'."}, {"id": "F4", "type": "multiple_choice", "questionHTML": "John seems keen ............ how to drive as soon as he can.", "options": [{"label": "A", "html": "of learning", "isCorrect": false}, {"label": "B", "html": "he learn", "isCorrect": false}, {"label": "C", "html": "for learn", "isCorrect": false}, {"label": "D", "html": "to learn", "isCorrect": true}], "explanationHTML": "<b>Giải thích:</b> 'keen to do sth' (háo hức làm gì) hoặc 'keen on V-ing'. Ở đây có 'to learn'."}, {"id": "F5", "type": "multiple_choice", "questionHTML": "Now, class, I'd like you all to write ............ a description of your last holiday.", "options": [{"label": "A", "html": "me", "isCorrect": true}, {"label": "B", "html": "to me", "isCorrect": false}, {"label": "C", "html": "it me", "isCorrect": false}, {"label": "D", "html": "about me", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> 'write someone something' (viết cho ai cái gì)."}, {"id": "F6", "type": "multiple_choice", "questionHTML": "When you arrive ............ , have your passport ready.", "options": [{"label": "A", "html": "to the airport", "isCorrect": false}, {"label": "B", "html": "in the airport", "isCorrect": false}, {"label": "C", "html": "on the airport", "isCorrect": false}, {"label": "D", "html": "at the airport", "isCorrect": true}], "explanationHTML": "<b>Giải thích:</b> 'arrive at + địa điểm nhỏ' (như sân bay, nhà ga)."}, {"id": "F7", "type": "multiple_choice", "questionHTML": "The Joneses have invited us ............ to Australia with them this summer.", "options": [{"label": "A", "html": "going", "isCorrect": false}, {"label": "B", "html": "for going", "isCorrect": false}, {"label": "C", "html": "about going", "isCorrect": false}, {"label": "D", "html": "to go", "isCorrect": true}], "explanationHTML": "<b>Giải thích:</b> 'invite sb to do sth' (mời ai làm gì)."}, {"id": "F8", "type": "multiple_choice", "questionHTML": "The in-flight entertainment may differ ............ that advertised.", "options": [{"label": "A", "html": "to", "isCorrect": false}, {"label": "B", "html": "from", "isCorrect": true}, {"label": "C", "html": "in", "isCorrect": false}, {"label": "D", "html": "at", "isCorrect": false}], "explanationHTML": "<b>Giải thích:</b> 'differ from' (khác với)."}, {"id": "G1", "type": "gap_fill_text", "questionHTML": "<b>G. Find the extra word.</b><br><b>Tìm lỗi sai (từ thừa):</b> Oh, let me tell you about our trip. Did you know that Sara is afraid of <i>be</i> flying?", "blanks": [{"blankId": "b1", "correctAnswers": ["be"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'be'. Cấu trúc đúng là 'afraid of + V-ing', nên 'afraid of flying' là đủ."}, {"id": "G2", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> flying? We had arranged <i>it</i> with her family to go to France for a few days.", "blanks": [{"blankId": "b1", "correctAnswers": ["it"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'it'. Cấu trúc 'arrange with sb to do sth' (sắp xếp với ai làm gì)."}, {"id": "G3", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> I have always wanted to see Paris and would love to live <i>in</i> there one day.", "blanks": [{"blankId": "b1", "correctAnswers": ["in"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'in'. 'there' là trạng từ chỉ nơi chốn, không cần giới từ 'in' đi kèm (live there)."}, {"id": "G4", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> Well, we got to the airport and Sara appeared <i>being</i> nervous. I asked her if", "blanks": [{"blankId": "b1", "correctAnswers": ["being"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'being'. Cấu trúc 'appear + adj' (trông có vẻ), 'appeared nervous' là đủ."}, {"id": "G5", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> she was okay and she said she was fine, so we continued on <i>to</i> our way.", "blanks": [{"blankId": "b1", "correctAnswers": ["to"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'to'. Cụm từ đúng là 'continue on our way' (tiếp tục lên đường)."}, {"id": "G6", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> We went through passport control and I could see <i>so</i> that Sara wasn't", "blanks": [{"blankId": "b1", "correctAnswers": ["so"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'so'. 'see that' (thấy rằng) là đủ, không cần 'so'."}, {"id": "G7", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> keen on going any further. Just then, a voice announced: 'We regret <i>it</i> to", "blanks": [{"blankId": "b1", "correctAnswers": ["it"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'it'. Cấu trúc 'regret to do sth' (tiếc phải làm gì), không có tân ngữ 'it'."}, {"id": "G8", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> inform passengers that Flight 114 to France <i>is</i> been cancelled.' That was", "blanks": [{"blankId": "b1", "correctAnswers": ["is"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'is'. Thì hiện tại hoàn thành bị động 'has been cancelled'."}, {"id": "G9", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> our flight! Sarah said she was glad because <i>of</i> she was too frightened to", "blanks": [{"blankId": "b1", "correctAnswers": ["of"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'of'. 'because' đi với mệnh đề, 'because of' đi với danh từ. Ở đây là mệnh đề 'she was...', nên không dùng 'of'."}, {"id": "G10", "type": "gap_fill_text", "questionHTML": "<b>Tìm lỗi sai (từ thừa):</b> fly anyway! So, we all went <i>to</i> home. That was the end of that trip!", "blanks": [{"blankId": "b1", "correctAnswers": ["to"]}], "explanationHTML": "<b>Giải thích:</b> Từ thừa là 'to'. 'go home' (về nhà), không có giới từ 'to'."}, {"id": "H1", "type": "gap_fill_text", "questionHTML": "<b>H. Word formation: Write the correct form of the word in brackets.</b><br>It's not always easy being a {{blank:b1}}. (TOUR)", "blanks": [{"blankId": "b1", "correctAnswers": ["tourist"]}], "explanationHTML": "<b>Giải thích:</b> Sau mạo từ 'a' cần một danh từ chỉ người. TOUR -> tourist (khách du lịch)."}, {"id": "H2", "type": "gap_fill_text", "questionHTML": "You spend half your time making {{blank:b1}} for your holiday and the other half worrying... (ARRANGE)", "blanks": [{"blankId": "b1", "correctAnswers": ["arrangements"]}], "explanationHTML": "<b>Giải thích:</b> Cụm từ 'make arrangements' (sắp xếp). Danh từ số nhiều của ARRANGE là arrangements."}, {"id": "H3", "type": "gap_fill_text", "questionHTML": "...worrying about sticking to the {{blank:b1}}. (TIME)", "blanks": [{"blankId": "b1", "correctAnswers": ["timetable", "timing"]}], "explanationHTML": "<b>Giải thích:</b> Danh từ phù hợp với ý nghĩa thời gian biểu lịch trình là timetable. TIME -> timetable."}, {"id": "H4", "type": "gap_fill_text", "questionHTML": "I think it's relaxing sometimes to spend a holiday at home. There are no {{blank:b1}} problems... (CULTURE)", "blanks": [{"blankId": "b1", "correctAnswers": ["cultural"]}], "explanationHTML": "<b>Giải thích:</b> Đứng trước danh từ 'problems' cần một tính từ. CULTURE -> cultural (thuộc về văn hóa)."}, {"id": "H5", "type": "gap_fill_text", "questionHTML": "...you don't need someone to be the {{blank:b1}}... (PHOTOGRAPH)", "blanks": [{"blankId": "b1", "correctAnswers": ["photographer"]}], "explanationHTML": "<b>Giải thích:</b> Sau 'the' và ngữ cảnh chỉ người chụp ảnh. PHOTOGRAPH -> photographer."}, {"id": "H6", "type": "gap_fill_text", "questionHTML": "...and you know that the local {{blank:b1}} are always friendly! (INHABIT)", "blanks": [{"blankId": "b1", "correctAnswers": ["inhabitants"]}], "explanationHTML": "<b>Giải thích:</b> Danh từ chỉ cư dân, số nhiều do động từ 'are'. INHABIT -> inhabitants."}, {"id": "I1", "type": "gap_fill_text", "questionHTML": "<b>I. Word formation: Write the correct form of the word in brackets.</b><br>Beijing has changed so much in the last few years that it's almost {{blank:b1}}. (RECOGNISE)", "blanks": [{"blankId": "b1", "correctAnswers": ["unrecognisable"]}], "explanationHTML": "<b>Giải thích:</b> Cần tính từ mô tả sự thay đổi đến mức không nhận ra. RECOGNISE -> unrecognisable."}, {"id": "I2", "type": "gap_fill_text", "questionHTML": "The number of cars {{blank:b1}} (WORLD) is about a billion and is increasing all the time.", "blanks": [{"blankId": "b1", "correctAnswers": ["worldwide"]}], "explanationHTML": "<b>Giải thích:</b> Cần trạng từ hoặc tính từ bổ nghĩa cho 'cars' trên toàn thế giới. WORLD -> worldwide."}, {"id": "I3", "type": "gap_fill_text", "questionHTML": "The new maglev trains run on a completely {{blank:b1}} (DIFFER) system from ordinary trains.", "blanks": [{"blankId": "b1", "correctAnswers": ["different"]}], "explanationHTML": "<b>Giải thích:</b> Cần tính từ đứng trước danh từ 'system'. DIFFER -> different."}, {"id": "I4", "type": "gap_fill_text", "questionHTML": "Living in a foreign country really does {{blank:b1}} (BROAD) your horizons.", "blanks": [{"blankId": "b1", "correctAnswers": ["broaden"]}], "explanationHTML": "<b>Giải thích:</b> Cần động từ sau trợ động từ 'does'. BROAD -> broaden (mở rộng)."}, {"id": "I5", "type": "gap_fill_text", "questionHTML": "I can't find a {{blank:b1}} (DIRECT) flight from London to Delhi so I've booked one that changes in Frankfurt.", "blanks": [{"blankId": "b1", "correctAnswers": ["direct"]}], "explanationHTML": "<b>Giải thích:</b> Cần tính từ đứng trước 'flight'. DIRECT -> direct (giữ nguyên, tính từ)."}, {"id": "I6", "type": "gap_fill_text", "questionHTML": "All passengers must complete a visa form upon {{blank:b1}} (ARRIVE) at Singapore airport.", "blanks": [{"blankId": "b1", "correctAnswers": ["arrival"]}], "explanationHTML": "<b>Giải thích:</b> Cần danh từ sau giới từ 'upon'. ARRIVE -> arrival."}, {"id": "I7", "type": "gap_fill_text", "questionHTML": "You can still see old milestones by the side of the road in England, showing the {{blank:b1}} (DISTANT) to the nearest town.", "blanks": [{"blankId": "b1", "correctAnswers": ["distance"]}], "explanationHTML": "<b>Giải thích:</b> Cần danh từ sau 'the'. DISTANT -> distance (khoảng cách)."}, {"id": "I8", "type": "gap_fill_text", "questionHTML": "The Museum of Transport has a full-sized jet plane next to the {{blank:b1}} (ENTER).", "blanks": [{"blankId": "b1", "correctAnswers": ["entrance"]}], "explanationHTML": "<b>Giải thích:</b> Cần danh từ sau 'the' chỉ lối vào. ENTER -> entrance."}];
+        const testName = "Travel and Transport Unit 2";
+
+        const state = {};
+        let studentName = '';
+        
+        function init() {
+            const container = document.getElementById('questionsContainer');
+            quizData.forEach(q => {
+                state[q.id] = { checked: false, isCorrect: false };
+                
+                const block = document.createElement('div');
+                block.className = 'question-block';
+                block.id = 'q-block-' + q.id;
+                
+                let qText = q.questionHTML || q.question;
+                
+                // Wrap instruction in a nice box if it exists
+                if (qText.startsWith('<b>') && qText.match(/^<b>(.*?)<\/b>\s*<br\s*\/?>/i)) {
+                    qText = qText.replace(/^<b>(.*?)<\/b>\s*<br\s*\/?>/i, '<div class="instruction-box">$1</div>');
+                }
+                
+                if (q.type === 'gap_fill_text') {
+                    q.blanks.forEach(b => {
+                        let blankStr = '{{blank:' + b.blankId + '}}';
+                        let inpStr = '<input type="text" id="input-' + q.id + '-' + b.blankId + '" class="gap-fill-input" autocomplete="off">';
+                        qText = qText.replace(blankStr, inpStr);
+                    });
+                }
+                
+                let html = '<div class="question-text">' + qText + '</div>';
+                
+                if (q.type === 'multiple_choice' || q.type === 'mcq') {
+                const selectedVal = state[qid].value;
+                const correctOptIndex = q.options.findIndex(o => o.isCorrect);
+                const correctOptLabel = q.options[correctOptIndex].label || String.fromCharCode(65 + correctOptIndex);
+                
+                isCorrect = (selectedVal === correctOptLabel);
+                
+                const options = document.querySelectorAll('#q-block-' + qid + ' .option');
+                options.forEach(opt => opt.style.pointerEvents = 'none');
+                
+                const selectedIndex = q.options.findIndex((o, i) => (o.label || String.fromCharCode(65 + i)) === selectedVal);
+                
+                if (isCorrect) {
+                    if(options[selectedIndex]) options[selectedIndex].classList.add('correct-opt');
+                } else {
+                    if(options[selectedIndex]) options[selectedIndex].classList.add('wrong-opt');
+                    if(options[correctOptIndex]) options[correctOptIndex].classList.add('correct-opt');
+                    errorDetails = 'Câu ' + qid + ': Học sinh chọn ' + selectedVal + ' (sai), đáp án đúng là ' + correctOptLabel;
+                }
+            }
+            else if (q.type === 'reordering') {
+                const drop = document.getElementById('drop-' + qid);
+                const chips = Array.from(drop.children);
+                let userOrder = chips.map(c => c.getAttribute('data-token'));
+                isCorrect = JSON.stringify(userOrder) === JSON.stringify(q.correctOrder);
+                
+                let userText = chips.map(c => c.textContent).join(' ');
+                let corrText = q.correctOrder.map(tid => q.words.find(w => w.tokenId === tid).text).join(' ');
+                
+                if (isCorrect) {
+                    drop.classList.add('correct-opt');
+                } else {
+                    drop.classList.add('wrong-opt');
+                    let corrDiv = document.createElement('div');
+                    corrDiv.style.marginTop = '10px';
+                    corrDiv.style.color = '#e74c3c';
+                    corrDiv.style.fontWeight = 'bold';
+                    corrDiv.textContent = "Đáp án đúng: " + corrText;
+                    drop.parentNode.appendChild(corrDiv);
+                    errorDetails = 'Câu ' + qid + ': Học sinh ghép "' + userText + '" (sai), đáp án đúng là "' + corrText + '"';
+                }
+            }
+            else if (q.type === 'sentence_rewrite') {
+                const input = document.getElementById('input-' + qid);
+                input.disabled = true;
+                input.classList.add('wrong-opt'); 
+                let corrDiv = document.createElement('div');
+                corrDiv.style.marginTop = '10px';
+                corrDiv.style.color = '#27ae60';
+                corrDiv.style.fontWeight = 'bold';
+                corrDiv.textContent = "Đáp án mẫu: " + q.sampleAnswers.join(" HOẶC ");
+                input.parentNode.insertBefore(corrDiv, input.nextSibling);
+                isCorrect = true; 
+                state[qid].isRewrite = true;
+            }
+            
+            state[qid].isCorrect = isCorrect;
+            state[qid].errorDetails = errorDetails;
+            updateProgress();
+        }
+        
+        function updateProgress() {
+            let checkedCount = 0;
+            quizData.forEach(q => { if (state[q.id].checked) checkedCount++; });
+            const pct = (checkedCount / quizData.length) * 100;
+            document.getElementById('progressBar').style.width = pct + '%';
+        }
+        
+        function submitTest() {
+            quizData.forEach(q => {
+                if (!state[q.id].checked) {
+                    state[q.id].checked = true;
+                    state[q.id].isCorrect = false;
+                    state[q.id].errorDetails = 'Câu ' + q.id + ': Bỏ trống';
+                }
+            });
+            
+            updateProgress();
+            
+            let score = 0;
+            let gradableCount = 0;
+            let errorList = [];
+            
+            quizData.forEach(q => {
+                if (state[q.id].isRewrite) return;
+                gradableCount++;
+                if (state[q.id].isCorrect) score++;
+                else if (state[q.id].errorDetails) errorList.push(state[q.id].errorDetails);
+            });
+            
+            const scoreText = score + ' / ' + gradableCount;
+            const errorDetailsStr = errorList.length > 0 ? errorList.join(' | ') : 'Không có lỗi sai';
+            const formURL = 'https://docs.google.com/forms/d/e/1FAIpQLSfZCAK2lpNE8O8Ieqwc3SI1ubr6HZDvGZR91AsSpUk8kEBqaA/formResponse';
+            
+            const formData = new URLSearchParams();
+            formData.append('entry.1861648410', studentName);
+            formData.append('entry.1691800437', scoreText);
+            formData.append('entry.639295732', errorDetailsStr);
+            formData.append('entry.370465671', testName);
+            
+            fetch(formURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formData
+            }).then(() => {
+                document.getElementById('testScreen').classList.remove('active');
+                document.getElementById('resultScreen').classList.add('active');
+                document.getElementById('scoreDisplay').innerText = 'Điểm của bạn: ' + scoreText;
+                window.scrollTo(0, 0);
+            }).catch(err => {
+                alert('Có lỗi khi gửi kết quả. Vui lòng thử lại!');
+                console.error(err);
+            });
+        }
+        
+        init();
         
         let state = {};
         
