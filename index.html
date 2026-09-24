@@ -5,9 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel and Transport Unit 2</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f0f2f5; position: relative; z-index: 1; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f0f2f5; position: relative; z-index: 1; overflow-x: hidden; }
         .watermark { position: absolute; top: 30px; left: 0; right: 0; text-align: center; font-size: 50px; color: rgba(0, 0, 0, 0.04); font-weight: bold; pointer-events: none; z-index: -1; user-select: none; }
         .watermark div { transform: rotate(-30deg); margin: 200px 0; }
+@media (max-width: 600px) {
+    .watermark { font-size: 20px; top: 10px; }
+    .watermark div { margin: 90px 0; }
+}
+@media (max-width: 400px) {
+    .watermark { font-size: 16px; }
+    .watermark div { margin: 70px 0; }
+}
         h1, h2 { color: #2c3e50; text-align: center; }
         .screen { display: none; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .screen.active { display: block; }
@@ -110,6 +118,8 @@ function init() {
     container.innerHTML = '';
     
     quizData.forEach((q, index) => {
+      try {
+        if (!q) { console.warn('Bỏ qua câu hỏi rỗng/null tại vị trí index=' + index); return; }
         if (!q.id) q.id = 'auto_id_' + index;
         state[q.id] = { checked: false, isCorrect: false, value: null };
         
@@ -202,6 +212,9 @@ function init() {
         
         block.innerHTML = html;
         container.appendChild(block);
+      } catch (err) {
+        console.error('Lỗi khi render câu hỏi tại index=' + index + ', id=' + (q && q.id) + '. Bỏ qua câu này, tiếp tục các câu sau.', err);
+      }
     });
 }
 
@@ -307,11 +320,11 @@ function checkQuestion(qid, isSubmit = false) {
         let correctAnswersArr = [];
         (q.blanks || []).forEach(b => {
             const input = document.getElementById('input-' + qid + '-' + b.blankId);
-            const val = input ? input.value.trim().toLowerCase() : "";
+            const val = input ? normalize(input.value.toLowerCase()) : "";
             let expectedAns = b.correctAnswers || [];
             if (expectedAns.length === 0 && b.answer) expectedAns = [b.answer];
             
-            let isBlankCorrect = expectedAns.some(ans => ans.toLowerCase() === val);
+            let isBlankCorrect = expectedAns.some(ans => normalize(ans.toLowerCase()) === val);
             if (isBlankCorrect) {
                 if (input) {
                     input.style.backgroundColor = '#eafaf1';
