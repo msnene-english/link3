@@ -159,6 +159,15 @@
         let nq = JSON.parse(JSON.stringify(q));
         nq.id = (nq.id || nq.id === 0) ? String(nq.id) : String(index + 1);
         if (nq.question || nq.text || nq.questionText) nq.questionHTML = nq.question || nq.text || nq.questionText || nq.questionHTML;
+        
+        if (nq.questionHTML) {
+            let m = nq.questionHTML.match(/^<b>([\s\S]*?)<\/b>\s*(?:<br\s*\/?>\s*)+/i);
+            if (m) {
+                nq.showTitle = m[1];
+                nq.questionHTML = nq.questionHTML.replace(/^<b>[\s\S]*?<\/b>\s*(?:<br\s*\/?>\s*)+/i, '');
+            }
+        }
+        
         let stripped = false;
         nq.questionHTML = (nq.questionHTML || '').replace(/(^|<br\s*\/?>|<\/b>|<\/strong>|<\/p>)\s*(?:C[^\s]*\s*\d+[:\.]?\s*|\d+[\.\)]\s*)/i, (match, p1) => {
             if (!stripped) {
@@ -253,8 +262,9 @@
             if (q.type === 'multiple_choice' || q.type === 'mcq') {
                 html = `<div class="question-text">${qNumStr} ${q.questionHTML}</div><div class="options">`;
                 q.options.forEach((opt, oIdx) => {
+                    let textToShow = (opt.html || opt.text || '').replace(/^[A-D]\.\s*/, '');
                     html += `<div class="option" data-qid="${q.id}" data-idx="${oIdx}">
-                        <div class="radio-circle"></div> <b>${esc(opt.displayLabel || opt.label)}.</b> ${opt.html}
+                        <div class="radio-circle"></div> <b>${esc(opt.displayLabel || opt.label)}.</b> ${textToShow}
                     </div>`;
                 });
                 html += `</div><div><button class="check-btn" id="check-btn-${q.id}" data-qid="${q.id}">Kiểm tra</button></div>`;
