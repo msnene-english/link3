@@ -144,15 +144,7 @@
       return ansArr.some(ans => {
           let normAns = norm(ans);
           if (normAns === normVal) return true;
-          let parts = normAns.split(' ');
-          if (parts.length >= 2 && normAns) {
-              let prefix = norm(parts[0].replace(/^(->|\?|’)\s*/, ''));
-              let suffix = norm(parts[parts.length - 1]);
-              let partialAns = normAns;
-              if (prefix) partialAns = partialAns.replace(new RegExp('^' + prefix.replace(/[.*+?^${}()|[\]\]/g, '\$&') + '\s*'), '').trim();
-              if (suffix) partialAns = partialAns.replace(new RegExp('\s*' + suffix.replace(/[.*+?^${}()|[\]\]/g, '\$&') + '$'), '').trim();
-              if (partialAns && partialAns === normVal) return true;
-          }
+          /* partial matching removed to prevent antonym bugs */
           return false;
       });
     }
