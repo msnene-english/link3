@@ -200,7 +200,7 @@
                 if (typeof opt === 'string') {
                     let label = String.fromCharCode(65 + idx);
                     let html = opt;
-                    let m = opt.match(/^([A-D])\s+(.*)/);
+                    let m = opt.match(/^([A-Z])\s+(.*)/);
                     if (m) { label = m[1]; html = m[2]; }
                     options.push({label, html, isCorrect: (opt === correctAnsStr || (correctAnsStr && correctAnsStr.startsWith(label))) });
                 } else {
@@ -270,7 +270,7 @@
             if (q.type === 'multiple_choice' || q.type === 'mcq') {
                 html = `<div class="question-text">${qNumStr} ${q.questionHTML}</div><div class="options">`;
                 q.options.forEach((opt, oIdx) => {
-                    let textToShow = (opt.html || opt.text || '').replace(/^[A-D]\.\s*/, '');
+                    let textToShow = (opt.html || opt.text || '').replace(/^[A-Z]\.\s*/, '');
                     html += `<div class="option" data-qid="${q.id}" data-idx="${oIdx}">
                         <div class="radio-circle"></div> <b>${esc(opt.displayLabel || opt.label)}.</b> ${textToShow}
                     </div>`;
