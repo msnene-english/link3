@@ -522,6 +522,9 @@
         let correctCount = 0;
         let gradableCount = 0;
         let wrongHTML = '<h3 style="color:#e74c3c;text-align:left;margin-top:0;">DANH SÁCH CÁC CÂU LÀM SAI / CHƯA LÀM</h3>';
+        let sheetReport = `DANH SACH CAC CAU LAM SAI / CHUA LAM
+
+`;
         let hasWrong = false;
         
         questions.forEach((q, index) => {
@@ -626,6 +629,8 @@
                 correctCount++;
             } else if (isGradable && !isCorrect) {
                 hasWrong = true;
+                sheetReport += `Câu ${index + 1}: Học sinh: ${hsStr} | Đáp án đúng: ${rightStr}
+`;
                 wrongHTML += `<div class="error-item">
                     <strong>Câu ${index + 1}:</strong> ${q.questionHTML.replace(/\{\{blank:[^\}]+\}\}/g, '___')}<br>
                     <span style="color:#e74c3c;">Học sinh: <span style="${hsStr.includes('chưa trả lời') ? '' : 'text-decoration:line-through;'}">${esc(hsStr)}</span></span><br>
@@ -659,7 +664,7 @@
             formData.append('entry.1861648410', studentName);
             let finalScore = gradableCount > 0 ? (correctCount * 10 / gradableCount).toFixed(2) : 0;
             formData.append('entry.1691800437', finalScore);
-            const plainErrorReport = hasWrong ? wrongHTML.replace(/<[^>]*>?/gm, '') : 'Perfect';
+            const plainErrorReport = hasWrong ? sheetReport : 'Perfect';
             formData.append('entry.639295732', plainErrorReport);
             let pageTitle = document.title || location.pathname.split('/').pop() || 'Unknown';
             formData.append('entry.370465671', pageTitle);
